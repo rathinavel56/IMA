@@ -1,0 +1,221 @@
+{
+	"id": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+	"name": "IMP",
+	"description": "",
+	"order": [
+		"695ea6ba-cf3e-eef7-b06c-14e2100c433f",
+		"be1a0009-3b6f-1121-f038-7e04ee9cdcaf",
+		"54a47454-8e54-1f03-a34d-677bcc36047c",
+		"b4b7a8d3-04dc-6742-431d-f3a2acbe0012",
+		"f768fce5-2629-9157-9f86-93f9001a3a3d"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1581622377038,
+	"owner": "502680",
+	"public": false,
+	"requests": [
+		{
+			"id": "54a47454-8e54-1f03-a34d-677bcc36047c",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/mail_test",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Mail Test",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1581741283923,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\"email\":\"freelanceratoz@gmail.com\"}"
+		},
+		{
+			"id": "695ea6ba-cf3e-eef7-b06c-14e2100c433f",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/register",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1581745997410,
+			"name": "Signup",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK"
+					},
+					"time": 0,
+					"headers": [],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"id\":148,\"created_at\":\"2020-02-13 20:36:01\",\"updated_at\":\"2020-02-13 20:36:01\",\"username\":\"freelanceratoz1\",\"project_count\":0,\"is_email_confirmed\":0,\"job_count\":0,\"job_apply_count\":0,\"portfolio_count\":0,\"portfolio_favorite_count\":0,\"quote_service_count\":0,\"quote_request_count\":0,\"quote_bid_count\":0,\"exams_user_count\":0,\"exams_user_passed_count\":0,\"first_name\":null,\"last_name\":null,\"display_name\":null,\"gender_id\":null,\"contest_count\":0,\"contest_user_count\":0,\"view_count\":0,\"follower_count\":0,\"flag_count\":0,\"total_rating_as_employer\":0,\"review_count_as_employer\":0,\"total_rating_as_freelancer\":0,\"review_count_as_freelancer\":0,\"education_count\":0,\"work_profile_count\":0,\"certificate_count\":0,\"publication_count\":0,\"address\":null,\"address1\":null,\"city_id\":null,\"state_id\":null,\"country_id\":null,\"zip_code\":null,\"latitude\":null,\"longitude\":null,\"full_address\":null,\"expired_balance_credit_points\":0,\"is_made_deposite\":0,\"hourly_rate\":null,\"project_completed_count\":0,\"project_failed_count\":0,\"designation\":null,\"about_me\":null,\"blocked_amount\":0,\"is_have_unreaded_activity\":0,\"attachment\":null,\"cover_photo\":null,\"error\":{\"code\":0,\"message\":\"\",\"fields\":\"\"}}",
+					"language": "json",
+					"rawDataType": "",
+					"previewType": "parsed",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"id": "c3dfd878-22f9-916e-95c1-f0c5f9ba6fef",
+					"name": "Signup",
+					"isSample": true,
+					"scrollToResult": false,
+					"runTests": false,
+					"request": {
+						"url": "http://http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/register",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [],
+						"headerData": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"enabled": true,
+								"description": ""
+							}
+						],
+						"headers": "Content-Type: application/json\n",
+						"data": "{\"email\":\"freelanceratoz+1@gmail.com\",\"username\":\"freelanceratoz1\",\"password\":\"123456\",\"is_agree_terms_conditions\":true,\"is_freelancer\":1}",
+						"method": "POST",
+						"dataMode": "raw"
+					}
+				}
+			],
+			"rawModeData": "{\"email\":\"freelanceratoz+7@gmail.com\",\"username\":\"freelancer7\",\"password\":\"123456\",\"is_agree_terms_conditions\":true}"
+		},
+		{
+			"id": "b4b7a8d3-04dc-6742-431d-f3a2acbe0012",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/forgot_password",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Forgot Password",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1581744777232,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\"email\":\"freelanceratoz+6@gmail.com\"}"
+		},
+		{
+			"id": "be1a0009-3b6f-1121-f038-7e04ee9cdcaf",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/login",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1581746277700,
+			"name": "Login",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\"username\":\"freelancer7\",\"password\":\"1234567\"}"
+		},
+		{
+			"id": "f768fce5-2629-9157-9f86-93f9001a3a3d",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/change_password?token=d3348b1ff52032c6b16417b4fd4add8230a4c938",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "d3348b1ff52032c6b16417b4fd4add8230a4c938",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1581746228943,
+			"name": "Change Password",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\"password\":\"123456\",\"new_password\":\"1234567\"}"
+		}
+	]
+}
