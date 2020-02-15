@@ -1,0 +1,25 @@
+<?php
+/**
+ * OauthAccessToken
+ *
+ * PHP version 5
+ *
+ * @category   PHP
+ * @package    Base
+ * @subpackage Model
+ */
+namespace Models;
+
+class OauthAccessToken extends AppModel
+{
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'oauth_access_tokens';
+    public function user()
+    {
+        return $this->belongsTo('Models\User', 'user_id', 'username')->select('id', 'role_id');
+    }
+}
