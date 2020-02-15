@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Customer } from 'src/app/models/customer';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,16 +11,16 @@ export class CustomerService {
   url = localStorage.getItem('ServerUrl');
   constructor(private http: HttpClient) { }
 
-  AddNewCustomer(customer: Customer): Observable<boolean> {
-    return this.http.post<boolean>(`${this.url}customer/addNewCustomer`, customer);
+  Register(customer: Customer): Observable<boolean> {
+    return this.http.post<boolean>(`${this.url}users/register`, customer);
   }
 
-  Login(username: string, password: string): Observable<Customer>{
-    return this.http.post<Customer>(`${this.url}customer/authenticateLogin`, {Username: username, Password: password});
+  Login(customer: Customer): Observable<Customer> {
+    return this.http.post<Customer>(`${this.url}users/login`, customer);
   }
 
-  Logout(){
-    let result = this.http.get(`${this.url}customer/logout`);
+  Logout() {
+    const result = this.http.get(`${this.url}users/logout`);
     return result;
   }
 

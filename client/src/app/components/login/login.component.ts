@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { CustomerService } from 'src/app/services/Customer/customer.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -28,24 +29,24 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
 
-  onSubmit(){
+  onSubmit() {
     this.submitted = true;
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
-        return;
+      return;
     }
 
     this.loading = true;
-        this.customerService.Login(this.f.username.value, this.f.password.value)
-            .subscribe(
-                data => {
-                  localStorage.setItem('user', JSON.stringify(data[0]));
-                  this.router.navigate(['/products']);
-                },
-                error => {
-                    this.loading = false;
-                });
+    this.customerService.Login(this.loginForm.value)
+      .subscribe(
+        data => {
+          localStorage.setItem('user', JSON.stringify(data));
+          this.router.navigate(['/products']);
+        },
+        error => {
+          this.loading = false;
+        });
   }
 
 }

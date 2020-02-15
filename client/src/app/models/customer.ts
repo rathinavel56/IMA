@@ -5,7 +5,7 @@ export class Customer {
     FullName: string;
     AddressOne: string;
     AddressTwo: string;
-    Town:string;
+    Town: string;
     Country: string;
     RegionId: number;
     Region: string;
@@ -13,5 +13,8 @@ export class Customer {
     Mobile: number;
     CreditCard: number;
     Email: string;
-    Password: string;
+    username: string;
+    password: string;
+    // tslint:disable-next-line: variable-name
+    is_agree_terms_conditions: boolean;
 }

@@ -1,8 +1,8 @@
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import { Component, OnInit } from '@angular/core';
-import { ShippingService } from 'src/app/services/Shipping/shipping.service';
-import { ShippingRegion } from 'src/app/models/shipping-region';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Customer } from 'src/app/models/customer';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomerService } from 'src/app/services/Customer/customer.service';
 import { Router } from '@angular/router';
 
@@ -13,60 +13,57 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  regions: ShippingRegion[];
   customer: Customer = new Customer();
   registerForm: FormGroup;
   loading = false;
   submitted = false;
-  constructor(private shippingService: ShippingService,
-              private formBuilder: FormBuilder,
+  private user: SocialUser;
+
+  constructor(private formBuilder: FormBuilder,
               private customerService: CustomerService,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit() {
-    this.GetShippingRegions();
-    this.customer.RegionId = 1;
+    this.authService.authState.subscribe((user) => {
+      console.log('1-----', user);
+      this.user = user;
+    });
     this.registerForm = this.formBuilder.group({
-        FirstName: ['', Validators.required],
-        AddressOne: ['', Validators.required],
-        AddressTwo: ['', null],
-        Town: ['', Validators.required],
-        Country: ['', Validators.required],
-        RegionId: ['', null],
-        ZipCode: ['', null],
-        Mobile: ['', Validators.required],
-        CreditCard: ['', null],
-        LastName: ['', Validators.required],
-        Email: ['', Validators.required],
-        Password: ['', [Validators.required, Validators.minLength(6)]]
+      email: ['', Validators.required],
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      is_agree_terms_conditions: [true]
     });
   }
 
   get f() { return this.registerForm.controls; }
 
-  GetShippingRegions(){
-    this.shippingService.getShippingRegions()
-        .subscribe(a => {
-          this.regions = a as ShippingRegion[];
-        });
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
-  onSubmit(){
-    this.submitted = true;
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
 
-        // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            return;
+  signOut(): void {
+    this.authService.signOut();
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      return;
+    }
+    this.customer = this.registerForm.value;
+    this.customerService.Register(this.customer)
+      .subscribe(data => {
+        if (data) {
+          localStorage.setItem('user', JSON.stringify(data));
+          this.router.navigate(['/products']);
         }
-        this.customer = this.registerForm.value;
-        this.customerService.AddNewCustomer(this.customer)
-            .subscribe(a => {
-              console.log(a);
-              if(a){
-                this.router.navigate(['/customer/login']);
-              }
-            })
-    console.log(this.registerForm.value);
+      });
   }
 
 }
