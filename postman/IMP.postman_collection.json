@@ -7,7 +7,18 @@
 		"be1a0009-3b6f-1121-f038-7e04ee9cdcaf",
 		"54a47454-8e54-1f03-a34d-677bcc36047c",
 		"b4b7a8d3-04dc-6742-431d-f3a2acbe0012",
-		"f768fce5-2629-9157-9f86-93f9001a3a3d"
+		"f768fce5-2629-9157-9f86-93f9001a3a3d",
+		"9ca47189-bc96-4b02-a257-d9120e947633",
+		"159d8217-5742-ae0d-03e4-6bf3d605ffef",
+		"a67d9e8f-380a-76a4-0f10-2248b1325e81",
+		"755a04cd-25fd-7e50-bd82-19ea7a4857cf",
+		"a224818c-4e7e-c307-2b1e-a022a2cbac21",
+		"a223bfbc-6453-2ba3-e54e-c3ba47f26dba",
+		"1f7d51a2-65cf-00a7-54a6-50ec9c145f77",
+		"4c8a112f-1c43-4547-8c43-57811b401e8b",
+		"b7febb1e-c4bf-97f1-ea3f-4601c078aeaf",
+		"ad0c691b-b9b4-4348-325a-2324d7873ce7",
+		"3815b71a-2928-8bd0-fe6f-ee59bdb17073"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -15,6 +26,120 @@
 	"owner": "502680",
 	"public": false,
 	"requests": [
+		{
+			"folder": null,
+			"id": "159d8217-5742-ae0d-03e4-6bf3d605ffef",
+			"name": "How It Works",
+			"dataMode": "params",
+			"data": null,
+			"auth": null,
+			"events": null,
+			"rawModeData": null,
+			"descriptionFormat": "html",
+			"description": null,
+			"variables": null,
+			"headers": "",
+			"method": "GET",
+			"pathVariables": {},
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/pages/14",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": null,
+			"helperAttributes": null,
+			"queryParams": [],
+			"headerData": [],
+			"pathVariableData": [],
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc"
+		},
+		{
+			"id": "1f7d51a2-65cf-00a7-54a6-50ec9c145f77",
+			"headers": "",
+			"headerData": [],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/contestants",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"data": null,
+			"dataMode": "params",
+			"name": "Contestants",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1581856540063,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "3815b71a-2928-8bd0-fe6f-ee59bdb17073",
+			"headers": "",
+			"headerData": [],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/images/big_thumb/UserAvatar/19.76c24bff7a76b299adb494bf5f447a19.jpg?chrome-3xx-fix",
+			"queryParams": [
+				{
+					"key": "chrome-3xx-fix",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1581884741873,
+			"name": "Image Generator",
+			"description": "UserAvatar19jpgbig_thumb\n\n",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
+			"id": "4c8a112f-1c43-4547-8c43-57811b401e8b",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users?token=ff646897b2b22da10dbdde41cd508881bfd39cff",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "ff646897b2b22da10dbdde41cd508881bfd39cff",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1581879186862,
+			"name": "User Profile Edit",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\n  \"first_name\": \"VJ\",\n  \"last_name\": \"VJ\",\n  \"address\": \"1 Apple Park Way Cupertino\",\n  \"image\": \"95fb84115da9da4f5f032687a824950e.jpg\"\n}"
+		},
 		{
 			"id": "54a47454-8e54-1f03-a34d-677bcc36047c",
 			"headers": "Content-Type: application/json\n",
@@ -69,7 +194,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1581745997410,
+			"time": 1581863805227,
 			"name": "Signup",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -118,7 +243,291 @@
 					}
 				}
 			],
-			"rawModeData": "{\"email\":\"freelanceratoz+7@gmail.com\",\"username\":\"freelancer7\",\"password\":\"123456\",\"is_agree_terms_conditions\":true}"
+			"rawModeData": "{\"email\":\"freelanceratoz+122@gmail.com\",\"username\":\"freelancer122\",\"password\":\"123456\"}"
+		},
+		{
+			"folder": null,
+			"id": "755a04cd-25fd-7e50-bd82-19ea7a4857cf",
+			"name": "Term and conditions",
+			"dataMode": "params",
+			"data": null,
+			"auth": null,
+			"events": null,
+			"rawModeData": null,
+			"descriptionFormat": "html",
+			"description": null,
+			"variables": null,
+			"headers": "",
+			"method": "GET",
+			"pathVariables": {},
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/pages/7",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": null,
+			"helperAttributes": null,
+			"queryParams": [],
+			"headerData": [],
+			"pathVariableData": [],
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc"
+		},
+		{
+			"folder": null,
+			"id": "9ca47189-bc96-4b02-a257-d9120e947633",
+			"name": "privacy-policy",
+			"dataMode": "params",
+			"data": null,
+			"auth": null,
+			"events": null,
+			"rawModeData": null,
+			"descriptionFormat": "html",
+			"description": null,
+			"variables": null,
+			"headers": "",
+			"method": "GET",
+			"pathVariables": {},
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/pages/9",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": null,
+			"helperAttributes": null,
+			"queryParams": [],
+			"headerData": [],
+			"pathVariableData": [],
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc"
+		},
+		{
+			"id": "a223bfbc-6453-2ba3-e54e-c3ba47f26dba",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=facebook&token=77faf9c221ff317fe5051b28e972826493a54e13",
+			"queryParams": [
+				{
+					"key": "type",
+					"value": "facebook",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "token",
+					"value": "77faf9c221ff317fe5051b28e972826493a54e13",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Facebook Login",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1581832168579,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n  \"code\": \"AQD0DAYog_bHj2rFA_B9TYf-oDv-JrdO_J7lIvGd4dfp_kKR1mJeKT0Mj1Fk4SosONidTt_ve_RMp5ZSG4P12CdfXwWED7LHI4AUdI4j812m1H_K8cEk2J_YqyVXsj9j_d6uOjhWFukbYKq18tJNY3SkgPg1t3kax2OL3R5taw2qodysN3jAZzSKmeR6NXBS1CPB_wt38_TqP5Tr5Hqc1DGQSHHZE_2JOwua3oCCSYAHvLdnJo4Y8XH4N1CSkUgWN2TnmrpZbqwATzDhsMKMg8g1LRjaMSWduK7jHrkAtVQiMKStGP93ymMBpKwaJ1tSjh4ZISNhBzYjjg-3Eh1-Lu3PM-XXlLkswTgNqzCvSU-rbw\",\n  \"clientId\": \"934931923377900\",\n  \"redirectUri\": \"https://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=facebook\"\n}"
+		},
+		{
+			"id": "a224818c-4e7e-c307-2b1e-a022a2cbac21",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google",
+			"queryParams": [
+				{
+					"key": "type",
+					"value": "google",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1581854864697,
+			"name": "Google Login",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK"
+					},
+					"time": 1895,
+					"headers": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "Keep-Alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "222",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json;charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sun, 16 Feb 2020 07:01:19 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5, max=100",
+							"description": "Custom header"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Apache/2.4.41 (Unix) OpenSSL/1.1.1d PHP/7.4.2 mod_perl/2.0.8-dev Perl/v5.16.3",
+							"description": "A name for the server"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "PHP/7.4.2",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"id\": \"112978327091398387895\",\r\n\"name\": \"freelancer f\",\r\n\"email\": \"freelanceratoz@gmail.com\",\r\n\"photoUrl\": \"https://lh4.googleusercontent.com/-CqT2J8yR8Qw/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rftLzqfIQrKES5VK3sv190mNs-Ang/s96-c/photo.jpg\",\r\n\"firstName\": \"freelancer\",\r\n\"lastName\": \"f\",\r\n\"authToken\": \"ya29.Il-9B8jNRnTTCsNQQbzCkSXsBWBViyFxu_TV8-r3uV0YRVVFiI2nyLLy3dLAg4PQefR_sGc-GmC1wtN0Q-dL-nXiFz5FUMjlvltLV4_evPmCojWnJfezHsDUTKCEhVPmzw\",\r\n\"idToken\":\"eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc2MmZhNjM3YWY5NTM1OTBkYjhiYjhhNjM2YmYxMWQ0MzYwYWJjOTgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyOTc4MzI3MDkxMzk4Mzg3ODk1IiwiZW1haWwiOiJmcmVlbGFuY2VyYXRvekBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6Im1jUWN6TzNvUmdXb2VPOHdER1pmcEEiLCJuYW1lIjoiZnJlZWxhbmNlciBmIiwicGljdHVyZSI6Imh0dHBzOi8vbGg0Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tQ3FUMko4eVI4UXcvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUNIaTNyZnRMenFmSVFyS0VTNVZLM3N2MTkwbU5zLUFuZy9zOTYtYy9waG90by5qcGciLCJnaXZlbl9uYW1lIjoiZnJlZWxhbmNlciIsImZhbWlseV9uYW1lIjoiZiIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNTgxODM2MzYwLCJleHAiOjE1ODE4Mzk5NjAsImp0aSI6ImI2ZDY3NTRmYzBhNDQyMDgwY2QxNDdjY2ZjNWZjM2EzM2RjYzhiMTUifQ.Dfu3n7VQ_W7_u6W1rs-fKi92n8zfKPsyOa2LFW3s6LcSP1NIF3R_icfbz_ShM6YCbSc3nE-r8cIFDKI7RnmK1X_Tc49bGnR77eQZrEFH2oPpCYR0xm0qpQELiVHMcJW3rslZGVOBR0P-w2wKgGCXnLh2a5QR-7GCS28X8fNJtMQdcZrGOOJI2EMVt_yuDsUxS9yTTSQIl9TFBorRwNmSq2XiJpOpw9WnBjUc_jJ20ZH_ytPLzRzorpGlgl9GHaUvhuMkf-yIG6ptV_r_SURZ7w4W_YGenyHaYhchPpUInGNrmSrlO610MLIONcHn5Ow6TRBm1AXzEurIGdpaDdY_tQ\",\r\n\"provider\":\"GOOGLE\"\r\n}",
+					"language": "json",
+					"rawDataType": "text",
+					"previewType": "text",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"name": "Google Login",
+					"id": "5298a9a6-4275-31cf-3574-8ca4e7d39686",
+					"isSample": true,
+					"scrollToResult": false,
+					"runTests": false,
+					"request": {
+						"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [
+							{
+								"key": "type",
+								"value": "google",
+								"equals": true,
+								"description": "",
+								"enabled": true
+							}
+						],
+						"headerData": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"enabled": true,
+								"description": ""
+							}
+						],
+						"headers": "Content-Type: application/json\n",
+						"data": "{\n  \"code\": \"ya29.Il-9B8jNRnTTCsNQQbzCkSXsBWBViyFxu_TV8-r3uV0YRVVFiI2nyLLy3dLAg4PQefR_sGc-GmC1wtN0Q-dL-nXiFz5FUMjlvltLV4_evPmCojWnJfezHsDUTKCEhVPmzw\",\n  \"clientId\": \"263189942868-n5vmdmtk8i0snumqqtnhoels6bg8cqnn.apps.googleusercontent.com\",\n  \"redirectUri\": \"http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google\",\n  \"state\": \"5kiay7wvh1h\"\n}",
+						"method": "POST",
+						"dataMode": "raw"
+					}
+				}
+			],
+			"rawModeData": "{\n  \"code\": \"ya29.Il-9ByZV9r39d8fDnYbytwq6X0u-OZxHdEMreZTc7yBaH1AX3qwS6MN4eO86oBzxLD8TXZHc7OoyB_cvpNGBoUQGZtekzVYpJtzv0NwB1XQ2MEcINI2n2Lhr-Cp17i8WIw\",\n  \"redirectUri\": \"http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google\"\n}"
+		},
+		{
+			"folder": null,
+			"id": "a67d9e8f-380a-76a4-0f10-2248b1325e81",
+			"name": "FAQ",
+			"dataMode": "params",
+			"data": null,
+			"auth": null,
+			"events": null,
+			"rawModeData": null,
+			"descriptionFormat": "html",
+			"description": null,
+			"variables": null,
+			"headers": "",
+			"method": "GET",
+			"pathVariables": {},
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/pages/16",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": null,
+			"helperAttributes": null,
+			"queryParams": [],
+			"headerData": [],
+			"pathVariableData": [],
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc"
+		},
+		{
+			"id": "ad0c691b-b9b4-4348-325a-2324d7873ce7",
+			"headers": "",
+			"headerData": [],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/oauth/refresh_token?token=bb201bc5e885e3228f056a7ad3ef14d6f41dce1a",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "bb201bc5e885e3228f056a7ad3ef14d6f41dce1a",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1581885152971,
+			"name": "Refresh Token",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "b4b7a8d3-04dc-6742-431d-f3a2acbe0012",
@@ -152,6 +561,51 @@
 			"rawModeData": "{\"email\":\"freelanceratoz+6@gmail.com\"}"
 		},
 		{
+			"id": "b7febb1e-c4bf-97f1-ea3f-4601c078aeaf",
+			"headers": "",
+			"headerData": [],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/attachments?class=UserAvatar&token=ff646897b2b22da10dbdde41cd508881bfd39cff",
+			"queryParams": [
+				{
+					"key": "class",
+					"value": "UserAvatar",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "token",
+					"value": "ff646897b2b22da10dbdde41cd508881bfd39cff",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "file",
+					"value": "Jellyfish.jpg",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1581878953578,
+			"name": "Attachment Upload",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
 			"id": "be1a0009-3b6f-1121-f038-7e04ee9cdcaf",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
@@ -173,7 +627,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1581746277700,
+			"time": 1581831896661,
 			"name": "Login",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
