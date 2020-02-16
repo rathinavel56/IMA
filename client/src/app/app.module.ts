@@ -94,7 +94,7 @@ const googleLoginOptions: any = {
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('Google-OAuth-Client-Id', googleLoginOptions)
+    provider: new GoogleLoginProvider('263189942868-n5vmdmtk8i0snumqqtnhoels6bg8cqnn.apps.googleusercontent.com', googleLoginOptions)
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
