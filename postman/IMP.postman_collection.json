@@ -372,7 +372,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1581854864697,
+			"time": 1581913464529,
 			"name": "Google Login",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -472,7 +472,7 @@
 					}
 				}
 			],
-			"rawModeData": "{\n  \"code\": \"ya29.Il-9ByZV9r39d8fDnYbytwq6X0u-OZxHdEMreZTc7yBaH1AX3qwS6MN4eO86oBzxLD8TXZHc7OoyB_cvpNGBoUQGZtekzVYpJtzv0NwB1XQ2MEcINI2n2Lhr-Cp17i8WIw\",\n  \"redirectUri\": \"http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google\"\n}"
+			"rawModeData": "{\n  \"access_token\": \"ya29.ImC9B3zSrkhyF0TpMibnu_WEiypPucCfpsVj9Mvt-cmoyG0K2yTjqLtwoce8tZF7PWkTCA4P0znhTIuCGAZzY9j_VqXVhNfigq8hbaqI7noDZbud2eOH4v8lC3zSv9zzPlQ\",\n  \"redirectUri\": \"http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google\"\n}"
 		},
 		{
 			"folder": null,
