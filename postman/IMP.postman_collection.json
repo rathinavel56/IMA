@@ -13,12 +13,17 @@
 		"a67d9e8f-380a-76a4-0f10-2248b1325e81",
 		"755a04cd-25fd-7e50-bd82-19ea7a4857cf",
 		"a224818c-4e7e-c307-2b1e-a022a2cbac21",
+		"0b24abc8-ac1d-3ce4-d62d-0d5aebf287ac",
 		"a223bfbc-6453-2ba3-e54e-c3ba47f26dba",
 		"1f7d51a2-65cf-00a7-54a6-50ec9c145f77",
 		"4c8a112f-1c43-4547-8c43-57811b401e8b",
 		"b7febb1e-c4bf-97f1-ea3f-4601c078aeaf",
 		"ad0c691b-b9b4-4348-325a-2324d7873ce7",
-		"3815b71a-2928-8bd0-fe6f-ee59bdb17073"
+		"3815b71a-2928-8bd0-fe6f-ee59bdb17073",
+		"be16db63-3841-efff-e298-8f7d8c8a3176",
+		"54cac98e-6ee9-0ade-9052-03a9debc6945",
+		"18856b4d-bdd7-e0db-a30f-49642b23964d",
+		"5c8b46e8-88ef-81f5-1c06-2f73f7b3f6f9"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -26,6 +31,140 @@
 	"owner": "502680",
 	"public": false,
 	"requests": [
+		{
+			"id": "0b24abc8-ac1d-3ce4-d62d-0d5aebf287ac",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google",
+			"queryParams": [
+				{
+					"key": "type",
+					"value": "google",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1582000561261,
+			"name": "Google Login Mobile",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK"
+					},
+					"time": 1895,
+					"headers": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "Keep-Alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "222",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json;charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sun, 16 Feb 2020 07:01:19 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5, max=100",
+							"description": "Custom header"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Apache/2.4.41 (Unix) OpenSSL/1.1.1d PHP/7.4.2 mod_perl/2.0.8-dev Perl/v5.16.3",
+							"description": "A name for the server"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "PHP/7.4.2",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"id\": \"112978327091398387895\",\r\n\"name\": \"freelancer f\",\r\n\"email\": \"freelanceratoz@gmail.com\",\r\n\"photoUrl\": \"https://lh4.googleusercontent.com/-CqT2J8yR8Qw/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rftLzqfIQrKES5VK3sv190mNs-Ang/s96-c/photo.jpg\",\r\n\"firstName\": \"freelancer\",\r\n\"lastName\": \"f\",\r\n\"authToken\": \"ya29.Il-9B8jNRnTTCsNQQbzCkSXsBWBViyFxu_TV8-r3uV0YRVVFiI2nyLLy3dLAg4PQefR_sGc-GmC1wtN0Q-dL-nXiFz5FUMjlvltLV4_evPmCojWnJfezHsDUTKCEhVPmzw\",\r\n\"idToken\":\"eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc2MmZhNjM3YWY5NTM1OTBkYjhiYjhhNjM2YmYxMWQ0MzYwYWJjOTgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyOTc4MzI3MDkxMzk4Mzg3ODk1IiwiZW1haWwiOiJmcmVlbGFuY2VyYXRvekBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6Im1jUWN6TzNvUmdXb2VPOHdER1pmcEEiLCJuYW1lIjoiZnJlZWxhbmNlciBmIiwicGljdHVyZSI6Imh0dHBzOi8vbGg0Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tQ3FUMko4eVI4UXcvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUNIaTNyZnRMenFmSVFyS0VTNVZLM3N2MTkwbU5zLUFuZy9zOTYtYy9waG90by5qcGciLCJnaXZlbl9uYW1lIjoiZnJlZWxhbmNlciIsImZhbWlseV9uYW1lIjoiZiIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNTgxODM2MzYwLCJleHAiOjE1ODE4Mzk5NjAsImp0aSI6ImI2ZDY3NTRmYzBhNDQyMDgwY2QxNDdjY2ZjNWZjM2EzM2RjYzhiMTUifQ.Dfu3n7VQ_W7_u6W1rs-fKi92n8zfKPsyOa2LFW3s6LcSP1NIF3R_icfbz_ShM6YCbSc3nE-r8cIFDKI7RnmK1X_Tc49bGnR77eQZrEFH2oPpCYR0xm0qpQELiVHMcJW3rslZGVOBR0P-w2wKgGCXnLh2a5QR-7GCS28X8fNJtMQdcZrGOOJI2EMVt_yuDsUxS9yTTSQIl9TFBorRwNmSq2XiJpOpw9WnBjUc_jJ20ZH_ytPLzRzorpGlgl9GHaUvhuMkf-yIG6ptV_r_SURZ7w4W_YGenyHaYhchPpUInGNrmSrlO610MLIONcHn5Ow6TRBm1AXzEurIGdpaDdY_tQ\",\r\n\"provider\":\"GOOGLE\"\r\n}",
+					"language": "json",
+					"rawDataType": "text",
+					"previewType": "text",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"name": "Google Login",
+					"id": "a70fca5f-69de-99da-dd12-5f125bab6f5b",
+					"isSample": true,
+					"scrollToResult": false,
+					"runTests": false,
+					"request": "0b24abc8-ac1d-3ce4-d62d-0d5aebf287ac",
+					"requestObject": {
+						"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google",
+						"pathVariables": {},
+						"pathVariableData": [],
+						"queryParams": [
+							{
+								"key": "type",
+								"value": "google",
+								"equals": true,
+								"description": "",
+								"enabled": true
+							}
+						],
+						"headerData": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"enabled": true,
+								"description": ""
+							}
+						],
+						"headers": "Content-Type: application/json\n",
+						"data": "{\n  \"code\": \"ya29.Il-9B8jNRnTTCsNQQbzCkSXsBWBViyFxu_TV8-r3uV0YRVVFiI2nyLLy3dLAg4PQefR_sGc-GmC1wtN0Q-dL-nXiFz5FUMjlvltLV4_evPmCojWnJfezHsDUTKCEhVPmzw\",\n  \"clientId\": \"263189942868-n5vmdmtk8i0snumqqtnhoels6bg8cqnn.apps.googleusercontent.com\",\n  \"redirectUri\": \"http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google\",\n  \"state\": \"5kiay7wvh1h\"\n}",
+						"method": "POST",
+						"dataMode": "raw"
+					}
+				}
+			],
+			"rawModeData": "{\n  \"idToken\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc2MmZhNjM3YWY5NTM1OTBkYjhiYjhhNjM2YmYxMWQ0MzYwYWJjOTgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyOTc4MzI3MDkxMzk4Mzg3ODk1IiwiZW1haWwiOiJmcmVlbGFuY2VyYXRvekBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6IkNMc2U2VTZmWVhvRXRaeVA3U2pmWlEiLCJuYW1lIjoiZnJlZWxhbmNlciBmIiwicGljdHVyZSI6Imh0dHBzOi8vbGg0Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tQ3FUMko4eVI4UXcvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUNIaTNyZnRMenFmSVFyS0VTNVZLM3N2MTkwbU5zLUFuZy9zOTYtYy9waG90by5qcGciLCJnaXZlbl9uYW1lIjoiZnJlZWxhbmNlciIsImZhbWlseV9uYW1lIjoiZiIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNTgxOTk5NDU0LCJleHAiOjE1ODIwMDMwNTQsImp0aSI6ImMyYjMxNjA5ZTZkZGJhZmFlNjYzOTlhYzY3N2QzZGQ5ZjJjYzc3OGEifQ.Ut89evfkkZ9UH5iVqKG6kt_vh6ezrz7zrWsttWDfBcMxs8py3ZlW93Ekg-LwmHR_fnORXnE1hjj87P6krKyeqwhvHS6iQIM25XgKOAsJ2sV7UH6V8GT4Zf3Oa9rXU9opXAhI5LCamlaUeokD9Y-4X7kpsFQVy_zQ1HzuD4DeNdh_610a2nwXmGQzTprIandQkUX8HYTN-Mv6Q1wLVAOpGKqKusoOm2rHFMbrFFig6EjCI65fGPbz6USyEgR_2ceL2TNmbl6RykJB0fpAdri3s7xSEvZDYOhpXrnV1TOb48jk-lVNsVaA--Pzy-0Kjer_nR_WKx3DL4oT1w6IeKSNCw\"\n}"
+		},
 		{
 			"folder": null,
 			"id": "159d8217-5742-ae0d-03e4-6bf3d605ffef",
@@ -52,27 +191,70 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc"
 		},
 		{
+			"id": "18856b4d-bdd7-e0db-a30f-49642b23964d",
+			"headers": "",
+			"headerData": [],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/companies?token=d83ea23955d8382665734b30e1415ee00df35d11&page=1",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "d83ea23955d8382665734b30e1415ee00df35d11",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "page",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1581967391122,
+			"name": "Companies",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
 			"id": "1f7d51a2-65cf-00a7-54a6-50ec9c145f77",
 			"headers": "",
 			"headerData": [],
-			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/contestants",
-			"queryParams": [],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/contestants?page=1",
+			"queryParams": [
+				{
+					"key": "page",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
 			"method": "GET",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"data": null,
 			"dataMode": "params",
-			"name": "Contestants",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1581856540063,
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {}
+			"helperAttributes": {},
+			"time": 1581967361849,
+			"name": "Contestants",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "3815b71a-2928-8bd0-fe6f-ee59bdb17073",
@@ -114,11 +296,11 @@
 					"enabled": true
 				}
 			],
-			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users?token=ff646897b2b22da10dbdde41cd508881bfd39cff",
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users?token=996c7b912bfbf6fc87661f8cf38bcb2a93e4c529",
 			"queryParams": [
 				{
 					"key": "token",
-					"value": "ff646897b2b22da10dbdde41cd508881bfd39cff",
+					"value": "996c7b912bfbf6fc87661f8cf38bcb2a93e4c529",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -133,7 +315,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1581879186862,
+			"time": 1581965294809,
 			"name": "User Profile Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -170,6 +352,75 @@
 			"currentHelper": "normal",
 			"helperAttributes": {},
 			"rawModeData": "{\"email\":\"freelanceratoz@gmail.com\"}"
+		},
+		{
+			"id": "54cac98e-6ee9-0ade-9052-03a9debc6945",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/login",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Admin Login",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1581958957052,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\"username\":\"admin\",\"password\":\"123456\"}"
+		},
+		{
+			"id": "5c8b46e8-88ef-81f5-1c06-2f73f7b3f6f9",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/company?token=b5b096d1d96141b57c7d833e3267cdf3f694b2f0",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "b5b096d1d96141b57c7d833e3267cdf3f694b2f0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1581967617451,
+			"name": "Company Add",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\n  \"name\": \"freelancer10\",\n  \"image\": \"0cbe196ee3fe98d742f045abbf2b5ec0.jpg\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
 		},
 		{
 			"id": "695ea6ba-cf3e-eef7-b06c-14e2100c433f",
@@ -372,8 +623,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1581913464529,
-			"name": "Google Login",
+			"time": 1582000950164,
+			"name": "Google Login Web",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [
@@ -472,7 +723,7 @@
 					}
 				}
 			],
-			"rawModeData": "{\n  \"access_token\": \"ya29.ImC9B3zSrkhyF0TpMibnu_WEiypPucCfpsVj9Mvt-cmoyG0K2yTjqLtwoce8tZF7PWkTCA4P0znhTIuCGAZzY9j_VqXVhNfigq8hbaqI7noDZbud2eOH4v8lC3zSv9zzPlQ\",\n  \"redirectUri\": \"http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google\"\n}"
+			"rawModeData": "{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc2MmZhNjM3YWY5NTM1OTBkYjhiYjhhNjM2YmYxMWQ0MzYwYWJjOTgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyOTc4MzI3MDkxMzk4Mzg3ODk1IiwiZW1haWwiOiJmcmVlbGFuY2VyYXRvekBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6IkNMc2U2VTZmWVhvRXRaeVA3U2pmWlEiLCJuYW1lIjoiZnJlZWxhbmNlciBmIiwicGljdHVyZSI6Imh0dHBzOi8vbGg0Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tQ3FUMko4eVI4UXcvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUNIaTNyZnRMenFmSVFyS0VTNVZLM3N2MTkwbU5zLUFuZy9zOTYtYy9waG90by5qcGciLCJnaXZlbl9uYW1lIjoiZnJlZWxhbmNlciIsImZhbWlseV9uYW1lIjoiZiIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNTgxOTk5NDU0LCJleHAiOjE1ODIwMDMwNTQsImp0aSI6ImMyYjMxNjA5ZTZkZGJhZmFlNjYzOTlhYzY3N2QzZGQ5ZjJjYzc3OGEifQ.Ut89evfkkZ9UH5iVqKG6kt_vh6ezrz7zrWsttWDfBcMxs8py3ZlW93Ekg-LwmHR_fnORXnE1hjj87P6krKyeqwhvHS6iQIM25XgKOAsJ2sV7UH6V8GT4Zf3Oa9rXU9opXAhI5LCamlaUeokD9Y-4X7kpsFQVy_zQ1HzuD4DeNdh_610a2nwXmGQzTprIandQkUX8HYTN-Mv6Q1wLVAOpGKqKusoOm2rHFMbrFFig6EjCI65fGPbz6USyEgR_2ceL2TNmbl6RykJB0fpAdri3s7xSEvZDYOhpXrnV1TOb48jk-lVNsVaA--Pzy-0Kjer_nR_WKx3DL4oT1w6IeKSNCw\",\n  \"redirectUri\": \"http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google\"\n}"
 		},
 		{
 			"folder": null,
@@ -564,7 +815,7 @@
 			"id": "b7febb1e-c4bf-97f1-ea3f-4601c078aeaf",
 			"headers": "",
 			"headerData": [],
-			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/attachments?class=UserAvatar&token=ff646897b2b22da10dbdde41cd508881bfd39cff",
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/attachments?class=UserAvatar&token=9c327d84c6a551f17753b9c9ac9cc78b35f13dfa",
 			"queryParams": [
 				{
 					"key": "class",
@@ -575,7 +826,7 @@
 				},
 				{
 					"key": "token",
-					"value": "ff646897b2b22da10dbdde41cd508881bfd39cff",
+					"value": "9c327d84c6a551f17753b9c9ac9cc78b35f13dfa",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -588,7 +839,7 @@
 			"data": [
 				{
 					"key": "file",
-					"value": "Jellyfish.jpg",
+					"value": "Penguins.jpg",
 					"description": "",
 					"type": "file",
 					"enabled": true
@@ -599,11 +850,50 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1581878953578,
+			"time": 1581964738495,
 			"name": "Attachment Upload",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": []
+		},
+		{
+			"id": "be16db63-3841-efff-e298-8f7d8c8a3176",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users?token=9c327d84c6a551f17753b9c9ac9cc78b35f13dfa",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "9c327d84c6a551f17753b9c9ac9cc78b35f13dfa",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Admin Add User",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1581958897210,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n  \"role_id\": 3,\n  \"username\": \"test111\",\n  \"email\": \"test111@gmail.com\",\n  \"password\": \"123456\",\n  \"first_name\": \"test\",\n  \"last_name\": \"test\",\n  \"is_active\": true,\n  \"image\": \"b9c7a11352f41ad322783caac2db7251.jpg\"\n}"
 		},
 		{
 			"id": "be1a0009-3b6f-1121-f038-7e04ee9cdcaf",
