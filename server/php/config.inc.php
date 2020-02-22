@@ -33,9 +33,9 @@ if (ini_get('date.timezone')) {
 date_default_timezone_set($default_timezone);
 define('R_DB_DRIVER', 'mysql');
 define('R_DB_HOST', 'localhost');
-define('R_DB_NAME', 'imp');
+define('R_DB_NAME', 'contest');
 define('R_DB_USER', 'root');
-define('R_DB_PASSWORD', '');
+define('R_DB_PASSWORD', 'Weblogic@123');
 define('R_DB_PORT', 3306);
 define('SITE_LICENSE_KEY', 'YOUR LICENCE HERE');
 define('SECURITY_SALT', 'e9a556134534545ab47c6c81c14f06c0b8sdfsdf');

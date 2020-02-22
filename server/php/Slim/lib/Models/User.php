@@ -37,12 +37,13 @@ class User extends AppModel
         'about_me',
         'full_address',
         'is_have_unreaded_activity',
-		'onfido_applicant_id',
-		'onfido_check_id',
-		'onfido_status',
-		'onfido_is_sanbox',
-		'tax_id'
+		'instagram_url',
+		'tiktok_url',
+		'youtube_url',
+		'twitter_url',
+		'facebook_url'
     );
+	
     public $qSearchFields = array(
         'first_name',
         'last_name',
@@ -53,13 +54,6 @@ class User extends AppModel
         'role_id',
         'password',
         'email',
-        'bid_count',
-        'won_bid_count',
-        'user_login_count',
-        'project_flag_count',
-        'job_flag_count',
-        'quote_service_flag_count',
-        'portfolio_flag_count',
         'available_wallet_amount',
         'ip_id',
         'last_login_ip_id',
@@ -67,14 +61,34 @@ class User extends AppModel
         'is_agree_terms_conditions',
         'is_active',
         'total_amount_withdrawn',
-        'zazpay_receiver_account_id',
         'available_credit_count',
         'total_credit_bought',
-        'quote_credit_purchase_log_count',
-        'total_site_revenue_as_freelancer',
-        'total_site_revenue_as_employer',
-        'total_earned_amount_as_freelancer',
-        'total_spend_amount_as_employer'
+		'scope',
+		'is_email_confirmed',
+		'display_name',
+		'gender_id',
+		'contest_user_count',
+		'view_count',
+		'follower_count',
+		'flag_count',
+		'total_rating_as_employer',
+		'review_count_as_employer',
+		'address1',
+		'city_id',
+		'state_id',
+		'country_id',
+		'zip_code',
+		'latitude',
+		'longitude',
+		'full_address',
+		'expired_balance_credit_points',
+		'is_made_deposite',
+		'hourly_rate',
+		'total_spend_amount_as_employer',
+		'about_me',
+		'blocked_amount',
+		'is_have_unreaded_activity',
+		'user_login_count'
     );
     public $rules = array(
        'username' => [
@@ -85,7 +99,12 @@ class User extends AppModel
                 'regex:/^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/',
             ],
         'email' => 'sometimes|required|email',
-        'password' => 'sometimes|required'
+        'password' => [
+                'sometimes',
+                'required',
+                'min:3',
+                'max:15'
+            ]
     );
     // Admin scope
     protected $scopes_1 = array();

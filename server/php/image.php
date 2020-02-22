@@ -12,7 +12,6 @@ require_once 'config.inc.php';
 require_once __DIR__ . '/Slim/vendor/autoload.php';
 require_once './Slim/lib/database.php';
 require_once './Slim/lib/settings.php';
-//$db_lnk = pg_connect('host=' . R_DB_HOST . ' port=' . R_DB_PORT . ' dbname=' . R_DB_NAME . ' user=' . R_DB_USER . ' password=' . R_DB_PASSWORD . ' options=--client_encoding=UTF8') or die('Database could not connect');
 $thumbsizes = array(
     'UserAvatar' => array(
         'micro_thumb' => '16x16',
@@ -131,21 +130,14 @@ if ($hash == md5($model . $id . $ext . $size)) {
     if (!empty($aspect[$model][$size])) {
         $is_aspect = true;
     }
-    $imagePath = '/client/app/images/';
-    $whitelist = array(
-        '127.0.0.1',
-        '::1'
-    );
-    if (!in_array($_SERVER['REMOTE_ADDR'], $whitelist)) {
-        $imagePath = '/client/images/';
-    }
+    $imagePath = '/client/images/';
     $mediadir = APP_PATH . $imagePath . $size . '/' . $model . '/';
     if (!file_exists($mediadir)) {
         mkdir($mediadir, 0777, true);
     }
     $filename = $id . '.' . $hash . '.' . $ext;
     $writeTo = $mediadir . $filename;
-    if ($size != 'original') {
+	if ($size != 'original') {
         if (!$width || !$height) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
             exit;
@@ -167,7 +159,7 @@ if ($hash == md5($model . $id . $ext . $size)) {
             }
             $new_image->writeImage($writeTo);
         } else {
-            $target['width'] = $currentWidth;
+			$target['width'] = $currentWidth;
             $target['height'] = $currentHeight;
             $target['x'] = $target['y'] = 0;
             $types = array(
@@ -243,7 +235,7 @@ if ($hash == md5($model . $id . $ext . $size)) {
             if (strtolower($ext) == 'png') {
                 imagepng($temp, $writeTo);
             } elseif (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
-                imagejpeg($temp, $writeTo, 100);
+				imagejpeg($temp, $writeTo, 100);
             } elseif (strtolower($ext) == 'gif') {
                 imagegif($temp, $writeTo);
             }
@@ -252,7 +244,7 @@ if ($hash == md5($model . $id . $ext . $size)) {
             ob_get_clean();
             imagedestroy($image);
             imagedestroy($temp);
-        }
+	    }
     } else {
         copy($fullPath, $writeTo);
     }
@@ -285,13 +277,13 @@ function watermark($temp, $class, $size, $currentWidth, $currentHeight, $width, 
             imagecopymerge($temp, $watermark, $watermark_position_x, $watermark_position_y, 0, 0, $watermark_image_width, $watermark_image_height, 20);
             imagedestroy($watermark);
         } elseif ($watermark_type == 'Enable Text Watermark') {
-            $fontPath = '/client/app/fonts/';
+            $fontPath = '/client/static/fonts/';
             $whitelist = array(
                 '127.0.0.1',
                 '::1'
             );
             if (!in_array($_SERVER['REMOTE_ADDR'], $whitelist)) {
-                $fontPath = '/client/fonts/';
+                $fontPath = '/client/static/fonts/';
             }
             $font = APP_PATH . $fontPath . 'arial.ttf';
             $grey = imagecolorallocate($temp, 128, 128, 128);

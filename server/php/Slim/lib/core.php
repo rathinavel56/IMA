@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Database\Capsule\Manager as Capsule;
 /**
  * Core configurations
  *
@@ -287,7 +288,7 @@ function getCryptHash($str)
  * @params $adapter
  * @return array
  */
-function social_login($profile, $provider_id, $provider, $adapter)
+function social_login($profile, $provider_id, $provider, $adapter, $role_id)
 {
     $bool = false;
     $provider_details = Models\Provider::where('name', ucfirst($provider))->first();
@@ -302,7 +303,7 @@ function social_login($profile, $provider_id, $provider, $adapter)
     if (!empty($access_token_arr['oauth_token_secret'])) {
         $access_token_secret = $access_token_arr['oauth_token_secret'];
     }
-    $checkProviderUser = Models\ProviderUser::where('provider_id', $provider_id)->where('foreign_id', $profile->identifier)->where('is_connected', true)->first();
+	$checkProviderUser = Models\ProviderUser::where('provider_id', $provider_id)->where('foreign_id', $profile->identifier)->where('is_connected', true)->first();
     if (!empty($checkProviderUser)) {
         $isAlreadyExistingUser = Models\User::where('id', $checkProviderUser['user_id'])->first();
         $checkProviderUser->access_token = $access_token;
@@ -326,7 +327,7 @@ function social_login($profile, $provider_id, $provider, $adapter)
             );
         }
     } else {
-        if (!empty($profile->email) && !empty($profile->role_id)) {
+		if (!empty($profile->email)) {
             $isAlreadyExistingUser = Models\User::where('email', $profile->email)->first();
             if (!empty($isAlreadyExistingUser)) {
                 $bool = true;
@@ -342,7 +343,8 @@ function social_login($profile, $provider_id, $provider, $adapter)
                 $provider_user_ins->access_token_secret = $access_token_secret;
                 $provider_user_ins->is_connected = true;
                 $provider_user_ins->profile_picture_url = $profile_picture_url;
-                $provider_user_ins->save();
+				$provider_user_ins->role_id = $role_id;
+				$provider_user_ins->save();
                 $current_user_id = $isAlreadyExistingUser['id'];
                 $response = array(
                     'error' => array(
@@ -360,7 +362,7 @@ function social_login($profile, $provider_id, $provider, $adapter)
                 $user_data->email = (property_exists($profile, 'email')) ? $profile->email : "";
                 $user_data->password = getCryptHash('default'); // dummy password                
                 $user_data->is_active = true;
-				$user_data->role_id = $profile->role_id;
+				$user_data->role_id = $role_id;
                 $user_data->last_logged_in_time = date('Y-m-d H:i:s');
                 if (!empty($ip_id)) {
                     $user_data->last_login_ip_id = $ip_id;
@@ -403,7 +405,7 @@ function social_login($profile, $provider_id, $provider, $adapter)
     if (!empty($current_user_id)) {
         $user = Models\User::where('id', $current_user_id)->first();
         if (!empty($user)) {
-            $user->makeVisible($user->hidden);
+            // $user->makeVisible($user->hidden);
         }
         $scopes = '';
         if (!empty($user['scopes_' . $user['role_id']])) {
@@ -454,15 +456,44 @@ function social_auth_login($provider, $pass_value = array())
     if (!empty($pass_value['thrid_party_login'])) {
         return social_email_login($pass_value, $adapter);
     }
-    if (!empty($pass_value['access_token'])) {
-        $access_token = $pass_value['access_token'];
-    } else {
-        $access_token = $adapter->getAccessToken($pass_value);
-    }
-    $profile = $adapter->getUserProfile($access_token, $provider_details);
-    $profile->access_token = $profile->access_token_secret = '';
-    $profile->access_token = $access_token;
-    $response = social_login($profile, $provider_id, $provider, $adapter);
+	$role_id = '';
+	if (!empty($pass_value['register']) && $pass_value['register'] == 'company') {
+		$role_id = \Constants\ConstUserTypes::Employer;
+	} elseif (!empty($pass_value['register']) && $pass_value['register'] == 'constestant') {
+		$role_id = \Constants\ConstUserTypes::Freelancer;
+	} else {
+		$role_id = \Constants\ConstUserTypes::User;
+	}
+	if($pass_value['idToken']) {
+		$profileArray = array();
+		$idTokenResponse = _doGet('https://oauth2.googleapis.com/tokeninfo?id_token='.$pass_value['idToken']);
+		if (!isset($idTokenResponse['error'])) {
+			$profile = new stdClass;
+			$profile->photoURL = !empty($idTokenResponse['picture']) ? $idTokenResponse['picture'] : '';
+			$profile->identifier = $idTokenResponse['sub'];
+			$profile->access_token = $pass_value['idToken'];
+			$profile->access_token_secret = $pass_value['idToken'];
+			$profile->email = $idTokenResponse['email'];
+			$profile->displayName = $idTokenResponse['given_name'];
+			$response = social_login($profile, $provider_id, $provider, $adapter, $role_id);
+		} else {
+			$response = $idTokenResponse;
+		}
+	} else {
+		if (!empty($pass_value['access_token'])) {
+			$access_token = $pass_value['access_token'];
+		} else {
+			$access_token = $adapter->getAccessToken($pass_value);
+		}
+		if ($access_token) {
+			$profile = $adapter->getUserProfile($access_token, $provider_details);
+			$profile->access_token = $profile->access_token_secret = '';
+			$profile->access_token = $access_token;
+			$response = social_login($profile, $provider_id, $provider, $adapter, $role_id);
+		} else {
+			$response = null;
+		}
+	}
     return $response;
 }
 function social_email_login($data, $adapter)
@@ -471,22 +502,21 @@ function social_email_login($data, $adapter)
     if ($data['provider_id'] == \Constants\SocialLogins::Twitter) {
         $profile->email = $data['email'];
     }
-    if (!empty($data['is_employer']) && !empty($data['is_freelancer'])) {
-        $profile->role_id = \Constants\ConstUserTypes::User;
-    } elseif (!empty($data['is_employer'])) {
-        $profile->role_id = \Constants\ConstUserTypes::Employer;
-    } elseif (!empty($data['is_freelancer'])) {
-        $profile->role_id = \Constants\ConstUserTypes::Freelancer;
-    } else {
-        $profile->role_id = \Constants\ConstUserTypes::User;
-    }
+	if (!empty($data['register']) && $data['register'] == 'company') {
+		$profile->role_id = \Constants\ConstUserTypes::Employer;
+	} elseif (!empty($data['register']) && $data['register'] == 'constestant') {
+		$profile->role_id = \Constants\ConstUserTypes::Freelancer;
+	} else {
+		$profile->role_id = \Constants\ConstUserTypes::User;
+	}
+	
     $provider_id = $data['provider_id'];
     $provider = $profile->provider;
     $isAlreadyRegisteredUser = Models\ProviderUser::where('provider_id', $provider_id)->where('foreign_id', $profile->identifier)->where('is_connected', true)->first();
     $checkUser = Models\User::where('email', $data['email'])->first();
     if (!($isAlreadyRegisteredUser && $checkUser)) {
         //To login using social networking site accounts
-        $response = social_login($profile, $provider_id, $provider, $adapter);
+        $response = social_login($profile, $provider_id, $provider, $adapter, $profile->role_id);
     } else {
         $response['thrid_party_login'] = 1;
         $response['error']['code'] = 1;
@@ -547,8 +577,8 @@ function _execute($url, $method = 'get', $post = array(), $format = 'plain')
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
     }
     $response = curl_exec($ch);
-    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    // Note: timeout also falls here...
+	$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+	// Note: timeout also falls here...
     if (curl_errno($ch)) {
         $return['error']['message'] = curl_error($ch);
         curl_close($ch);
@@ -563,7 +593,16 @@ function _execute($url, $method = 'get', $post = array(), $format = 'plain')
                 $return = $response;
             }
             break;
-
+		case 400:
+			if (isJson($response)) {
+                $data = safe_json_decode($response);
+				$return['error']['message'] = $data['error_description'] ? $data['error_description'] :'Invalid Request';
+            } else {
+                $return = $response;
+				$return['error']['message'] = 'Invalid Request';
+            }
+			$return['error']['code'] = 1;
+            break;
         case 401:
             $return['error']['code'] = 1;
             $return['error']['message'] = 'Unauthorized';
@@ -752,12 +791,15 @@ function saveImage($class_name, $file, $foreign_id, $is_multi = false)
         }
         $attachment = new Models\Attachment;
         if (!file_exists(APP_PATH . '/media/' . $class_name . '/' . $foreign_id)) {
-            mkdir(APP_PATH . '/media/' . $class_name . '/' . $foreign_id, 0777, true);
+			mkdir(APP_PATH . '/media/' . $class_name . '/' . $foreign_id, 0777, true);
         }
         $src = APP_PATH . '/media/tmp/' . $file;
         $dest = APP_PATH . '/media/' . $class_name . '/' . $foreign_id . '/' . $file;
         copy($src, $dest);
         unlink($src);
+		if ($class_name == 'UserAvatar') {
+			Capsule::select('delete from attachments where class="'.$class_name.'" and foreign_id='.$foreign_id);
+		}
         $info = getimagesize($dest);
         $width = $info[0];
         $height = $info[1];
@@ -776,7 +818,7 @@ function saveImage($class_name, $file, $foreign_id, $is_multi = false)
             if (is_dir($targetzip)) {
                 rmdir_recursive($targetzip);
             }
-            mkdir($targetzip, 0777);
+            mkdir($targetzip, 0777, true);
             $zip = new ZipArchive;
             if ($zip->open($dest) === true) {
                 $zip->extractTo($targetzip);

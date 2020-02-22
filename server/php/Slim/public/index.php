@@ -110,18 +110,14 @@ $app->POST('/api/v1/users/register', function ($request, $response, $args) {
                 $user->is_email_confirmed = 1;
                 $user->is_active = 1;
             }
-            if (!empty($args['is_employer']) && !empty($args['is_freelancer'])) {
-                if (!IS_ENABLED_DUAL_REGISTER) {
-                    return renderWithJson($result, 'User should not allow to dual register(employer/freelancer).', '', 1);
-                }
-                $user->role_id = \Constants\ConstUserTypes::User;
-            } elseif (!empty($args['is_employer'])) {
+            if (!empty($args['register']) && $args['register'] == 'company') {
                 $user->role_id = \Constants\ConstUserTypes::Employer;
-            } elseif (!empty($args['is_freelancer'])) {
+            } elseif (!empty($args['register']) && $args['register'] == 'constestant') {
                 $user->role_id = \Constants\ConstUserTypes::Freelancer;
             } else {
                 $user->role_id = \Constants\ConstUserTypes::User;
             }
+			
             unset($user->is_employer);
             unset($user->is_freelancer);
             $user->save();
@@ -206,10 +202,24 @@ $app->POST('/api/v1/users/register', function ($request, $response, $args) {
             }
             return renderWithJson($result);
         } catch (Exception $e) {
+			// $e->getMessage()
             return renderWithJson($result, 'User could not be added. Please, try again.', '', 1);
         }
     } else {
-        return renderWithJson($result, 'User could not be added. Please, try again.', $validationErrorFields, 1);
+		if (!empty($validationErrorFields)) {
+			foreach ($validationErrorFields as $key=>$value) {
+				if ($key == 'unique') {
+					return renderWithJson($result, ucfirst($value[0]).' already exists. Please, try again login.', '', 1);
+				} else if (!empty($value[0]) && !empty($value[0]['numeric'])) {
+					return renderWithJson($result, $value[0]['numeric'], '', 1);
+				} else {
+					return renderWithJson($result, $value[0], '', 1);
+				}
+				break;
+			}
+		} else {
+			return renderWithJson($result, 'User could not be added. Please, try again.', $validationErrorFields, 1);
+		}
     }
 });
 /**
@@ -277,12 +287,10 @@ $app->POST('/api/v1/users/login', function ($request, $response, $args) {
         $log_user = $user->where('email', $body['email'])->with($enabledIncludes)->where('is_active', 1)->where('is_email_confirmed', 1)->first();
     }
     if (!empty($log_user)) {
-        $log_user->makeVisible($user->hidden);
+        // $log_user->makeVisible($user->hidden);
     }
 	$password = crypt($body['password'], $log_user['password']);
     $validationErrorFields = $user->validate($body);
-	$password = "a";
-	$log_user['password'] = "a";
 	$validationErrorFields = array();
     if (empty($validationErrorFields) && !empty($log_user) && ($password == $log_user['password'])) {
         $scopes = '';
@@ -305,7 +313,7 @@ $app->POST('/api/v1/users/login', function ($request, $response, $args) {
             $userLogin->ip_id = saveIp();
             $userLogin->user_agent = $_SERVER['HTTP_USER_AGENT'];
             $userLogin->save();
-            return renderWithJson($result);
+            return renderWithJson($result, 'LoggedIn Successfully');
         } else {
             return renderWithJson($result, 'Your login credentials are invalid.', '', 1);
         }
@@ -323,7 +331,7 @@ $app->GET('/api/v1/users/social_login', function ($request, $response, $args) {
     $queryParams = $request->getQueryParams();
     if (!empty($queryParams['type'])) {
         $response = social_auth_login($queryParams['type']);
-        return renderWithJson($response);
+		return renderWithJson($response);
     } else {
         return renderWithJson($result, 'No record found', '', 1);
     }
@@ -336,13 +344,18 @@ $app->GET('/api/v1/users/social_login', function ($request, $response, $args) {
  */
 $app->POST('/api/v1/users/social_login', function ($request, $response, $args) {
     $body = $request->getParsedBody();
-    $result = array();
-    if (!empty($_GET['type'])) {
-        $response = social_auth_login($_GET['type'], $body);
-        return renderWithJson($response);
-    } else {
-        return renderWithJson($result, 'Please choose one provider.', '', 1);
-    }
+	try {
+		$result = array();
+		if (!empty($_GET['type'])) {
+			$response = social_auth_login($_GET['type'], $body);
+			// return (($response && $response['error'] && $response['error']['code'] == 1) ? renderWithJson($response) : renderWithJson($result, 'Unable to fetch details', '', 1));
+			return renderWithJson($response, 'LoggedIn Successfully');
+		} else {
+			return renderWithJson($result, 'Please choose one provider.', '', 1);
+		}
+	} catch(Exception $e) {
+		return renderWithJson($result, $e->getMessage(), '', 1);
+	}
 });
 /**
  * POST usersForgotPasswordPost
@@ -383,11 +396,11 @@ $app->POST('/api/v1/users/forgot_password', function ($request, $response, $args
  * Notes: update change password
  * Output-Formats: [application/json]
  */
-$app->PUT('/api/v1/users/{userId}/change_password', function ($request, $response, $args) {
+$app->PUT('/api/v1/users/change_password', function ($request, $response, $args) {
     global $authUser;
     $result = array();
     $args = $request->getParsedBody();
-    $user = Models\User::find($request->getAttribute('userId'));
+    $user = Models\User::find($authUser->id);
     $validationErrorFields = $user->validate($args);
     $password = crypt($args['password'], $user['password']);
     if (empty($validationErrorFields)) {
@@ -472,6 +485,39 @@ $app->GET('/api/v1/users/logout', function ($request, $response, $args) {
         } catch (Exception $e) {
             return renderWithJson(array(), 'Please verify in your token', '', 1);
         }
+    }
+});
+$app->GET('/api/v1/contestants', function ($request, $response, $args) {    
+    $queryParams = $request->getQueryParams();    
+    global $authUser;
+    $result = array();
+    try {
+        $count = PAGE_LIMIT;
+        if (!empty($queryParams['limit'])) {
+            $count = $queryParams['limit'];
+        }
+        $queryParams['role_id'] = \Constants\ConstUserTypes::User;
+		$queryParams['is_email_confirmed'] = true;
+		$queryParams['is_active'] = true;
+		$enabledIncludes = array(
+            'attachment'
+        );
+        $users = Models\User::with($enabledIncludes);
+        $users = $users->Filter($queryParams)->paginate($count);
+        if (!empty($authUser) && $authUser->role_id == '1') {
+            $user_model = new Models\User;
+            $users->makeVisible($user_model->hidden);
+        }
+        $users = $users->toArray();
+        $data = $users['data'];
+		unset($users['data']);
+        $result = array(
+            'data' => $data,
+            '_metadata' => $users
+        );
+        return renderWithJson($result);
+    } catch (Exception $e) {
+        return renderWithJson($result, $message = 'No record found', $fields = '', $isError = 1);
     }
 });
 /**
@@ -584,6 +630,10 @@ $app->GET('/api/v1/usershome', function ($request, $response, $args) {
  * Output-Formats: [application/json]
  */
 $app->POST('/api/v1/users', function ($request, $response, $args) {
+	global $authUser;
+	if (!empty($authUser['id']) && $authUser->role_id != '1') {
+		return renderWithJson($result, $message = 'Invalid Request', $fields = '', $isError = 1);
+	}
     $args = $request->getParsedBody();
     $result = array();
     $user = new Models\User($args);
@@ -704,10 +754,9 @@ $app->GET('/api/v1/users/{userId}', function ($request, $response, $args) {
         'city',
         'state',
         'country',
-        'role',
-        'skill_users'
+        'role'
     );
-    (isPluginEnabled('Common/UserFollow')) ? $enabledIncludes[] = 'follower' : '';
+    // (isPluginEnabled('Common/UserFollow')) ? $enabledIncludes[] = 'follower' : '';
     $user = Models\User::with($enabledIncludes)->where('id', $request->getAttribute('userId'))->first();
     if (!empty($authUser['id']) && $authUser->role_id == '1') {
         $user_model = new Models\User;
@@ -716,7 +765,6 @@ $app->GET('/api/v1/users/{userId}', function ($request, $response, $args) {
     if (!empty($user)) {
         $result['data'] = $user;
         $isAllowToViewBadge = false;
-        //TO-DO
         if (!empty($authUser['id'])) {
             $enabledIncludes = array();
             (isPluginEnabled('Job/Job')) ? $enabledIncludes = 'job' : '';
@@ -777,11 +825,11 @@ $app->GET('/api/v1/me', function ($request, $response, $args) {
  * Notes: Update user
  * Output-Formats: [application/json]
  */
-$app->PUT('/api/v1/users/{userId}', function ($request, $response, $args) {
+$app->PUT('/api/v1/users', function ($request, $response, $args) {
     global $authUser;
-    $args = $request->getParsedBody();
+    $args = $request->getParsedBody();	
     $result = array();
-    $user = Models\User::find($request->getAttribute('userId'));
+    $user = Models\User::find($authUser->id);
     unset($user->location);
     unset($user->city_name);
     unset($user->state_name);
@@ -804,6 +852,9 @@ $app->PUT('/api/v1/users/{userId}', function ($request, $response, $args) {
             $validation = false;
         }
     }
+	if (!empty($args['address'])) {
+		$user->address = $args['address'];
+	}
     unset($user->country);
     unset($user->state);
     unset($user->city);
@@ -866,9 +917,7 @@ $app->PUT('/api/v1/users/{userId}', function ($request, $response, $args) {
                     }
                 }
                 $enabledIncludes = array(
-                    'attachment',
-                    'cover_photo',
-                    'skill_users'
+                    'attachment'
                 );
                 $user = Models\User::with($enabledIncludes)->find($user->id);
                 $result['data'] = $user->toArray();
@@ -4187,6 +4236,7 @@ $app->POST('/api/v1/attachments', function ($request, $response, $args) {
 	global $authUser;
     $args = $request->getQueryParams();
     $file = $request->getUploadedFiles();
+	
     if(!empty($file)) {
         $newfile = $file['file'];
         $type = pathinfo($newfile->getClientFilename(), PATHINFO_EXTENSION);
@@ -4247,7 +4297,7 @@ $app->POST('/api/v1/attachments', function ($request, $response, $args) {
                     }
                 } else {
                     if (!file_exists(APP_PATH . '/media/tmp/')) {
-                        mkdir(APP_PATH . '/media/tmp/');
+                        mkdir(APP_PATH . '/media/tmp/',0777,true);
                     }
                     if ($type == 'php') {
                         $type = 'txt';
@@ -5394,54 +5444,154 @@ $app->GET('/api/v1/cron', function ($request, $response, $args) use ($app)
 		Capsule::select($sql);
 	}
 });
-$app->GET('/api/v1/advertisements', function ($request, $response, $args) {
+$app->GET('/api/v1/companies', function ($request, $response, $args) {
     global $authUser;
+	if (!empty($authUser['id']) && $authUser->role_id != '1') {
+		return renderWithJson($result, $message = 'Invalid Request', $fields = '', $isError = 1);
+	}
     $queryParams = $request->getQueryParams();
     $results = array();
     try {
-		if ($queryParams['type'] == 'list') {
-			$count = PAGE_LIMIT;
-			if (!empty($queryParams['limit'])) {
-				$count = $queryParams['limit'];
-			}
-			$advertisements = Models\Advertisement::with('user', 'attachment')->Filter($queryParams)->paginate($count)->toArray();
-			$blocks = array();
-			foreach($advertisements['data'] as $advertisement) {
-				$blocks['block_no_'.$advertisement['block_no']] = $advertisement;
-			}
-			$pages = array();
-			for($i=1;$i <= 30; $i++) {
-				if (isset($blocks['block_no_'.$i])) {
-					$pages[] = $blocks['block_no_'.$i];
-				} else {
-					$pages[] = null;
-				}
-			}
-			unset($advertisement['data']);
-			$results = array(
-				'data' => $pages
-			);
-		} else {
-			$Sql = "SELECT * FROM blocks where is_active=1";
-			$blocks = Capsule::select($Sql);
-			if(!empty($blocks)) {
-				$blocks = json_decode(json_encode($blocks), true);
-				$results = array(
-					'data' => $blocks
-				);
-			} else {
-				$results = array(
-					'data' => []
-				);
-			}			
+		$count = PAGE_LIMIT;
+		if (!empty($queryParams['limit'])) {
+			$count = $queryParams['limit'];
 		}
-        return renderWithJson($results);
+		$companies = Models\Company::with('user', 'attachment')->Filter($queryParams)->paginate($count)->toArray();
+		$results = array(
+			'data' => $companies
+		);
+		return renderWithJson($results);
     } catch (Exception $e) {
         return renderWithJson($results, $message = 'No record found', $fields = '', $isError = 1);
     }
 });
-$app->GET('/api/v1/advertisements/{id}', function ($request, $response, $args) {
+$app->GET('/api/v1/company/{id}', function ($request, $response, $args) {
     global $authUser;
+	if (!empty($authUser['id']) && $authUser->role_id != '1') {
+		return renderWithJson($result, $message = 'Invalid Request', $fields = '', $isError = 1);
+	}
+    $queryParams = $request->getQueryParams();
+    $results = array();
+    try {
+        $company = Models\Company::find($request->getAttribute('id'));
+        if (!empty($company)) {
+            $result['data'] = $company;
+            return renderWithJson($result);
+        } else {
+            return renderWithJson($result, 'No record found', '', 1);
+        }
+    } catch (Exception $e) {
+        return renderWithJson($results, $message = 'No record found', $fields = '', $isError = 1);
+    }
+})->add(new ACL('canUpdateUser'));
+$app->POST('/api/v1/company', function ($request, $response, $args) {
+    global $authUser, $_server_domain_url;
+	if (!empty($authUser['id']) && $authUser->role_id != '1') {
+		return renderWithJson($result, $message = 'Invalid Request', $fields = '', $isError = 1);
+	}
+    $result = array();
+    $args = $request->getParsedBody();
+    $company = new Models\Company($args);
+    try {
+        $validationErrorFields = $company->validate($args);
+        if (empty($validationErrorFields)) {
+            $company->is_active = 1;
+            $company->user_id = $authUser->id;
+            if ($authUser['role_id'] == \Constants\ConstUserTypes::Admin && !empty($args['user_id'])) {
+                $company->user_id = $args['user_id'];
+            }
+            if ($company->save()) {
+				if ($company->id) {
+					if (!empty($args['image'])) {
+						saveImage('Company', $args['image'], $company->id);
+					}
+					$result['data'] = $company->toArray();
+					return renderWithJson($result);
+				}
+            } else {
+				return renderWithJson($result, 'Company could not be added. Please, try again.', '', 1);
+			}
+        } else {
+            return renderWithJson($result, 'Company could not be added. Please, try again.', $validationErrorFields, 1);
+        }
+    } catch (Exception $e) {
+        return renderWithJson($result, 'Company could not be added. Please, try again.'.$e->getMessage(), '', 1);
+    }
+})->add(new ACL('canUpdateUser'));
+$app->PUT('/api/v1/company/{id}', function ($request, $response, $args) {
+    global $authUser;
+	
+	if (!empty($authUser['id']) && $authUser->role_id != '1') {
+		return renderWithJson($result, $message = 'Invalid Request', $fields = '', $isError = 1);
+	}
+	$args = $request->getParsedBody();
+	$company = Models\Company::find($request->getAttribute('id'));
+	$company->fill($args);
+	$result = array();
+	try {
+		$validationErrorFields = $company->validate($args);
+		if (empty($validationErrorFields)) {
+			$company->save();
+			if (!empty($args['image']) && $company->id) {
+				saveImage('Company', $args['image'], $request->getAttribute('id'));
+			}
+			$result = $company->toArray();
+			return renderWithJson($result);
+		} else {
+			return renderWithJson($result, 'Company could not be updated. Please, try again.', $validationErrorFields, 1);
+		}
+	} catch (Exception $e) {
+		return renderWithJson($result, 'Company could not be updated. Please, try again.', $e->getMessage(), 1);
+	}
+})->add(new ACL('canUpdateUser'));
+$app->DELETE('/api/v1/company/{id}', function ($request, $response, $args) {
+    global $authUser;
+	if (!empty($authUser['id']) && $authUser->role_id != '1') {
+		return renderWithJson($result, $message = 'Invalid Request', $fields = '', $isError = 1);
+	}
+	$args = array();
+	$args['is_active'] = false;
+	$company = Models\Company::find($request->getAttribute('id'));
+	$company->fill($args);
+	$result = array();
+	try {
+		$validationErrorFields = $company->validate($args);
+		if (empty($validationErrorFields)) {
+			$company->save();
+			return renderWithJson(array(), 'Company delete sucessfully','', 0);
+		} else {
+			return renderWithJson($result, 'Company could not be delete. Please, try again.', $validationErrorFields, 1);
+		}
+	} catch (Exception $e) {
+		return renderWithJson($result, 'Company could not be delete. Please, try again.', $e->getMessage(), 1);
+	}
+})->add(new ACL('canUpdateUser'));
+$app->GET('/api/v1/advertisements', function ($request, $response, $args) {
+    global $authUser;
+	if (!empty($authUser['id']) && $authUser->role_id != '1') {
+		return renderWithJson($result, $message = 'Invalid Request', $fields = '', $isError = 1);
+	}
+    $queryParams = $request->getQueryParams();
+    $results = array();
+    try {
+		$count = PAGE_LIMIT;
+		if (!empty($queryParams['limit'])) {
+			$count = $queryParams['limit'];
+		}
+		$advertisements = Models\Advertisement::with('user', 'attachment')->Filter($queryParams)->paginate($count)->toArray();
+		$results = array(
+			'data' => $advertisements
+		);
+		return renderWithJson($results);
+    } catch (Exception $e) {
+        return renderWithJson($results, $message = 'No record found', $fields = '', $isError = 1);
+    }
+});
+$app->GET('/api/v1/advertisement/{id}', function ($request, $response, $args) {
+    global $authUser;
+	if (!empty($authUser['id']) && $authUser->role_id != '1') {
+		return renderWithJson($result, $message = 'Invalid Request', $fields = '', $isError = 1);
+	}
     $queryParams = $request->getQueryParams();
     $results = array();
     try {
@@ -5456,25 +5606,30 @@ $app->GET('/api/v1/advertisements/{id}', function ($request, $response, $args) {
         return renderWithJson($results, $message = 'No record found', $fields = '', $isError = 1);
     }
 })->add(new ACL('canUpdateUser'));
-$app->POST('/api/v1/advertisements', function ($request, $response, $args) {
+$app->POST('/api/v1/advertisement', function ($request, $response, $args) {
     global $authUser, $_server_domain_url;
+	if (!empty($authUser['id']) && $authUser->role_id != '1') {
+		return renderWithJson($result, $message = 'Invalid Request', $fields = '', $isError = 1);
+	}
     $result = array();
     $args = $request->getParsedBody();
     $advertisement = new Models\Advertisement($args);
     try {
         $validationErrorFields = $advertisement->validate($args);
         if (empty($validationErrorFields)) {
-            $advertisement->is_approved = 1;
+            $advertisement->is_active = 1;
             $advertisement->user_id = $authUser->id;
             if ($authUser['role_id'] == \Constants\ConstUserTypes::Admin && !empty($args['user_id'])) {
                 $advertisement->user_id = $args['user_id'];
             }
             if ($advertisement->save()) {
-                if (!empty($args['image']) && $advertisement->id) {
-                    saveImage('Advertisement', $args['image'], $advertisement->id);
+				if ($advertisement->id) {
+					if (!empty($args['image'])) {
+						saveImage('Advertisement', $args['image'], $advertisement->id);
+					}
 					$result['data'] = $advertisement->toArray();
 					return renderWithJson($result);
-                }
+				}
             } else {
 				return renderWithJson($result, 'Advertisement could not be added. Please, try again.', '', 1);
 			}
@@ -5482,31 +5637,59 @@ $app->POST('/api/v1/advertisements', function ($request, $response, $args) {
             return renderWithJson($result, 'Advertisement could not be added. Please, try again.', $validationErrorFields, 1);
         }
     } catch (Exception $e) {
-        return renderWithJson($result, 'Advertisement could not be added. Please, try again.', '', 1);
+        return renderWithJson($result, 'Advertisement could not be added. Please, try again.'.$e->getMessage(), '', 1);
     }
 })->add(new ACL('canUpdateUser'));
-$app->PUT('/api/v1/advertisements/{id}', function ($request, $response, $args) {
+$app->PUT('/api/v1/advertisement/{id}', function ($request, $response, $args) {
     global $authUser;
-    if ($authUser['role_id'] == \Constants\ConstUserTypes::Admin) {
-        $args = $request->getParsedBody();
-        $advertisement = Models\Advertisement::find($request->getAttribute('id'));
-        $advertisement->fill($args);
-        $result = array();
-        try {
-            $validationErrorFields = $advertisement->validate($args);
-            if (empty($validationErrorFields)) {
-                $advertisement->save();
-                if (!empty($args['image']) && $advertisement->id) {
-                    saveImage('Advertisement', $args['image'], $request->getAttribute('id'));
-                }
-                $result = $advertisement->toArray();
-                return renderWithJson($result);
-            } else {
-                return renderWithJson($result, 'Advertisement could not be added. Please, try again.', $validationErrorFields, 1);
-            }
-        } catch (Exception $e) {
-            return renderWithJson($result, 'Advertisement could not be added. Please, try again.', $e->getMessage(), 1);
-        }
-    }
+	if (!empty($authUser['id']) && $authUser->role_id != '1') {
+		return renderWithJson($result, $message = 'Invalid Request', $fields = '', $isError = 1);
+	}
+	$args = $request->getParsedBody();
+	$advertisement = Models\Advertisement::find($request->getAttribute('id'));
+	$advertisement->fill($args);
+	$result = array();
+	try {
+		$validationErrorFields = $advertisement->validate($args);
+		if (empty($validationErrorFields)) {
+			$advertisement->save();
+			if (!empty($args['image']) && $advertisement->id) {
+				saveImage('Advertisement', $args['image'], $request->getAttribute('id'));
+			}
+			$result = $advertisement->toArray();
+			return renderWithJson($result);
+		} else {
+			return renderWithJson($result, 'Advertisement could not be updated. Please, try again.', $validationErrorFields, 1);
+		}
+	} catch (Exception $e) {
+		return renderWithJson($result, 'Advertisement could not be updated. Please, try again.', $e->getMessage(), 1);
+	}
 })->add(new ACL('canUpdateUser'));
+$app->DELETE('/api/v1/advertisement/{id}', function ($request, $response, $args) {
+    global $authUser;
+	if (!empty($authUser['id']) && $authUser->role_id != '1') {
+		return renderWithJson($result, $message = 'Invalid Request', $fields = '', $isError = 1);
+	}
+	$args = array();
+	$args['is_active'] = false;
+	$advertisement = Models\Advertisement::find($request->getAttribute('id'));
+	$advertisement->fill($args);
+	$result = array();
+	try {
+		$advertisement->save();
+		return renderWithJson(array(), 'Advertisement delete sucessfully','', 0);
+	} catch (Exception $e) {
+		return renderWithJson($result, 'Advertisement could not be delete. Please, try again.', $e->getMessage(), 1);
+	}
+})->add(new ACL('canUpdateUser'));
+$app->POST('/api/v1/mail_test', function ($request, $response, $args) use ($app)
+{
+	$result = array();
+	$args = $request->getParsedBody();
+	$result['status'] = 'Failed';
+	if ($args && $args['email']) {
+		$result['status'] = mail($args['email'],"Mail Test","Testing Mail");
+	}
+	return renderWithJson($result);
+});
 $app->run();

@@ -33,9 +33,9 @@ class Providers_google
      */
     function getAccessToken($pass_value)
     {
-        $params = array(
+		$params = array(
             'code' => $pass_value['code'],
-            'client_id' => $pass_value['clientId'],
+            'client_id' => $pass_value['api_key'],
             'redirect_uri' => $pass_value['redirectUri'],
             'grant_type' => 'authorization_code',
             'client_secret' => $pass_value['secret_key']
