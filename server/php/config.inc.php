@@ -16,16 +16,6 @@ define('APP_PATH', dirname(dirname(dirname(__FILE__))));
 define('MEDIA_PATH', APP_PATH . DS . 'media');
 define('TMP_PATH', APP_PATH . DS . 'tmp');
 define('CACHE_PATH', TMP_PATH . DS . 'cache');
-define("AUTHENTICATION", "https://www.paytabs.com/apiv2/validate_secret_key");
-define("PAYPAGE_URL", "https://www.paytabs.com/apiv2/create_pay_page");
-define("VERIFY_URL", "https://www.paytabs.com/apiv2/verify_payment");
-if (file_exists(APP_PATH . DS . 'client' . DS . 'scripts')) {
-    define('SCRIPT_PATH', APP_PATH . DS . 'client' . DS . 'scripts');
-    define('IMAGES_PATH', APP_PATH . DS . 'client' . DS . 'images');
-} else {
-    define('SCRIPT_PATH', APP_PATH . DS . 'client' . DS . 'app' . DS . 'scripts');
-    define('IMAGES_PATH', APP_PATH . DS . 'client' . DS . 'app' . DS . 'images');
-}
 $default_timezone = 'Europe/Berlin';
 if (ini_get('date.timezone')) {
     $default_timezone = ini_get('date.timezone');
@@ -61,52 +51,6 @@ $configuration['Photo']['file'] = array(
         'png'
     )
 );
-$configuration['Job']['file'] = array(
-    'allowedExt' => array(
-        'jpg',
-        'jpeg',
-        'gif',
-        'png'
-    )
-);
-$configuration['QuoteServicePhoto']['file'] = array(
-    'allowedExt' => array(
-        'jpg',
-        'jpeg',
-        'gif',
-        'png'
-    )
-);
-$configuration['QuoteCategory']['file'] = array(
-    'allowedExt' => array(
-        'jpg',
-        'jpeg',
-        'gif',
-        'png'
-    )
-);
-$configuration['QuoteService']['file'] = array(
-    'allowedExt' => array(
-        'jpg',
-        'jpeg',
-        'gif',
-        'png'
-    )
-);
-$configuration['JobApply']['file'] = array(
-    'allowedExt' => array(
-        'doc',
-        'docx',
-        'pdf',
-        'txt',
-        'rtf',
-        'docm',
-        'dot'
-    )
-);
-$configuration['Portfolio']['file'] = array(
-    'allowedExt' => '*'
-);
 $configuration['UserAvatar']['file'] = array(
     'allowedExt' => array(
         'jpg',
@@ -114,41 +58,7 @@ $configuration['UserAvatar']['file'] = array(
         'gif',
         'png'
     )
-);
-$configuration['Exam']['file'] = array(
-    'allowedExt' => array(
-        'jpg',
-        'jpeg',
-        'gif',
-        'png'
-    )
-);
-$configuration['Question']['file'] = array(
-    'allowedExt' => array(
-        'csv'
-    )
-);
-$configuration['ContestUser']['file'] = array(
-    'allowedExt' => '*'
-);
-$configuration['ContestUserDeliveryFile']['file'] = array(
-    'allowedExt' => '*'
-);
-$configuration['ContestType']['file'] = array(
-    'allowedExt' => array(
-        'jpg',
-        'jpeg',
-        'gif',
-        'png'
-    )
-);
-$configuration['MessageContent']['file'] = array(
-    'allowedExt' => '*'
-);
-$configuration['ProjectDocument']['file'] = array(
-    'allowedExt' => '*'
-);
-$configuration['Project']['file'] = array(
+);$configuration['ContestUser']['file'] = array(
     'allowedExt' => '*'
 );
 $configuration['CoverPhoto']['file'] = array(
