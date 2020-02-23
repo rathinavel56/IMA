@@ -164,8 +164,8 @@
 		}
 	],
 	"folders_order": [
-		"eecf6744-9e5f-542d-96ee-9e87215a7d7d",
 		"cc8e48c6-0dc7-a04f-7d45-7a2b0180c220",
+		"eecf6744-9e5f-542d-96ee-9e87215a7d7d",
 		"a5f36ab8-4dc6-a8ee-6658-dc3c3f8fdd85",
 		"9ba385a8-3939-95ce-4f7e-456dfe5a0005",
 		"cd677033-d107-7f8f-54c9-24bad7e82367",
@@ -509,7 +509,7 @@
 			"id": "2602a163-8fbc-a8a5-163a-82f36c9cabcc",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/user_catagories?token={{Token}}&page=1",
+			"url": "{{Host}}/api/v1/user_catagories?token={{Token}}&page=1&category_id=2",
 			"folder": "cd677033-d107-7f8f-54c9-24bad7e82367",
 			"queryParams": [
 				{
@@ -525,6 +525,13 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "category_id",
+					"value": "2",
+					"equals": true,
+					"description": "",
+					"enabled": true
 				}
 			],
 			"preRequestScript": null,
@@ -537,7 +544,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1582443454762,
+			"time": 1582475239796,
 			"name": "User Catagories",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -882,12 +889,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1582403853199,
+			"time": 1582462491950,
 			"name": "Signup",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\"email\":\"freelanceratoz+12gf34367@gmail.com\",\"username\":\"fr2f3tk32314\",\"password\":\"12334345\"}"
+			"rawModeData": "{\n  \"email\": \"abc@gmail.com\",\n  \"username\": \"kate_winslet\",\n  \"password\": \"1234567\",\n  \"first_name\":\"kate\",\n  \"last_name\":\"winslet\"\n}"
 		},
 		{
 			"id": "69d42c39-d4f2-c544-d558-568266a6fff5",
