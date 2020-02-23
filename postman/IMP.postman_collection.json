@@ -509,7 +509,7 @@
 			"id": "2602a163-8fbc-a8a5-163a-82f36c9cabcc",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/user_catagories?token={{Token}}&page=1&category_id=2",
+			"url": "{{Host}}/api/v1/user_catagories?token={{Token}}&page=1&category_id=1",
 			"folder": "cd677033-d107-7f8f-54c9-24bad7e82367",
 			"queryParams": [
 				{
@@ -528,7 +528,7 @@
 				},
 				{
 					"key": "category_id",
-					"value": "2",
+					"value": "1",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -544,7 +544,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1582475239796,
+			"time": 1582478067028,
 			"name": "User Catagories",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
