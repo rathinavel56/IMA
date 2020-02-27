@@ -110,6 +110,17 @@
 			"id": "a5f36ab8-4dc6-a8ee-6658-dc3c3f8fdd85"
 		},
 		{
+			"name": "Payment",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"order": [
+				"eeaac2ef-dfdd-e78a-53a6-f92786515315"
+			],
+			"owner": "502680",
+			"folders_order": [],
+			"id": "6ce6422f-c419-ba51-1494-9c33f66eae2c"
+		},
+		{
 			"name": "Products",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -150,6 +161,18 @@
 			"id": "9f637cf2-a6cc-bb75-eac0-e41de76f6cf8"
 		},
 		{
+			"name": "Subscriptions",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"order": [
+				"4092f089-692c-5fbf-9417-f4a93e7ba574",
+				"b57b1d2e-a77f-0859-1612-e9291e27e51e"
+			],
+			"owner": "502680",
+			"folders_order": [],
+			"id": "f12d9859-cff0-e1b9-c79b-79ee2a67dc06"
+		},
+		{
 			"name": "Users",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -161,6 +184,18 @@
 			"owner": "502680",
 			"folders_order": [],
 			"id": "9ba385a8-3939-95ce-4f7e-456dfe5a0005"
+		},
+		{
+			"name": "Votes",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"order": [
+				"c6604493-9d8b-c06f-1888-eedebe13f23d",
+				"562962c6-a2aa-83fe-57ab-f0aef688ff14"
+			],
+			"owner": "502680",
+			"folders_order": [],
+			"id": "b1a45791-032c-1481-bbf9-082e21642be9"
 		}
 	],
 	"folders_order": [
@@ -175,7 +210,10 @@
 		"8fcc7b58-d191-6b02-05f0-d5da4607c449",
 		"701dc571-cd60-d10d-5b65-2670c5498d30",
 		"70742691-a1e2-0057-d3a9-1cf9c7565e80",
-		"9f637cf2-a6cc-bb75-eac0-e41de76f6cf8"
+		"9f637cf2-a6cc-bb75-eac0-e41de76f6cf8",
+		"6ce6422f-c419-ba51-1494-9c33f66eae2c",
+		"b1a45791-032c-1481-bbf9-082e21642be9",
+		"f12d9859-cff0-e1b9-c79b-79ee2a67dc06"
 	],
 	"timestamp": 1581622377038,
 	"owner": "502680",
@@ -649,6 +687,38 @@
 			"collectionRequestId": "407ad785-0c19-a066-502b-d62d134587df"
 		},
 		{
+			"id": "4092f089-692c-5fbf-9417-f4a93e7ba574",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/subscription?token={{Token}}",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"data": null,
+			"dataMode": "params",
+			"name": "Subscription",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1582778000565,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "f12d9859-cff0-e1b9-c79b-79ee2a67dc06"
+		},
+		{
 			"id": "4c8a112f-1c43-4547-8c43-57811b401e8b",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
@@ -750,6 +820,36 @@
 			"isFromCollection": true,
 			"collectionRequestId": "54cac98e-6ee9-0ade-9052-03a9debc6945",
 			"rawModeData": "{\"username\":\"admin\",\"password\":\"123456\"}"
+		},
+		{
+			"id": "562962c6-a2aa-83fe-57ab-f0aef688ff14",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/purchase/vote_package/2?token={{Token}}",
+			"folder": "b1a45791-032c-1481-bbf9-082e21642be9",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1582777831959,
+			"name": "Votes Purchase",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "5a9ba3fe-e118-f683-983e-e5a965870884",
@@ -1471,6 +1571,38 @@
 			"rawModeData": "{\"email\":\"freelanceratoz+6@gmail.com\"}"
 		},
 		{
+			"id": "b57b1d2e-a77f-0859-1612-e9291e27e51e",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/purchase/subscription/1?token={{Token}}",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"data": null,
+			"dataMode": "params",
+			"name": "Purchase Subscription",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1582778254704,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "f12d9859-cff0-e1b9-c79b-79ee2a67dc06"
+		},
+		{
 			"id": "b7febb1e-c4bf-97f1-ea3f-4601c078aeaf",
 			"headers": "",
 			"headerData": [],
@@ -1589,6 +1721,35 @@
 			"rawModeData": "{\"username\":\"user\",\"password\":\"1234567\"}"
 		},
 		{
+			"id": "c6604493-9d8b-c06f-1888-eedebe13f23d",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/vote_packages?token={{Token}}",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1582744702450,
+			"name": "Votes Packages",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
 			"id": "e83974ba-4d70-6b04-11a0-3434ef774a74",
 			"headers": "",
 			"headerData": [],
@@ -1632,6 +1793,45 @@
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": []
+		},
+		{
+			"id": "eeaac2ef-dfdd-e78a-53a6-f92786515315",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/fund?token={{Token}}&amount=6",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "amount",
+					"value": "6",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"data": null,
+			"dataMode": "params",
+			"name": "Fund",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1582741374080,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "6ce6422f-c419-ba51-1494-9c33f66eae2c"
 		},
 		{
 			"id": "f768fce5-2629-9157-9f86-93f9001a3a3d",
