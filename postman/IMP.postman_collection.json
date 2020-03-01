@@ -147,6 +147,17 @@
 			"id": "6ce6422f-c419-ba51-1494-9c33f66eae2c"
 		},
 		{
+			"name": "Payment Gateway Connect",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"order": [
+				"644f2fca-7dba-dbe2-61b8-32794a6d0a16"
+			],
+			"owner": "502680",
+			"folders_order": [],
+			"id": "51eb32dc-249d-0d5d-0c43-0e4efdc39c82"
+		},
+		{
 			"name": "Products",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -235,6 +246,7 @@
 		"701dc571-cd60-d10d-5b65-2670c5498d30",
 		"70742691-a1e2-0057-d3a9-1cf9c7565e80",
 		"6ce6422f-c419-ba51-1494-9c33f66eae2c",
+		"51eb32dc-249d-0d5d-0c43-0e4efdc39c82",
 		"055b7b5d-d7c2-23f8-197e-099a90b3b2b3",
 		"8fcc7b58-d191-6b02-05f0-d5da4607c449",
 		"b1a45791-032c-1481-bbf9-082e21642be9",
@@ -1052,6 +1064,59 @@
 			"isFromCollection": true,
 			"timestamp": null,
 			"rawModeData": "{\n  \"name\": \"freelancer10\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
+		},
+		{
+			"id": "644f2fca-7dba-dbe2-61b8-32794a6d0a16",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/payment_gateways?token={{Token}}&is_active=true&sort=id&sortby=ASC",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "is_active",
+					"value": "true",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sort",
+					"value": "id",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sortby",
+					"value": "ASC",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"data": null,
+			"dataMode": "params",
+			"name": "Paypal Connect",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1583062355555,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "51eb32dc-249d-0d5d-0c43-0e4efdc39c82"
 		},
 		{
 			"id": "695ea6ba-cf3e-eef7-b06c-14e2100c433f",
