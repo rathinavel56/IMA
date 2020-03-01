@@ -27,7 +27,6 @@
 			"order": [
 				"9dae81e4-2e51-2da6-75bb-4b5b08f6a39f",
 				"697e420e-65d2-8435-9e73-8697b071ef00",
-				"026eb548-a180-75e0-380f-47ee62703e58",
 				"7cd85fdd-b377-bd86-2729-527dbc4df708"
 			],
 			"owner": "502680",
@@ -140,7 +139,8 @@
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
-				"fc0fdf99-605f-f57d-714a-e194fa1a04b9"
+				"fc0fdf99-605f-f57d-714a-e194fa1a04b9",
+				"24b33a39-790c-4085-e1fa-3ef96015400b"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -246,45 +246,6 @@
 	"owner": "502680",
 	"public": false,
 	"requests": [
-		{
-			"id": "026eb548-a180-75e0-380f-47ee62703e58",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{Host}}/api/v1/card/1?token={{Token}}",
-			"folder": "055b7b5d-d7c2-23f8-197e-099a90b3b2b3",
-			"queryParams": [
-				{
-					"key": "token",
-					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "PUT",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1583006827456,
-			"name": "Card Edit",
-			"description": "",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": [],
-			"rawModeData": "{\n  \"name\": \"freelancer10fghj\",\n  \"image\": \"0cbe196ee3fe98d742f045abbf2b5ec0.jpg\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
-		},
 		{
 			"id": "0b24abc8-ac1d-3ce4-d62d-0d5aebf287ac",
 			"headers": "Content-Type: application/json\n",
@@ -615,6 +576,45 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"timestamp": null
+		},
+		{
+			"id": "24b33a39-790c-4085-e1fa-3ef96015400b",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/payment_gateway/2?token={{Token}}",
+			"folder": "6ce6422f-c419-ba51-1494-9c33f66eae2c",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583056912397,
+			"name": "Payment Gateways Edit",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\n  \"image\": \"484948f6c113a48427d219bbf89f073c.png\"\n}"
 		},
 		{
 			"id": "2602a163-8fbc-a8a5-163a-82f36c9cabcc",
@@ -1116,12 +1116,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583037852498,
+			"time": 1583059029550,
 			"name": "Card Add",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"card_number\": \"111111232132\",\n  \"expiry_date\": \"10/22\",\n  \"ccv\": \"123\"\n}"
+			"rawModeData": "{\n  \"card_number\": \"5555555555554444\",\n  \"expiry_date\": \"10/22\",\n  \"ccv\": \"123\"\n}"
 		},
 		{
 			"id": "69d42c39-d4f2-c544-d558-568266a6fff5",
@@ -1236,7 +1236,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/card/1?token={{Token}}",
+			"url": "{{Host}}/api/v1/card/4?token={{Token}}",
 			"folder": "055b7b5d-d7c2-23f8-197e-099a90b3b2b3",
 			"queryParams": [
 				{
@@ -1257,7 +1257,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583006832590,
+			"time": 1583059379231,
 			"name": "Card Delete",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1841,12 +1841,12 @@
 			"id": "b7febb1e-c4bf-97f1-ea3f-4601c078aeaf",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/attachments?class=UserAvatar&token={{Token}}",
+			"url": "{{Host}}/api/v1/attachments?class=PaymentGateway&token={{Token}}",
 			"folder": "4b1aeef6-01e3-9266-36c6-c1972efc9edc",
 			"queryParams": [
 				{
 					"key": "class",
-					"value": "UserAvatar",
+					"value": "PaymentGateway",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -1866,7 +1866,7 @@
 			"data": [
 				{
 					"key": "file",
-					"value": "",
+					"value": "stripe.png",
 					"description": "",
 					"type": "file",
 					"enabled": true
@@ -1876,14 +1876,12 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582347416749,
+			"helperAttributes": {},
+			"time": 1583056916933,
 			"name": "Attachment Upload",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": [],
-			"isFromCollection": true,
-			"timestamp": null
+			"responses": []
 		},
 		{
 			"id": "be16db63-3841-efff-e298-8f7d8c8a3176",
@@ -2121,7 +2119,8 @@
 			"id": "fc0fdf99-605f-f57d-714a-e194fa1a04b9",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/payment_gateways?token={{Token}}",
+			"url": "{{Host}}/api/v1/payment_gateways?token={{Token}}&is_active=true&sort=id&sortby=ASC",
+			"folder": "6ce6422f-c419-ba51-1494-9c33f66eae2c",
 			"queryParams": [
 				{
 					"key": "token",
@@ -2129,28 +2128,44 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "is_active",
+					"value": "true",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sort",
+					"value": "id",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sortby",
+					"value": "ASC",
+					"equals": true,
+					"description": "",
+					"enabled": true
 				}
 			],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
 			"method": "GET",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"data": null,
 			"dataMode": "params",
-			"name": "Payment Gateways",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1582983158214,
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"folder": "6ce6422f-c419-ba51-1494-9c33f66eae2c",
-			"isFromCollection": true,
-			"collectionRequestId": "fc0fdf99-605f-f57d-714a-e194fa1a04b9",
-			"timestamp": null
+			"helperAttributes": {},
+			"time": 1583059027719,
+			"name": "Payment Gateways",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "ff4d6dd1-f411-b5a1-98c7-f726975d5499",
