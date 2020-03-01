@@ -21,10 +21,25 @@
 			"id": "70742691-a1e2-0057-d3a9-1cf9c7565e80"
 		},
 		{
+			"name": "Cards",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"order": [
+				"9dae81e4-2e51-2da6-75bb-4b5b08f6a39f",
+				"697e420e-65d2-8435-9e73-8697b071ef00",
+				"026eb548-a180-75e0-380f-47ee62703e58",
+				"7cd85fdd-b377-bd86-2729-527dbc4df708"
+			],
+			"owner": "502680",
+			"folders_order": [],
+			"id": "055b7b5d-d7c2-23f8-197e-099a90b3b2b3"
+		},
+		{
 			"name": "Carts",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
+				"7d55db2b-073a-862d-0b45-f2930a15c226",
 				"9103d232-5b9c-e4f1-ba37-a3f9124530d6"
 			],
 			"owner": "502680",
@@ -70,6 +85,17 @@
 			"id": "941ff06d-e864-1d31-b773-0c86eac29dfc"
 		},
 		{
+			"name": "Fund",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"order": [
+				"eeaac2ef-dfdd-e78a-53a6-f92786515315"
+			],
+			"owner": "502680",
+			"folders_order": [],
+			"id": "6b5b1085-d1d5-f9b1-6162-87756547a924"
+		},
+		{
 			"name": "Image",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -110,11 +136,11 @@
 			"id": "a5f36ab8-4dc6-a8ee-6658-dc3c3f8fdd85"
 		},
 		{
-			"name": "Payment",
+			"name": "Payment Gateway",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
-				"eeaac2ef-dfdd-e78a-53a6-f92786515315"
+				"fc0fdf99-605f-f57d-714a-e194fa1a04b9"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -128,8 +154,7 @@
 				"407ad785-0c19-a066-502b-d62d134587df",
 				"37e622a5-3a8e-3808-b021-d8e3b501fdb2",
 				"a21a6b3c-d083-6264-3c19-877d19164c0d",
-				"177574b8-0756-111c-6c11-dc8e1f456312",
-				"69d42c39-d4f2-c544-d558-568266a6fff5"
+				"177574b8-0756-111c-6c11-dc8e1f456312"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -207,20 +232,22 @@
 		"941ff06d-e864-1d31-b773-0c86eac29dfc",
 		"4b1aeef6-01e3-9266-36c6-c1972efc9edc",
 		"821cc0b4-16e5-e166-3e7c-a7b697a44a82",
-		"8fcc7b58-d191-6b02-05f0-d5da4607c449",
 		"701dc571-cd60-d10d-5b65-2670c5498d30",
 		"70742691-a1e2-0057-d3a9-1cf9c7565e80",
-		"9f637cf2-a6cc-bb75-eac0-e41de76f6cf8",
 		"6ce6422f-c419-ba51-1494-9c33f66eae2c",
+		"055b7b5d-d7c2-23f8-197e-099a90b3b2b3",
+		"8fcc7b58-d191-6b02-05f0-d5da4607c449",
 		"b1a45791-032c-1481-bbf9-082e21642be9",
-		"f12d9859-cff0-e1b9-c79b-79ee2a67dc06"
+		"f12d9859-cff0-e1b9-c79b-79ee2a67dc06",
+		"6b5b1085-d1d5-f9b1-6162-87756547a924",
+		"9f637cf2-a6cc-bb75-eac0-e41de76f6cf8"
 	],
 	"timestamp": 1581622377038,
 	"owner": "502680",
 	"public": false,
 	"requests": [
 		{
-			"id": "0b24abc8-ac1d-3ce4-d62d-0d5aebf287ac",
+			"id": "026eb548-a180-75e0-380f-47ee62703e58",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
 				{
@@ -228,6 +255,45 @@
 					"value": "application/json",
 					"description": "",
 					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/card/1?token={{Token}}",
+			"folder": "055b7b5d-d7c2-23f8-197e-099a90b3b2b3",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583006827456,
+			"name": "Card Edit",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\n  \"name\": \"freelancer10fghj\",\n  \"image\": \"0cbe196ee3fe98d742f045abbf2b5ec0.jpg\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
+		},
+		{
+			"id": "0b24abc8-ac1d-3ce4-d62d-0d5aebf287ac",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/users/social_login?type=google",
@@ -250,7 +316,7 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582378513469,
 			"name": "Google Login Mobile",
 			"description": "",
@@ -349,11 +415,15 @@
 						"data": "{\n  \"code\": \"ya29.Il-9B8jNRnTTCsNQQbzCkSXsBWBViyFxu_TV8-r3uV0YRVVFiI2nyLLy3dLAg4PQefR_sGc-GmC1wtN0Q-dL-nXiFz5FUMjlvltLV4_evPmCojWnJfezHsDUTKCEhVPmzw\",\n  \"clientId\": \"263189942868-n5vmdmtk8i0snumqqtnhoels6bg8cqnn.apps.googleusercontent.com\",\n  \"redirectUri\": \"http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google\",\n  \"state\": \"5kiay7wvh1h\"\n}",
 						"method": "POST",
 						"dataMode": "raw"
-					}
+					},
+					"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+					"requestId": "0b24abc8-ac1d-3ce4-d62d-0d5aebf287ac",
+					"owner": "502680",
+					"collection": "60aaabea-64a8-e816-e50d-ef7bd85719fc"
 				}
 			],
 			"isFromCollection": true,
-			"collectionRequestId": "0b24abc8-ac1d-3ce4-d62d-0d5aebf287ac",
+			"timestamp": null,
 			"rawModeData": "{\n  \"idToken\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc2MmZhNjM3YWY5NTM1OTBkYjhiYjhhNjM2YmYxMWQ0MzYwYWJjOTgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyOTc4MzI3MDkxMzk4Mzg3ODk1IiwiZW1haWwiOiJmcmVlbGFuY2VyYXRvekBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6IkJ1Wll0OEJybE1YX0p1bTh2V3lWV1EiLCJuYW1lIjoiZnJlZWxhbmNlciBmIiwicGljdHVyZSI6Imh0dHBzOi8vbGg0Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tQ3FUMko4eVI4UXcvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUNIaTNyZnRMenFmSVFyS0VTNVZLM3N2MTkwbU5zLUFuZy9zOTYtYy9waG90by5qcGciLCJnaXZlbl9uYW1lIjoiZnJlZWxhbmNlciIsImZhbWlseV9uYW1lIjoiZiIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNTgyMDUzNzExLCJleHAiOjE1ODIwNTczMTEsImp0aSI6ImU3NWZiOWMxY2U5MDkyMDc2NDliMjg5NTFhNjFhYjllMWZkYjgzYWMifQ.IU_FY6-0KwI5_Phd_XcUfgR6r3_Q1Xe-7OT8lS4Fqbc_gnbaOYjapv6Zf0NO6-Zcz5M2LZiwa5j2HMbPLMfftltf5NV4dH3xKqck5TMhheKtT2YM7fPzBMlci9i3Oe1SAHzv2An-rCBOIrPb4hVq2ujUaNfvTuNZm-TvZ3P7hoIh_o8ghP1P5J2DZOnfvz67s8sB2uh9YtuqQHYpLb7Iohpoh7Rmulu9tu1RuJ7u8ZpGIoMnquUc-P7WnQQBkbTH-2g-SuamuupvhePWo6sv9ykPwcG20-AKJSRi0HBu4rpT_wmUxV6qKp4saQdNu5ywFSlcefyFln28Ls77jzQ42w\"\n}"
 		},
 		{
@@ -363,8 +433,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/advertisement/1?token={{Token}}",
@@ -387,14 +457,14 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582375971592,
 			"name": "Advertisement Delete",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "0e59f03f-0782-ae73-0ed3-bb5fb15c3e05",
+			"timestamp": null,
 			"rawModeData": ""
 		},
 		{
@@ -412,13 +482,13 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347252443,
 			"name": "How It Works",
 			"description": null,
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"isFromCollection": true,
-			"collectionRequestId": "159d8217-5742-ae0d-03e4-6bf3d605ffef"
+			"timestamp": null
 		},
 		{
 			"id": "177574b8-0756-111c-6c11-dc8e1f456312",
@@ -427,8 +497,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/product/1?token={{Token}}",
@@ -451,12 +521,13 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582439601602,
 			"name": "Product Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
+			"timestamp": null,
 			"rawModeData": "{\n  \"name\": \"Shoe\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"image\": \"a435b5cd769c80f823d41999467caecd.jpg\"\n}"
 		},
 		{
@@ -489,14 +560,15 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347335853,
 			"name": "Companies",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "18856b4d-bdd7-e0db-a30f-49642b23964d"
+			"collectionRequestId": "18856b4d-bdd7-e0db-a30f-49642b23964d",
+			"timestamp": null
 		},
 		{
 			"id": "1f7d51a2-65cf-00a7-54a6-50ec9c145f77",
@@ -536,12 +608,13 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582445694609,
 			"name": "Contestants Votes",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": []
+			"responses": [],
+			"timestamp": null
 		},
 		{
 			"id": "2602a163-8fbc-a8a5-163a-82f36c9cabcc",
@@ -581,12 +654,15 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582478067028,
 			"name": "User Catagories",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": []
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "2602a163-8fbc-a8a5-163a-82f36c9cabcc",
+			"timestamp": null
 		},
 		{
 			"id": "37e622a5-3a8e-3808-b021-d8e3b501fdb2",
@@ -618,12 +694,15 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582440719332,
 			"name": "User Products",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": []
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "37e622a5-3a8e-3808-b021-d8e3b501fdb2",
+			"timestamp": null
 		},
 		{
 			"id": "3815b71a-2928-8bd0-fe6f-ee59bdb17073",
@@ -640,12 +719,13 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347404689,
 			"name": "Image Generator",
 			"description": "UserAvatar19jpgbig_thumb\n\n",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": []
+			"responses": [],
+			"timestamp": null
 		},
 		{
 			"id": "407ad785-0c19-a066-502b-d62d134587df",
@@ -677,14 +757,15 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582438418521,
 			"name": "Products",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "407ad785-0c19-a066-502b-d62d134587df"
+			"collectionRequestId": "407ad785-0c19-a066-502b-d62d134587df",
+			"timestamp": null
 		},
 		{
 			"id": "4092f089-692c-5fbf-9417-f4a93e7ba574",
@@ -715,8 +796,11 @@
 			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
-			"folder": "f12d9859-cff0-e1b9-c79b-79ee2a67dc06"
+			"helperAttributes": "{}",
+			"folder": "f12d9859-cff0-e1b9-c79b-79ee2a67dc06",
+			"isFromCollection": true,
+			"collectionRequestId": "4092f089-692c-5fbf-9417-f4a93e7ba574",
+			"timestamp": null
 		},
 		{
 			"id": "4c8a112f-1c43-4547-8c43-57811b401e8b",
@@ -725,8 +809,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/users?token={{Token}}",
@@ -748,14 +832,14 @@
 			"dataMode": "raw",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347425744,
 			"name": "User Profile Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "4c8a112f-1c43-4547-8c43-57811b401e8b",
+			"timestamp": null,
 			"rawModeData": "{\n  \"first_name\": \"VJ\",\n  \"last_name\": \"VJ\",\n  \"address\": \"1 Apple Park Way Cupertino\",\n  \"image\": \"95fb84115da9da4f5f032687a824950e.jpg\"\n}"
 		},
 		{
@@ -765,8 +849,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/mail_test",
@@ -780,12 +864,13 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347282581,
 			"name": "Mail Test",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
+			"timestamp": null,
 			"rawModeData": "{\"email\":\"freelanceratoz@gmail.com\"}"
 		},
 		{
@@ -795,8 +880,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/users/login",
@@ -811,14 +896,14 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347362799,
 			"name": "Admin Login",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "54cac98e-6ee9-0ade-9052-03a9debc6945",
+			"timestamp": null,
 			"rawModeData": "{\"username\":\"admin\",\"password\":\"123456\"}"
 		},
 		{
@@ -844,12 +929,15 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582777831959,
 			"name": "Votes Purchase",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": []
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "562962c6-a2aa-83fe-57ab-f0aef688ff14",
+			"timestamp": null
 		},
 		{
 			"id": "5a9ba3fe-e118-f683-983e-e5a965870884",
@@ -874,14 +962,14 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347385344,
 			"name": "User Details",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "5a9ba3fe-e118-f683-983e-e5a965870884"
+			"timestamp": null
 		},
 		{
 			"id": "5b929dcd-bb83-f507-9a09-6145fe2ce747",
@@ -890,8 +978,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/company/13?token={{Token}}",
@@ -914,14 +1002,14 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582373912032,
 			"name": "Company Delete",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "5b929dcd-bb83-f507-9a09-6145fe2ce747",
+			"timestamp": null,
 			"rawModeData": ""
 		},
 		{
@@ -931,8 +1019,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/advertisement?token={{Token}}",
@@ -955,14 +1043,14 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582373660495,
 			"name": "Advertisement Add",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "5c8b46e8-88ef-81f5-1c06-2f73f7b3f6f9",
+			"timestamp": null,
 			"rawModeData": "{\n  \"name\": \"freelancer10\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
 		},
 		{
@@ -989,15 +1077,15 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1582462491950,
+			"time": 1583006781594,
 			"name": "Signup",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"email\": \"abc@gmail.com\",\n  \"username\": \"kate_winslet\",\n  \"password\": \"1234567\",\n  \"first_name\":\"kate\",\n  \"last_name\":\"winslet\"\n}"
+			"rawModeData": "{\n  \"email\": \"abc2@gmail.com\",\n  \"username\": \"test_user\",\n  \"password\": \"1234567\",\n  \"first_name\":\"Test\",\n  \"last_name\":\"Test\"\n}"
 		},
 		{
-			"id": "69d42c39-d4f2-c544-d558-568266a6fff5",
+			"id": "697e420e-65d2-8435-9e73-8697b071ef00",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
 				{
@@ -1007,8 +1095,46 @@
 					"enabled": true
 				}
 			],
+			"url": "{{Host}}/api/v1/card?token={{Token}}",
+			"folder": "055b7b5d-d7c2-23f8-197e-099a90b3b2b3",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583037852498,
+			"name": "Card Add",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\n  \"card_number\": \"111111232132\",\n  \"expiry_date\": \"10/22\",\n  \"ccv\": \"123\"\n}"
+		},
+		{
+			"id": "69d42c39-d4f2-c544-d558-568266a6fff5",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"enabled": true,
+					"description": ""
+				}
+			],
 			"url": "{{Host}}/api/v1/product/1?token={{Token}}",
-			"folder": "821cc0b4-16e5-e166-3e7c-a7b697a44a82",
 			"queryParams": [
 				{
 					"key": "token",
@@ -1027,14 +1153,14 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582439554471,
 			"name": "Products Delete",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "69d42c39-d4f2-c544-d558-568266a6fff5",
+			"timestamp": null,
 			"rawModeData": ""
 		},
 		{
@@ -1044,8 +1170,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/company/13?token={{Token}}",
@@ -1068,12 +1194,13 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582374764804,
 			"name": "Company Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
+			"timestamp": null,
 			"rawModeData": "{\n  \"name\": \"freelancer1023\",\n  \"image\": \"0cbe196ee3fe98d742f045abbf2b5ec0.jpg\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
 		},
 		{
@@ -1091,11 +1218,89 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582345902345,
 			"name": "Term and conditions",
 			"description": null,
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc"
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"timestamp": null
+		},
+		{
+			"id": "7cd85fdd-b377-bd86-2729-527dbc4df708",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/card/1?token={{Token}}",
+			"folder": "055b7b5d-d7c2-23f8-197e-099a90b3b2b3",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583006832590,
+			"name": "Card Delete",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "7d55db2b-073a-862d-0b45-f2930a15c226",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/cart/me?token={{Token}}",
+			"folder": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583004208165,
+			"name": "Add Cart",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "[\n  {\n  \t\"id\": 1,\n    \"product_id\": 1,\n    \"quantity\": 50\n  }\n]"
 		},
 		{
 			"id": "85be8fed-f188-68bb-07ba-c92cee4cc09c",
@@ -1127,14 +1332,15 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582373540614,
 			"name": "Advertisements",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "85be8fed-f188-68bb-07ba-c92cee4cc09c"
+			"collectionRequestId": "85be8fed-f188-68bb-07ba-c92cee4cc09c",
+			"timestamp": null
 		},
 		{
 			"id": "8de4c548-d981-60a2-cd9b-d3d438ac8f54",
@@ -1143,8 +1349,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/advertisement/1?token={{Token}}",
@@ -1167,14 +1373,14 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582375931366,
 			"name": "Advertisement Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "8de4c548-d981-60a2-cd9b-d3d438ac8f54",
+			"timestamp": null,
 			"rawModeData": "{\n  \"name\": \"freelancer10fghj\",\n  \"image\": \"0cbe196ee3fe98d742f045abbf2b5ec0.jpg\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
 		},
 		{
@@ -1182,7 +1388,7 @@
 			"headers": "",
 			"headerData": [],
 			"url": "{{Host}}/api/v1/cart/me?token={{Token}}",
-			"folder": "821cc0b4-16e5-e166-3e7c-a7b697a44a82",
+			"folder": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
 			"queryParams": [
 				{
 					"key": "token",
@@ -1200,12 +1406,16 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582445625218,
 			"name": "User Cart",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": []
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "9103d232-5b9c-e4f1-ba37-a3f9124530d6",
+			"folderId": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
+			"timestamp": null
 		},
 		{
 			"id": "9ca47189-bc96-4b02-a257-d9120e947633",
@@ -1222,13 +1432,51 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347269805,
 			"name": "privacy-policy",
 			"description": null,
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"isFromCollection": true,
-			"collectionRequestId": "9ca47189-bc96-4b02-a257-d9120e947633"
+			"collectionRequestId": "9ca47189-bc96-4b02-a257-d9120e947633",
+			"timestamp": null
+		},
+		{
+			"id": "9dae81e4-2e51-2da6-75bb-4b5b08f6a39f",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/cards?token={{Token}}&page=1",
+			"folder": "055b7b5d-d7c2-23f8-197e-099a90b3b2b3",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "page",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583007149177,
+			"name": "Cards",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "a21a6b3c-d083-6264-3c19-877d19164c0d",
@@ -1237,8 +1485,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/product?token={{Token}}",
@@ -1261,14 +1509,14 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582439401431,
 			"name": "Product Add",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "a21a6b3c-d083-6264-3c19-877d19164c0d",
+			"timestamp": null,
 			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"image\": \"a435b5cd769c80f823d41999467caecd.jpg\"\n}"
 		},
 		{
@@ -1278,8 +1526,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/users/social_login?type=facebook",
@@ -1302,12 +1550,13 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582378501389,
 			"name": "Facebook Login",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
+			"timestamp": null,
 			"rawModeData": "{\n  \"code\": \"AQD0DAYog_bHj2rFA_B9TYf-oDv-JrdO_J7lIvGd4dfp_kKR1mJeKT0Mj1Fk4SosONidTt_ve_RMp5ZSG4P12CdfXwWED7LHI4AUdI4j812m1H_K8cEk2J_YqyVXsj9j_d6uOjhWFukbYKq18tJNY3SkgPg1t3kax2OL3R5taw2qodysN3jAZzSKmeR6NXBS1CPB_wt38_TqP5Tr5Hqc1DGQSHHZE_2JOwua3oCCSYAHvLdnJo4Y8XH4N1CSkUgWN2TnmrpZbqwATzDhsMKMg8g1LRjaMSWduK7jHrkAtVQiMKStGP93ymMBpKwaJ1tSjh4ZISNhBzYjjg-3Eh1-Lu3PM-XXlLkswTgNqzCvSU-rbw\",\n  \"clientId\": \"934931923377900\",\n  \"redirectUri\": \"https://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=facebook\"\n}"
 		},
 		{
@@ -1317,8 +1566,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/users/social_login?type=google",
@@ -1341,7 +1590,7 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582378494476,
 			"name": "Google Login Web",
 			"description": "",
@@ -1414,35 +1663,14 @@
 					"isSample": true,
 					"scrollToResult": false,
 					"runTests": false,
-					"request": {
-						"url": "http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google",
-						"pathVariables": {},
-						"pathVariableData": [],
-						"queryParams": [
-							{
-								"key": "type",
-								"value": "google",
-								"equals": true,
-								"description": "",
-								"enabled": true
-							}
-						],
-						"headerData": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"enabled": true,
-								"description": ""
-							}
-						],
-						"headers": "Content-Type: application/json\n",
-						"data": "{\n  \"code\": \"ya29.Il-9B8jNRnTTCsNQQbzCkSXsBWBViyFxu_TV8-r3uV0YRVVFiI2nyLLy3dLAg4PQefR_sGc-GmC1wtN0Q-dL-nXiFz5FUMjlvltLV4_evPmCojWnJfezHsDUTKCEhVPmzw\",\n  \"clientId\": \"263189942868-n5vmdmtk8i0snumqqtnhoels6bg8cqnn.apps.googleusercontent.com\",\n  \"redirectUri\": \"http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google\",\n  \"state\": \"5kiay7wvh1h\"\n}",
-						"method": "POST",
-						"dataMode": "raw"
-					}
+					"request": "a224818c-4e7e-c307-2b1e-a022a2cbac21",
+					"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+					"requestId": "a224818c-4e7e-c307-2b1e-a022a2cbac21",
+					"owner": "502680",
+					"collection": "60aaabea-64a8-e816-e50d-ef7bd85719fc"
 				}
 			],
-			"folderId": "eecf6744-9e5f-542d-96ee-9e87215a7d7d",
+			"timestamp": null,
 			"rawModeData": "{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc2MmZhNjM3YWY5NTM1OTBkYjhiYjhhNjM2YmYxMWQ0MzYwYWJjOTgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyOTc4MzI3MDkxMzk4Mzg3ODk1IiwiZW1haWwiOiJmcmVlbGFuY2VyYXRvekBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6IkNMc2U2VTZmWVhvRXRaeVA3U2pmWlEiLCJuYW1lIjoiZnJlZWxhbmNlciBmIiwicGljdHVyZSI6Imh0dHBzOi8vbGg0Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tQ3FUMko4eVI4UXcvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUNIaTNyZnRMenFmSVFyS0VTNVZLM3N2MTkwbU5zLUFuZy9zOTYtYy9waG90by5qcGciLCJnaXZlbl9uYW1lIjoiZnJlZWxhbmNlciIsImZhbWlseV9uYW1lIjoiZiIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNTgxOTk5NDU0LCJleHAiOjE1ODIwMDMwNTQsImp0aSI6ImMyYjMxNjA5ZTZkZGJhZmFlNjYzOTlhYzY3N2QzZGQ5ZjJjYzc3OGEifQ.Ut89evfkkZ9UH5iVqKG6kt_vh6ezrz7zrWsttWDfBcMxs8py3ZlW93Ekg-LwmHR_fnORXnE1hjj87P6krKyeqwhvHS6iQIM25XgKOAsJ2sV7UH6V8GT4Zf3Oa9rXU9opXAhI5LCamlaUeokD9Y-4X7kpsFQVy_zQ1HzuD4DeNdh_610a2nwXmGQzTprIandQkUX8HYTN-Mv6Q1wLVAOpGKqKusoOm2rHFMbrFFig6EjCI65fGPbz6USyEgR_2ceL2TNmbl6RykJB0fpAdri3s7xSEvZDYOhpXrnV1TOb48jk-lVNsVaA--Pzy-0Kjer_nR_WKx3DL4oT1w6IeKSNCw\",\n  \"redirectUri\": \"http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google\"\n}"
 		},
 		{
@@ -1460,13 +1688,13 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347239909,
 			"name": "FAQ",
 			"description": null,
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"isFromCollection": true,
-			"collectionRequestId": "a67d9e8f-380a-76a4-0f10-2248b1325e81"
+			"timestamp": null
 		},
 		{
 			"id": "a6e8f590-be73-2be0-0996-15a86541debb",
@@ -1499,12 +1727,15 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582443398183,
 			"name": "Catagories",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": []
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "a6e8f590-be73-2be0-0996-15a86541debb",
+			"timestamp": null
 		},
 		{
 			"id": "ad0c691b-b9b4-4348-325a-2324d7873ce7",
@@ -1530,14 +1761,14 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347608847,
 			"name": "Refresh Token",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "ad0c691b-b9b4-4348-325a-2324d7873ce7"
+			"timestamp": null
 		},
 		{
 			"id": "b4b7a8d3-04dc-6742-431d-f3a2acbe0012",
@@ -1546,8 +1777,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/users/forgot_password",
@@ -1562,12 +1793,13 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347617303,
 			"name": "Forgot Password",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
+			"timestamp": null,
 			"rawModeData": "{\"email\":\"freelanceratoz+6@gmail.com\"}"
 		},
 		{
@@ -1599,8 +1831,11 @@
 			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
-			"folder": "f12d9859-cff0-e1b9-c79b-79ee2a67dc06"
+			"helperAttributes": "{}",
+			"folder": "f12d9859-cff0-e1b9-c79b-79ee2a67dc06",
+			"isFromCollection": true,
+			"collectionRequestId": "b57b1d2e-a77f-0859-1612-e9291e27e51e",
+			"timestamp": null
 		},
 		{
 			"id": "b7febb1e-c4bf-97f1-ea3f-4601c078aeaf",
@@ -1641,14 +1876,14 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347416749,
 			"name": "Attachment Upload",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "b7febb1e-c4bf-97f1-ea3f-4601c078aeaf"
+			"timestamp": null
 		},
 		{
 			"id": "be16db63-3841-efff-e298-8f7d8c8a3176",
@@ -1657,8 +1892,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/users?token={{Token}}",
@@ -1681,14 +1916,14 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347350447,
 			"name": "Admin Add User",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "be16db63-3841-efff-e298-8f7d8c8a3176",
+			"timestamp": null,
 			"rawModeData": "{\n  \"role_id\": 3,\n  \"username\": \"test111\",\n  \"email\": \"test111@gmail.com\",\n  \"password\": \"123456\",\n  \"first_name\": \"test\",\n  \"last_name\": \"test\",\n  \"is_active\": true,\n  \"image\": \"b9c7a11352f41ad322783caac2db7251.jpg\"\n}"
 		},
 		{
@@ -1703,6 +1938,7 @@
 				}
 			],
 			"url": "{{Host}}/api/v1/users/login",
+			"folder": "eecf6744-9e5f-542d-96ee-9e87215a7d7d",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -1713,18 +1949,19 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1582444940092,
+			"time": 1582998584827,
 			"name": "Login",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\"username\":\"user\",\"password\":\"1234567\"}"
+			"rawModeData": "{\n  \"username\": \"user\",\n  \"password\": \"1234567\"\n}"
 		},
 		{
 			"id": "c6604493-9d8b-c06f-1888-eedebe13f23d",
 			"headers": "",
 			"headerData": [],
 			"url": "{{Host}}/api/v1/vote_packages?token={{Token}}",
+			"folder": "b1a45791-032c-1481-bbf9-082e21642be9",
 			"queryParams": [
 				{
 					"key": "token",
@@ -1742,12 +1979,15 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582744702450,
 			"name": "Votes Packages",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": []
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "c6604493-9d8b-c06f-1888-eedebe13f23d",
+			"timestamp": null
 		},
 		{
 			"id": "e83974ba-4d70-6b04-11a0-3434ef774a74",
@@ -1787,12 +2027,13 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582445699779,
 			"name": "Contestants Rank",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": []
+			"responses": [],
+			"timestamp": null
 		},
 		{
 			"id": "eeaac2ef-dfdd-e78a-53a6-f92786515315",
@@ -1830,8 +2071,11 @@
 			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
-			"folder": "6ce6422f-c419-ba51-1494-9c33f66eae2c"
+			"helperAttributes": "{}",
+			"folder": "6b5b1085-d1d5-f9b1-6162-87756547a924",
+			"isFromCollection": true,
+			"collectionRequestId": "eeaac2ef-dfdd-e78a-53a6-f92786515315",
+			"timestamp": null
 		},
 		{
 			"id": "f768fce5-2629-9157-9f86-93f9001a3a3d",
@@ -1840,8 +2084,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/users/change_password?token={{Token}}",
@@ -1863,15 +2107,50 @@
 			"dataMode": "raw",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582347471647,
 			"name": "Change Password",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "f768fce5-2629-9157-9f86-93f9001a3a3d",
+			"timestamp": null,
 			"rawModeData": "{\"password\":\"123456\",\"new_password\":\"1234567\"}"
+		},
+		{
+			"id": "fc0fdf99-605f-f57d-714a-e194fa1a04b9",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/payment_gateways?token={{Token}}",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"data": null,
+			"dataMode": "params",
+			"name": "Payment Gateways",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1582983158214,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": "{}",
+			"folder": "6ce6422f-c419-ba51-1494-9c33f66eae2c",
+			"isFromCollection": true,
+			"collectionRequestId": "fc0fdf99-605f-f57d-714a-e194fa1a04b9",
+			"timestamp": null
 		},
 		{
 			"id": "ff4d6dd1-f411-b5a1-98c7-f726975d5499",
@@ -1880,8 +2159,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"enabled": true,
+					"description": ""
 				}
 			],
 			"url": "{{Host}}/api/v1/company?token={{Token}}",
@@ -1904,14 +2183,14 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
+			"helperAttributes": "{}",
 			"time": 1582305986227,
 			"name": "Company Add",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "ff4d6dd1-f411-b5a1-98c7-f726975d5499",
+			"timestamp": null,
 			"rawModeData": "{\n  \"name\": \"freelancer10\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
 		}
 	]
