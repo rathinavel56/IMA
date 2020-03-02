@@ -279,7 +279,7 @@
 			"id": "05b605be-aeb9-816a-c79f-1fec93622af8",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/purchase/vote_package/2?token={{Token}}&payment_gateway_id=3&card_id=3",
+			"url": "{{Host}}/api/v1/purchase/vote_package/2?token={{Token}}&payment_gateway_id=3&card_id=3&ccv=123",
 			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
 			"queryParams": [
 				{
@@ -302,6 +302,13 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "ccv",
+					"value": "123",
+					"equals": true,
+					"description": "",
+					"enabled": true
 				}
 			],
 			"preRequestScript": null,
@@ -313,7 +320,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583173769917,
+			"time": 1583174906845,
 			"name": "Paypal Votes Purchase Card",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1027,12 +1034,19 @@
 			"id": "562962c6-a2aa-83fe-57ab-f0aef688ff14",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/purchase/vote_package/2?token={{Token}}",
+			"url": "{{Host}}/api/v1/purchase/vote_package/2?token={{Token}}&payment_gateway_id=1",
 			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
 			"queryParams": [
 				{
 					"key": "token",
 					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "payment_gateway_id",
+					"value": "1",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -1046,15 +1060,12 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582777831959,
+			"helperAttributes": {},
+			"time": 1583174909056,
 			"name": "Paypal Votes Purchase",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": [],
-			"isFromCollection": true,
-			"collectionRequestId": "562962c6-a2aa-83fe-57ab-f0aef688ff14",
-			"timestamp": null
+			"responses": []
 		},
 		{
 			"id": "5a9ba3fe-e118-f683-983e-e5a965870884",
