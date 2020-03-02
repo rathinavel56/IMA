@@ -86,17 +86,6 @@
 			"id": "941ff06d-e864-1d31-b773-0c86eac29dfc"
 		},
 		{
-			"name": "Fund",
-			"description": "",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"order": [
-				"eeaac2ef-dfdd-e78a-53a6-f92786515315"
-			],
-			"owner": "502680",
-			"folders_order": [],
-			"id": "6b5b1085-d1d5-f9b1-6162-87756547a924"
-		},
-		{
 			"name": "Image",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -183,7 +172,10 @@
 				"05b605be-aeb9-816a-c79f-1fec93622af8",
 				"b57b1d2e-a77f-0859-1612-e9291e27e51e",
 				"9e3ff3a9-ea01-c47a-5845-7b638198b750",
-				"09772767-7327-0cb6-9fa1-80463950f8aa"
+				"09772767-7327-0cb6-9fa1-80463950f8aa",
+				"eeaac2ef-dfdd-e78a-53a6-f92786515315",
+				"0b2671ab-9b01-4570-5617-4e9a37ec703f",
+				"8ce2dd84-5af1-0348-a194-f0f4086b3c8d"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -243,7 +235,8 @@
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
-				"c6604493-9d8b-c06f-1888-eedebe13f23d"
+				"c6604493-9d8b-c06f-1888-eedebe13f23d",
+				"859f4f64-eab9-1d04-3330-f0b13964d49f"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -268,7 +261,6 @@
 		"b1a45791-032c-1481-bbf9-082e21642be9",
 		"f12d9859-cff0-e1b9-c79b-79ee2a67dc06",
 		"37d16932-e231-1478-e145-daa186cfb50e",
-		"6b5b1085-d1d5-f9b1-6162-87756547a924",
 		"9f637cf2-a6cc-bb75-eac0-e41de76f6cf8"
 	],
 	"timestamp": 1581622377038,
@@ -510,6 +502,28 @@
 			"isFromCollection": true,
 			"timestamp": null,
 			"rawModeData": "{\n  \"idToken\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc2MmZhNjM3YWY5NTM1OTBkYjhiYjhhNjM2YmYxMWQ0MzYwYWJjOTgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyOTc4MzI3MDkxMzk4Mzg3ODk1IiwiZW1haWwiOiJmcmVlbGFuY2VyYXRvekBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6IkJ1Wll0OEJybE1YX0p1bTh2V3lWV1EiLCJuYW1lIjoiZnJlZWxhbmNlciBmIiwicGljdHVyZSI6Imh0dHBzOi8vbGg0Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tQ3FUMko4eVI4UXcvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUNIaTNyZnRMenFmSVFyS0VTNVZLM3N2MTkwbU5zLUFuZy9zOTYtYy9waG90by5qcGciLCJnaXZlbl9uYW1lIjoiZnJlZWxhbmNlciIsImZhbWlseV9uYW1lIjoiZiIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNTgyMDUzNzExLCJleHAiOjE1ODIwNTczMTEsImp0aSI6ImU3NWZiOWMxY2U5MDkyMDc2NDliMjg5NTFhNjFhYjllMWZkYjgzYWMifQ.IU_FY6-0KwI5_Phd_XcUfgR6r3_Q1Xe-7OT8lS4Fqbc_gnbaOYjapv6Zf0NO6-Zcz5M2LZiwa5j2HMbPLMfftltf5NV4dH3xKqck5TMhheKtT2YM7fPzBMlci9i3Oe1SAHzv2An-rCBOIrPb4hVq2ujUaNfvTuNZm-TvZ3P7hoIh_o8ghP1P5J2DZOnfvz67s8sB2uh9YtuqQHYpLb7Iohpoh7Rmulu9tu1RuJ7u8ZpGIoMnquUc-P7WnQQBkbTH-2g-SuamuupvhePWo6sv9ykPwcG20-AKJSRi0HBu4rpT_wmUxV6qKp4saQdNu5ywFSlcefyFln28Ls77jzQ42w\"\n}"
+		},
+		{
+			"id": "0b2671ab-9b01-4570-5617-4e9a37ec703f",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/fund/verify/5",
+			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583176871113,
+			"name": "Paypal Fund Card Verify",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "0e59f03f-0782-ae73-0ed3-bb5fb15c3e05",
@@ -1470,6 +1484,44 @@
 			"rawModeData": "{\n  \t\"id\": 1,\n    \"product_id\": 1,\n    \"quantity\": 50\n}"
 		},
 		{
+			"id": "859f4f64-eab9-1d04-3330-f0b13964d49f",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/vote/43?token={{Token}}",
+			"folder": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583178954941,
+			"name": "Add Votes",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
 			"id": "85be8fed-f188-68bb-07ba-c92cee4cc09c",
 			"headers": "",
 			"headerData": [],
@@ -1508,6 +1560,57 @@
 			"isFromCollection": true,
 			"collectionRequestId": "85be8fed-f188-68bb-07ba-c92cee4cc09c",
 			"timestamp": null
+		},
+		{
+			"id": "8ce2dd84-5af1-0348-a194-f0f4086b3c8d",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/fund/2?token={{Token}}&payment_gateway_id=3&card_id=3&ccv=123",
+			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "payment_gateway_id",
+					"value": "3",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "card_id",
+					"value": "3",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "ccv",
+					"value": "123",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583176765296,
+			"name": "Paypal Fund Card",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "8de4c548-d981-60a2-cd9b-d3d438ac8f54",
@@ -2261,11 +2364,19 @@
 			"id": "eeaac2ef-dfdd-e78a-53a6-f92786515315",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/fund?token={{Token}}&amount=6",
+			"url": "{{Host}}/api/v1/fund?token={{Token}}&payment_gateway_id=1&amount=6",
+			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
 			"queryParams": [
 				{
 					"key": "token",
 					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "payment_gateway_id",
+					"value": "1",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -2278,26 +2389,21 @@
 					"enabled": true
 				}
 			],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
 			"method": "GET",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"data": null,
 			"dataMode": "params",
-			"name": "Fund",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1582741374080,
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"folder": "6b5b1085-d1d5-f9b1-6162-87756547a924",
-			"isFromCollection": true,
-			"collectionRequestId": "eeaac2ef-dfdd-e78a-53a6-f92786515315",
-			"timestamp": null
+			"helperAttributes": {},
+			"time": 1583176613315,
+			"name": "Paypal Fund",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "f768fce5-2629-9157-9f86-93f9001a3a3d",
