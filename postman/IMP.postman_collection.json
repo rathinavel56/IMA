@@ -39,7 +39,9 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
 				"7d55db2b-073a-862d-0b45-f2930a15c226",
-				"9103d232-5b9c-e4f1-ba37-a3f9124530d6"
+				"ff567fab-9282-2210-a591-a220e1b207f3",
+				"9103d232-5b9c-e4f1-ba37-a3f9124530d6",
+				"eca8a644-e538-580f-2e97-b8f4bc5c330f"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -172,6 +174,22 @@
 			"id": "821cc0b4-16e5-e166-3e7c-a7b697a44a82"
 		},
 		{
+			"name": "Purchase",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"order": [
+				"562962c6-a2aa-83fe-57ab-f0aef688ff14",
+				"fb615046-2c4a-7923-d252-129383b0a28d",
+				"05b605be-aeb9-816a-c79f-1fec93622af8",
+				"b57b1d2e-a77f-0859-1612-e9291e27e51e",
+				"9e3ff3a9-ea01-c47a-5845-7b638198b750",
+				"09772767-7327-0cb6-9fa1-80463950f8aa"
+			],
+			"owner": "502680",
+			"folders_order": [],
+			"id": "37d16932-e231-1478-e145-daa186cfb50e"
+		},
+		{
 			"name": "Register",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -201,8 +219,7 @@
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
-				"4092f089-692c-5fbf-9417-f4a93e7ba574",
-				"b57b1d2e-a77f-0859-1612-e9291e27e51e"
+				"4092f089-692c-5fbf-9417-f4a93e7ba574"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -226,8 +243,7 @@
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
-				"c6604493-9d8b-c06f-1888-eedebe13f23d",
-				"562962c6-a2aa-83fe-57ab-f0aef688ff14"
+				"c6604493-9d8b-c06f-1888-eedebe13f23d"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -251,6 +267,7 @@
 		"8fcc7b58-d191-6b02-05f0-d5da4607c449",
 		"b1a45791-032c-1481-bbf9-082e21642be9",
 		"f12d9859-cff0-e1b9-c79b-79ee2a67dc06",
+		"37d16932-e231-1478-e145-daa186cfb50e",
 		"6b5b1085-d1d5-f9b1-6162-87756547a924",
 		"9f637cf2-a6cc-bb75-eac0-e41de76f6cf8"
 	],
@@ -258,6 +275,94 @@
 	"owner": "502680",
 	"public": false,
 	"requests": [
+		{
+			"id": "05b605be-aeb9-816a-c79f-1fec93622af8",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/purchase/vote_package/2?token={{Token}}&payment_gateway_id=3&card_id=3",
+			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "payment_gateway_id",
+					"value": "3",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "card_id",
+					"value": "3",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583173769917,
+			"name": "Paypal Votes Purchase Card",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
+			"id": "09772767-7327-0cb6-9fa1-80463950f8aa",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/purchase/vote_package/2?token={{Token}}&payment_gateway_id=3&card_id=3",
+			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "payment_gateway_id",
+					"value": "3",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "card_id",
+					"value": "3",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583173769917,
+			"name": "Paypal Purchase Subscription Card",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
 		{
 			"id": "0b24abc8-ac1d-3ce4-d62d-0d5aebf287ac",
 			"headers": "Content-Type: application/json\n",
@@ -923,7 +1028,7 @@
 			"headers": "",
 			"headerData": [],
 			"url": "{{Host}}/api/v1/purchase/vote_package/2?token={{Token}}",
-			"folder": "b1a45791-032c-1481-bbf9-082e21642be9",
+			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
 			"queryParams": [
 				{
 					"key": "token",
@@ -943,7 +1048,7 @@
 			"currentHelper": "normal",
 			"helperAttributes": "{}",
 			"time": 1582777831959,
-			"name": "Votes Purchase",
+			"name": "Paypal Votes Purchase",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
@@ -1067,9 +1172,17 @@
 		},
 		{
 			"id": "644f2fca-7dba-dbe2-61b8-32794a6d0a16",
-			"headers": "",
-			"headerData": [],
-			"url": "{{Host}}/api/v1/payment_gateways?token={{Token}}&is_active=true&sort=id&sortby=ASC",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/paypal_connect?token={{Token}}",
+			"folder": "6ce6422f-c419-ba51-1494-9c33f66eae2c",
 			"queryParams": [
 				{
 					"key": "token",
@@ -1077,46 +1190,24 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
-				},
-				{
-					"key": "is_active",
-					"value": "true",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "sort",
-					"value": "id",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "sortby",
-					"value": "ASC",
-					"equals": true,
-					"description": "",
-					"enabled": true
 				}
 			],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
-			"method": "GET",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"data": null,
-			"dataMode": "params",
-			"name": "Paypal Connect",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1583062355555,
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"folder": "51eb32dc-249d-0d5d-0c43-0e4efdc39c82"
+			"time": 1583094877419,
+			"name": "Paypal Connect",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\n  \"email\": \"sb-4xsbq1098603@personal.example.com\"\n}"
 		},
 		{
 			"id": "695ea6ba-cf3e-eef7-b06c-14e2100c433f",
@@ -1142,12 +1233,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583006781594,
+			"time": 1583094074087,
 			"name": "Signup",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"email\": \"abc2@gmail.com\",\n  \"username\": \"test_user\",\n  \"password\": \"1234567\",\n  \"first_name\":\"Test\",\n  \"last_name\":\"Test\"\n}"
+			"rawModeData": "{\n  \"email\": \"abc21@gmail.com\",\n  \"username\": \"test_user2\",\n  \"password\": \"1234567\",\n  \"first_name\":\"Test\",\n  \"last_name\":\"Test\"\n}"
 		},
 		{
 			"id": "697e420e-65d2-8435-9e73-8697b071ef00",
@@ -1181,12 +1272,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583059029550,
+			"time": 1583091746996,
 			"name": "Card Add",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"card_number\": \"5555555555554444\",\n  \"expiry_date\": \"10/22\",\n  \"ccv\": \"123\"\n}"
+			"rawModeData": "{\n\t\"name\": \"123321\",\n  \"card_number\": \"5555555555554444\",\n  \"expiry_date\": \"10/22\",\n  \"ccv\": \"123\"\n}"
 		},
 		{
 			"id": "69d42c39-d4f2-c544-d558-568266a6fff5",
@@ -1301,7 +1392,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/card/4?token={{Token}}",
+			"url": "{{Host}}/api/v1/card/5?token={{Token}}",
 			"folder": "055b7b5d-d7c2-23f8-197e-099a90b3b2b3",
 			"queryParams": [
 				{
@@ -1322,7 +1413,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583059379231,
+			"time": 1583091742196,
 			"name": "Card Delete",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1360,12 +1451,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583004208165,
+			"time": 1583171401187,
 			"name": "Add Cart",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "[\n  {\n  \t\"id\": 1,\n    \"product_id\": 1,\n    \"quantity\": 50\n  }\n]"
+			"rawModeData": "{\n  \t\"id\": 1,\n    \"product_id\": 1,\n    \"quantity\": 50\n}"
 		},
 		{
 			"id": "85be8fed-f188-68bb-07ba-c92cee4cc09c",
@@ -1542,6 +1633,30 @@
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": []
+		},
+		{
+			"id": "9e3ff3a9-ea01-c47a-5845-7b638198b750",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/purchase/vote_package/verify/5",
+			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583087400682,
+			"name": "Paypal Purchase Subscription Verify",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "fb615046-2c4a-7923-d252-129383b0a28d"
 		},
 		{
 			"id": "a21a6b3c-d083-6264-3c19-877d19164c0d",
@@ -1871,7 +1986,8 @@
 			"id": "b57b1d2e-a77f-0859-1612-e9291e27e51e",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/purchase/subscription/1?token={{Token}}",
+			"url": "{{Host}}/api/v1/purchase/subscription/1?token={{Token}}&payment_gateway_id=1",
+			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
 			"queryParams": [
 				{
 					"key": "token",
@@ -1879,28 +1995,30 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "payment_gateway_id",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
 				}
 			],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
 			"method": "GET",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"data": null,
 			"dataMode": "params",
-			"name": "Purchase Subscription",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1582778254704,
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"folder": "f12d9859-cff0-e1b9-c79b-79ee2a67dc06",
-			"isFromCollection": true,
-			"collectionRequestId": "b57b1d2e-a77f-0859-1612-e9291e27e51e",
-			"timestamp": null
+			"helperAttributes": {},
+			"time": 1583174283684,
+			"name": "Paypal Purchase Subscription",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "b7febb1e-c4bf-97f1-ea3f-4601c078aeaf",
@@ -2099,6 +2217,36 @@
 			"timestamp": null
 		},
 		{
+			"id": "eca8a644-e538-580f-2e97-b8f4bc5c330f",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/cart/me/11?token={{Token}}",
+			"folder": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583094179978,
+			"name": "User Cart Delete",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
 			"id": "eeaac2ef-dfdd-e78a-53a6-f92786515315",
 			"headers": "",
 			"headerData": [],
@@ -2179,6 +2327,30 @@
 			"isFromCollection": true,
 			"timestamp": null,
 			"rawModeData": "{\"password\":\"123456\",\"new_password\":\"1234567\"}"
+		},
+		{
+			"id": "fb615046-2c4a-7923-d252-129383b0a28d",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/purchase/vote_package/verify/5",
+			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583087400682,
+			"name": "Paypal Votes Purchase Verify",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "fb615046-2c4a-7923-d252-129383b0a28d"
 		},
 		{
 			"id": "fc0fdf99-605f-f57d-714a-e194fa1a04b9",
@@ -2272,6 +2444,53 @@
 			"isFromCollection": true,
 			"timestamp": null,
 			"rawModeData": "{\n  \"name\": \"freelancer10\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
+		},
+		{
+			"id": "ff567fab-9282-2210-a591-a220e1b207f3",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/cart/me?token={{Token}}&product_id=1",
+			"folder": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "product_id",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583091754706,
+			"name": "Add Cart From Product",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "7d55db2b-073a-862d-0b45-f2930a15c226",
+			"rawModeData": "[\n  {\n  \t\"id\": 1,\n    \"product_id\": 1,\n    \"quantity\": 50\n  }\n]"
 		}
 	]
 }
