@@ -52,8 +52,7 @@
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
-				"a6e8f590-be73-2be0-0996-15a86541debb",
-				"2602a163-8fbc-a8a5-163a-82f36c9cabcc"
+				"a6e8f590-be73-2be0-0996-15a86541debb"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -79,7 +78,8 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
 				"1f7d51a2-65cf-00a7-54a6-50ec9c145f77",
-				"e83974ba-4d70-6b04-11a0-3434ef774a74"
+				"e83974ba-4d70-6b04-11a0-3434ef774a74",
+				"838aa86a-425b-8e04-3f1e-981ad4782735"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -103,6 +103,7 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
 				"be1a0009-3b6f-1121-f038-7e04ee9cdcaf",
+				"a28a70ee-b8a9-8e7b-04eb-82fa77f04135",
 				"54cac98e-6ee9-0ade-9052-03a9debc6945",
 				"a224818c-4e7e-c307-2b1e-a022a2cbac21",
 				"ad0c691b-b9b4-4348-325a-2324d7873ce7",
@@ -156,7 +157,8 @@
 				"407ad785-0c19-a066-502b-d62d134587df",
 				"37e622a5-3a8e-3808-b021-d8e3b501fdb2",
 				"a21a6b3c-d083-6264-3c19-877d19164c0d",
-				"177574b8-0756-111c-6c11-dc8e1f456312"
+				"177574b8-0756-111c-6c11-dc8e1f456312",
+				"69d42c39-d4f2-c544-d558-568266a6fff5"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -369,8 +371,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				}
 			],
 			"url": "{{Host}}/api/v1/users/social_login?type=google",
@@ -393,8 +395,8 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582378513469,
+			"helperAttributes": {},
+			"time": 1583600844776,
 			"name": "Google Login Mobile",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -499,9 +501,7 @@
 					"collection": "60aaabea-64a8-e816-e50d-ef7bd85719fc"
 				}
 			],
-			"isFromCollection": true,
-			"timestamp": null,
-			"rawModeData": "{\n  \"idToken\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc2MmZhNjM3YWY5NTM1OTBkYjhiYjhhNjM2YmYxMWQ0MzYwYWJjOTgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyOTc4MzI3MDkxMzk4Mzg3ODk1IiwiZW1haWwiOiJmcmVlbGFuY2VyYXRvekBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6IkJ1Wll0OEJybE1YX0p1bTh2V3lWV1EiLCJuYW1lIjoiZnJlZWxhbmNlciBmIiwicGljdHVyZSI6Imh0dHBzOi8vbGg0Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tQ3FUMko4eVI4UXcvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUNIaTNyZnRMenFmSVFyS0VTNVZLM3N2MTkwbU5zLUFuZy9zOTYtYy9waG90by5qcGciLCJnaXZlbl9uYW1lIjoiZnJlZWxhbmNlciIsImZhbWlseV9uYW1lIjoiZiIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNTgyMDUzNzExLCJleHAiOjE1ODIwNTczMTEsImp0aSI6ImU3NWZiOWMxY2U5MDkyMDc2NDliMjg5NTFhNjFhYjllMWZkYjgzYWMifQ.IU_FY6-0KwI5_Phd_XcUfgR6r3_Q1Xe-7OT8lS4Fqbc_gnbaOYjapv6Zf0NO6-Zcz5M2LZiwa5j2HMbPLMfftltf5NV4dH3xKqck5TMhheKtT2YM7fPzBMlci9i3Oe1SAHzv2An-rCBOIrPb4hVq2ujUaNfvTuNZm-TvZ3P7hoIh_o8ghP1P5J2DZOnfvz67s8sB2uh9YtuqQHYpLb7Iohpoh7Rmulu9tu1RuJ7u8ZpGIoMnquUc-P7WnQQBkbTH-2g-SuamuupvhePWo6sv9ykPwcG20-AKJSRi0HBu4rpT_wmUxV6qKp4saQdNu5ywFSlcefyFln28Ls77jzQ42w\"\n}"
+			"rawModeData": "{\n  \"idToken\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6IjE3ZDU1ZmY0ZTEwOTkxZDZiMGVmZDM5MmI5MWEzM2U1NGMwZTIxOGIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIxODE1NDkwMTAzNjItMmo5cDlpZWZmdWZuZTd2Z3Q2bTJ2bXVjY29xMGtxMXIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIxODE1NDkwMTAzNjItMmo5cDlpZWZmdWZuZTd2Z3Q2bTJ2bXVjY29xMGtxMXIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTA0NTE3NDcyMDk1Mzk2NzA2MTgiLCJlbWFpbCI6ImViZ3V5czA0MTJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJCbWNyV2NMTl9LT0VSQ0dWYjJSc1ZBIiwibm9uY2UiOiI3RkJiT0hvZnZSTVV0X1ExR1dpQkwxOEs2cEtGV2EwT0RNa3J1UWppbGxZIiwibmFtZSI6ImViZ3V5cyAwNDEyIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS8tWWlfOGd4R2pqbGsvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUtGMDVuQ3NucEpWanlua1IwdjNiN3FuY1YzWnJYM0RIZy9zOTYtYy9waG90by5qcGciLCJnaXZlbl9uYW1lIjoiZWJndXlzIiwiZmFtaWx5X25hbWUiOiIwNDEyIiwibG9jYWxlIjoiZW4iLCJpYXQiOjE1ODM1OTc1ODksImV4cCI6MTU4MzYwMTE4OX0.P1gzC0tYl96yHMQdkOuCk3L_4ZlrHLtJna5Sw3JaSdjzgt7pRIpzF8_M2C3GuMeSseRFfP5Wad3PeXoMfC-cP5IugLgZYfO2yMtJsHMYJoeim_PPzEKzw-Ix4g4g441QXNC7tZtuy3oSHCk92JjhUY6ZYafqyYY1-6YN0h2jqJeDzn4MXNrjTF4aZMTUPM-vVRVNW5q8FYuXIBhLt5-EgoxdCTbNTs4JkodDVxspdVOfWTZRqu7NsWW0jDguRBpExePSBRnRflW7b8hLWStCu1MlsQtEhh4So2oG5eDEXZfIgZ4hu2ea1vncPe5y95jttYuNR1_JDm9Xoz9b6tPtcg\"\n}"
 		},
 		{
 			"id": "0b2671ab-9b01-4570-5617-4e9a37ec703f",
@@ -673,7 +673,7 @@
 			"id": "1f7d51a2-65cf-00a7-54a6-50ec9c145f77",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/contestants?token={{Token}}&page=1&filterby=votes",
+			"url": "{{Host}}/api/v1/contestants?token={{Token}}&page=1&sort=votes&sortby=desc",
 			"folder": "941ff06d-e864-1d31-b773-0c86eac29dfc",
 			"queryParams": [
 				{
@@ -691,8 +691,15 @@
 					"enabled": true
 				},
 				{
-					"key": "filterby",
+					"key": "sort",
 					"value": "votes",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sortby",
+					"value": "desc",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -707,13 +714,12 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582445694609,
+			"helperAttributes": {},
+			"time": 1583591061326,
 			"name": "Contestants Votes",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": [],
-			"timestamp": null
+			"responses": []
 		},
 		{
 			"id": "24b33a39-790c-4085-e1fa-3ef96015400b",
@@ -753,54 +759,6 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"rawModeData": "{\n  \"image\": \"484948f6c113a48427d219bbf89f073c.png\"\n}"
-		},
-		{
-			"id": "2602a163-8fbc-a8a5-163a-82f36c9cabcc",
-			"headers": "",
-			"headerData": [],
-			"url": "{{Host}}/api/v1/user_catagories?token={{Token}}&page=1&category_id=1",
-			"folder": "cd677033-d107-7f8f-54c9-24bad7e82367",
-			"queryParams": [
-				{
-					"key": "token",
-					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "page",
-					"value": "1",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "category_id",
-					"value": "1",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582478067028,
-			"name": "User Catagories",
-			"description": "",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": [],
-			"isFromCollection": true,
-			"collectionRequestId": "2602a163-8fbc-a8a5-163a-82f36c9cabcc",
-			"timestamp": null
 		},
 		{
 			"id": "37e622a5-3a8e-3808-b021-d8e3b501fdb2",
@@ -947,8 +905,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				}
 			],
 			"url": "{{Host}}/api/v1/users?token={{Token}}",
@@ -970,15 +928,13 @@
 			"dataMode": "raw",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582347425744,
+			"helperAttributes": {},
+			"time": 1583592758288,
 			"name": "User Profile Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"isFromCollection": true,
-			"timestamp": null,
-			"rawModeData": "{\n  \"first_name\": \"VJ\",\n  \"last_name\": \"VJ\",\n  \"address\": \"1 Apple Park Way Cupertino\",\n  \"image\": \"95fb84115da9da4f5f032687a824950e.jpg\"\n}"
+			"rawModeData": "{\n  \"first_name\": \"VJ\",\n  \"last_name\": \"VJ\",\n  \"image\": \"95fb84115da9da4f5f032687a824950e.jpg\",\n  \"username\" : \"sad\",\n  \"is_paypal_connect\": \"sad\",\n  \"is_stripe_connect\": \"asd\",\n  \"subscription_end_date\": \"asd\"\n}"
 		},
 		{
 			"id": "54a47454-8e54-1f03-a34d-677bcc36047c",
@@ -1334,7 +1290,7 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
+			"helperAttributes": {},
 			"time": 1582439554471,
 			"name": "Products Delete",
 			"description": "",
@@ -1342,7 +1298,8 @@
 			"responses": [],
 			"isFromCollection": true,
 			"timestamp": null,
-			"rawModeData": ""
+			"rawModeData": "",
+			"folder": "821cc0b4-16e5-e166-3e7c-a7b697a44a82"
 		},
 		{
 			"id": "6b1043b6-cb23-62dd-8505-b69f49ec3c5b",
@@ -1456,7 +1413,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/cart/me?token={{Token}}",
+			"url": "{{Host}}/api/v1/cart?token={{Token}}",
 			"folder": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
 			"queryParams": [
 				{
@@ -1476,12 +1433,57 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583171401187,
+			"time": 1583591163141,
 			"name": "Add Cart",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"rawModeData": "{\n  \t\"id\": 1,\n    \"product_id\": 1,\n    \"quantity\": 50\n}"
+		},
+		{
+			"id": "838aa86a-425b-8e04-3f1e-981ad4782735",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/contestants?token={{Token}}&page=1&category_id=1",
+			"folder": "941ff06d-e864-1d31-b773-0c86eac29dfc",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "page",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "category_id",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583590487714,
+			"name": "Contestants Category",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "859f4f64-eab9-1d04-3330-f0b13964d49f",
@@ -1657,7 +1659,7 @@
 			"id": "9103d232-5b9c-e4f1-ba37-a3f9124530d6",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/cart/me?token={{Token}}",
+			"url": "{{Host}}/api/v1/cart?token={{Token}}",
 			"folder": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
 			"queryParams": [
 				{
@@ -1676,16 +1678,12 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582445625218,
+			"helperAttributes": {},
+			"time": 1583591179503,
 			"name": "User Cart",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": [],
-			"isFromCollection": true,
-			"collectionRequestId": "9103d232-5b9c-e4f1-ba37-a3f9124530d6",
-			"folderId": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
-			"timestamp": null
+			"responses": []
 		},
 		{
 			"id": "9ca47189-bc96-4b02-a257-d9120e947633",
@@ -1968,6 +1966,38 @@
 			"rawModeData": "{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc2MmZhNjM3YWY5NTM1OTBkYjhiYjhhNjM2YmYxMWQ0MzYwYWJjOTgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMjYzMTg5OTQyODY4LW41dm1kbXRrOGkwc251bXFxdG5ob2VsczZiZzhjcW5uLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyOTc4MzI3MDkxMzk4Mzg3ODk1IiwiZW1haWwiOiJmcmVlbGFuY2VyYXRvekBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6IkNMc2U2VTZmWVhvRXRaeVA3U2pmWlEiLCJuYW1lIjoiZnJlZWxhbmNlciBmIiwicGljdHVyZSI6Imh0dHBzOi8vbGg0Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tQ3FUMko4eVI4UXcvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUNIaTNyZnRMenFmSVFyS0VTNVZLM3N2MTkwbU5zLUFuZy9zOTYtYy9waG90by5qcGciLCJnaXZlbl9uYW1lIjoiZnJlZWxhbmNlciIsImZhbWlseV9uYW1lIjoiZiIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNTgxOTk5NDU0LCJleHAiOjE1ODIwMDMwNTQsImp0aSI6ImMyYjMxNjA5ZTZkZGJhZmFlNjYzOTlhYzY3N2QzZGQ5ZjJjYzc3OGEifQ.Ut89evfkkZ9UH5iVqKG6kt_vh6ezrz7zrWsttWDfBcMxs8py3ZlW93Ekg-LwmHR_fnORXnE1hjj87P6krKyeqwhvHS6iQIM25XgKOAsJ2sV7UH6V8GT4Zf3Oa9rXU9opXAhI5LCamlaUeokD9Y-4X7kpsFQVy_zQ1HzuD4DeNdh_610a2nwXmGQzTprIandQkUX8HYTN-Mv6Q1wLVAOpGKqKusoOm2rHFMbrFFig6EjCI65fGPbz6USyEgR_2ceL2TNmbl6RykJB0fpAdri3s7xSEvZDYOhpXrnV1TOb48jk-lVNsVaA--Pzy-0Kjer_nR_WKx3DL4oT1w6IeKSNCw\",\n  \"redirectUri\": \"http://ec2-18-223-28-89.us-east-2.compute.amazonaws.com/api/v1/users/social_login?type=google\"\n}"
 		},
 		{
+			"id": "a28a70ee-b8a9-8e7b-04eb-82fa77f04135",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/users/login",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Constestant Login",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1583524917460,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "eecf6744-9e5f-542d-96ee-9e87215a7d7d",
+			"rawModeData": "{\n  \"username\": \"contest\",\n  \"password\": \"1234567\",\n  \"role_id\": 3\n}"
+		},
+		{
 			"id": "a67d9e8f-380a-76a4-0f10-2248b1325e81",
 			"headers": "",
 			"headerData": [],
@@ -2244,12 +2274,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1582998584827,
+			"time": 1583524949585,
 			"name": "Login",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"username\": \"user\",\n  \"password\": \"1234567\"\n}"
+			"rawModeData": "{\n  \"username\": \"user\",\n  \"password\": \"1234567\",\n  \"role_id\": 2\n}"
 		},
 		{
 			"id": "c6604493-9d8b-c06f-1888-eedebe13f23d",
@@ -2288,7 +2318,7 @@
 			"id": "e83974ba-4d70-6b04-11a0-3434ef774a74",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/contestants?token={{Token}}&page=1&filterby=rank",
+			"url": "{{Host}}/api/v1/contestants?token={{Token}}&page=1&sort=rank&sortby=asc",
 			"folder": "941ff06d-e864-1d31-b773-0c86eac29dfc",
 			"queryParams": [
 				{
@@ -2306,8 +2336,15 @@
 					"enabled": true
 				},
 				{
-					"key": "filterby",
+					"key": "sort",
 					"value": "rank",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sortby",
+					"value": "asc",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -2322,19 +2359,18 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582445699779,
+			"helperAttributes": {},
+			"time": 1583590200330,
 			"name": "Contestants Rank",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": [],
-			"timestamp": null
+			"responses": []
 		},
 		{
 			"id": "eca8a644-e538-580f-2e97-b8f4bc5c330f",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/cart/me/11?token={{Token}}",
+			"url": "{{Host}}/api/v1/cart/11?token={{Token}}",
 			"folder": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
 			"queryParams": [
 				{
@@ -2354,7 +2390,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583094179978,
+			"time": 1583591185506,
 			"name": "User Cart Delete",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -2573,7 +2609,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/cart/me?token={{Token}}&product_id=1",
+			"url": "{{Host}}/api/v1/cart?token={{Token}}&product_id=1",
 			"folder": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
 			"queryParams": [
 				{
@@ -2600,13 +2636,11 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583091754706,
+			"time": 1583591169368,
 			"name": "Add Cart From Product",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"isFromCollection": true,
-			"collectionRequestId": "7d55db2b-073a-862d-0b45-f2930a15c226",
 			"rawModeData": "[\n  {\n  \t\"id\": 1,\n    \"product_id\": 1,\n    \"quantity\": 50\n  }\n]"
 		}
 	]
