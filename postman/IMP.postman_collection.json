@@ -90,7 +90,8 @@
 			"order": [
 				"1f7d51a2-65cf-00a7-54a6-50ec9c145f77",
 				"e83974ba-4d70-6b04-11a0-3434ef774a74",
-				"838aa86a-425b-8e04-3f1e-981ad4782735"
+				"838aa86a-425b-8e04-3f1e-981ad4782735",
+				"afcd094c-4778-00dd-225e-0a6f8ac2e359"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -233,17 +234,6 @@
 			"id": "f12d9859-cff0-e1b9-c79b-79ee2a67dc06"
 		},
 		{
-			"name": "User Contests",
-			"description": "",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"order": [
-				"723b6555-d76e-0dfc-ea9a-4638678e617c"
-			],
-			"owner": "502680",
-			"folders_order": [],
-			"id": "f64f81d4-8298-776f-5b11-7131b0c49052"
-		},
-		{
 			"name": "Users",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -285,7 +275,6 @@
 		"055b7b5d-d7c2-23f8-197e-099a90b3b2b3",
 		"8fcc7b58-d191-6b02-05f0-d5da4607c449",
 		"da00d9c6-7a92-3ba1-cc8a-28bd6f23545b",
-		"f64f81d4-8298-776f-5b11-7131b0c49052",
 		"b1a45791-032c-1481-bbf9-082e21642be9",
 		"f12d9859-cff0-e1b9-c79b-79ee2a67dc06",
 		"37d16932-e231-1478-e145-daa186cfb50e",
@@ -1419,36 +1408,6 @@
 			"rawModeData": "{\n  \"name\": \"freelancer1023\",\n  \"image\": \"0cbe196ee3fe98d742f045abbf2b5ec0.jpg\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
 		},
 		{
-			"id": "723b6555-d76e-0dfc-ea9a-4638678e617c",
-			"headers": "",
-			"headerData": [],
-			"url": "{{Host}}/api/v1/user_contests/1?token={{Token}}",
-			"folder": "da00d9c6-7a92-3ba1-cc8a-28bd6f23545b",
-			"queryParams": [
-				{
-					"key": "token",
-					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1583661885301,
-			"name": "User Contest",
-			"description": "",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": []
-		},
-		{
 			"id": "755a04cd-25fd-7e50-bd82-19ea7a4857cf",
 			"headers": "",
 			"headerData": [],
@@ -2200,6 +2159,51 @@
 			"responses": [],
 			"isFromCollection": true,
 			"timestamp": null
+		},
+		{
+			"id": "afcd094c-4778-00dd-225e-0a6f8ac2e359",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/contestants?token={{Token}}&page=1&contest_id=1",
+			"folder": "941ff06d-e864-1d31-b773-0c86eac29dfc",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "page",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "contest_id",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583687648592,
+			"name": "Contestants Contest",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "b4b7a8d3-04dc-6742-431d-f3a2acbe0012",
