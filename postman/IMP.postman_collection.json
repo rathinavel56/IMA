@@ -73,6 +73,17 @@
 			"id": "701dc571-cd60-d10d-5b65-2670c5498d30"
 		},
 		{
+			"name": "Contest",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"order": [
+				"b8f22d91-ea2b-ddc7-eac9-2f4b79dc85c5"
+			],
+			"owner": "502680",
+			"folders_order": [],
+			"id": "da00d9c6-7a92-3ba1-cc8a-28bd6f23545b"
+		},
+		{
 			"name": "Contestants",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -172,6 +183,8 @@
 				"562962c6-a2aa-83fe-57ab-f0aef688ff14",
 				"fb615046-2c4a-7923-d252-129383b0a28d",
 				"05b605be-aeb9-816a-c79f-1fec93622af8",
+				"589d0af4-e0b0-f474-dcdb-e2c51fc607c2",
+				"df44cced-2da3-45a8-ddcc-fc768af7d929",
 				"b57b1d2e-a77f-0859-1612-e9291e27e51e",
 				"9e3ff3a9-ea01-c47a-5845-7b638198b750",
 				"09772767-7327-0cb6-9fa1-80463950f8aa",
@@ -220,6 +233,17 @@
 			"id": "f12d9859-cff0-e1b9-c79b-79ee2a67dc06"
 		},
 		{
+			"name": "User Contests",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"order": [
+				"723b6555-d76e-0dfc-ea9a-4638678e617c"
+			],
+			"owner": "502680",
+			"folders_order": [],
+			"id": "f64f81d4-8298-776f-5b11-7131b0c49052"
+		},
+		{
 			"name": "Users",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -260,6 +284,8 @@
 		"51eb32dc-249d-0d5d-0c43-0e4efdc39c82",
 		"055b7b5d-d7c2-23f8-197e-099a90b3b2b3",
 		"8fcc7b58-d191-6b02-05f0-d5da4607c449",
+		"da00d9c6-7a92-3ba1-cc8a-28bd6f23545b",
+		"f64f81d4-8298-776f-5b11-7131b0c49052",
 		"b1a45791-032c-1481-bbf9-082e21642be9",
 		"f12d9859-cff0-e1b9-c79b-79ee2a67dc06",
 		"37d16932-e231-1478-e145-daa186cfb50e",
@@ -396,7 +422,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583600844776,
+			"time": 1583610142992,
 			"name": "Google Login Mobile",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -501,7 +527,7 @@
 					"collection": "60aaabea-64a8-e816-e50d-ef7bd85719fc"
 				}
 			],
-			"rawModeData": "{\n  \"idToken\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6IjE3ZDU1ZmY0ZTEwOTkxZDZiMGVmZDM5MmI5MWEzM2U1NGMwZTIxOGIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIxODE1NDkwMTAzNjItMmo5cDlpZWZmdWZuZTd2Z3Q2bTJ2bXVjY29xMGtxMXIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIxODE1NDkwMTAzNjItMmo5cDlpZWZmdWZuZTd2Z3Q2bTJ2bXVjY29xMGtxMXIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTA0NTE3NDcyMDk1Mzk2NzA2MTgiLCJlbWFpbCI6ImViZ3V5czA0MTJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJCbWNyV2NMTl9LT0VSQ0dWYjJSc1ZBIiwibm9uY2UiOiI3RkJiT0hvZnZSTVV0X1ExR1dpQkwxOEs2cEtGV2EwT0RNa3J1UWppbGxZIiwibmFtZSI6ImViZ3V5cyAwNDEyIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS8tWWlfOGd4R2pqbGsvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUtGMDVuQ3NucEpWanlua1IwdjNiN3FuY1YzWnJYM0RIZy9zOTYtYy9waG90by5qcGciLCJnaXZlbl9uYW1lIjoiZWJndXlzIiwiZmFtaWx5X25hbWUiOiIwNDEyIiwibG9jYWxlIjoiZW4iLCJpYXQiOjE1ODM1OTc1ODksImV4cCI6MTU4MzYwMTE4OX0.P1gzC0tYl96yHMQdkOuCk3L_4ZlrHLtJna5Sw3JaSdjzgt7pRIpzF8_M2C3GuMeSseRFfP5Wad3PeXoMfC-cP5IugLgZYfO2yMtJsHMYJoeim_PPzEKzw-Ix4g4g441QXNC7tZtuy3oSHCk92JjhUY6ZYafqyYY1-6YN0h2jqJeDzn4MXNrjTF4aZMTUPM-vVRVNW5q8FYuXIBhLt5-EgoxdCTbNTs4JkodDVxspdVOfWTZRqu7NsWW0jDguRBpExePSBRnRflW7b8hLWStCu1MlsQtEhh4So2oG5eDEXZfIgZ4hu2ea1vncPe5y95jttYuNR1_JDm9Xoz9b6tPtcg\"\n}"
+			"rawModeData": "{\n  \"idToken\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6IjE3ZDU1ZmY0ZTEwOTkxZDZiMGVmZDM5MmI5MWEzM2U1NGMwZTIxOGIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIxODE1NDkwMTAzNjItMmo5cDlpZWZmdWZuZTd2Z3Q2bTJ2bXVjY29xMGtxMXIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIxODE1NDkwMTAzNjItMmo5cDlpZWZmdWZuZTd2Z3Q2bTJ2bXVjY29xMGtxMXIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDQxODAyNTE2NTQ1ODM3NzExOTEiLCJlbWFpbCI6Imxha3NoYXBhbmRpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiRnJjamRfMk8wRU1tVGM1T1Q1SXMxdyIsIm5vbmNlIjoiMTVCSGNjZ0x6QnY4bFZzc1h3Tm94bnJqQU5JczFnODNBNVJzbWJzV1JOMCIsIm5hbWUiOiJsYWtzaGEgcGFuZGlhbiIsInBpY3R1cmUiOiJodHRwczovL2xoNi5nb29nbGV1c2VyY29udGVudC5jb20vLUhuZjZBdzVPanpZL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFBL0FLRjA1bkRXRzlHZmM4REJ6UTRUV1JpaVA2TnlzYkw4NUEvczk2LWMvcGhvdG8uanBnIiwiZ2l2ZW5fbmFtZSI6Imxha3NoYSIsImZhbWlseV9uYW1lIjoicGFuZGlhbiIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNTgzNTk3OTE2LCJleHAiOjE1ODM2MDE1MTZ9.XGL2iNC6nB2Fz2FUMe8leQDxAkuE77CKm6VDpqiyJK1yaTqDUdPnfUIRx7SlihiFAyc5U7XdpzVovsDvG9FmVynz_-PIn8gii4YIpXdI0Xw-KyTKTLAUxxjhtxGGvLMeBb6idpbAYy8EEELB8IQadovl56OJFXN2AkJzF0klAuCsFzy7Bxa4YAcyZgJWpeZiXE7Mj6InM-iBL0JrJ3BcVfrCRdXbQZBweOmUx1uu_W-p18tWY7h_CkjqwVpXDQrrDmsBAE4Gs14BUzieO132Br8IyfYaRWuHoVw_J9x1qaeZfaqM4zOC4KH-N1TzIeEO5RsXH-PyUWQIx9Jvg7teIA\"\n}"
 		},
 		{
 			"id": "0b2671ab-9b01-4570-5617-4e9a37ec703f",
@@ -1004,7 +1030,7 @@
 			"id": "562962c6-a2aa-83fe-57ab-f0aef688ff14",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/purchase/vote_package/2?token={{Token}}&payment_gateway_id=1",
+			"url": "{{Host}}/api/v1/purchase/vote_package/2?token={{Token}}&payment_gateway_id=1&contestant_id=26",
 			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
 			"queryParams": [
 				{
@@ -1020,6 +1046,13 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "contestant_id",
+					"value": "26",
+					"equals": true,
+					"description": "",
+					"enabled": true
 				}
 			],
 			"preRequestScript": null,
@@ -1031,8 +1064,52 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583174909056,
+			"time": 1583610147674,
 			"name": "Paypal Votes Purchase",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
+			"id": "589d0af4-e0b0-f474-dcdb-e2c51fc607c2",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/purchase/contest/1?token={{Token}}&payment_gateway_id=1&contestant_id=26",
+			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "payment_gateway_id",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "contestant_id",
+					"value": "26",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583659131363,
+			"name": "Paypal Instant Votes Purchase",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": []
@@ -1340,6 +1417,36 @@
 			"responses": [],
 			"timestamp": null,
 			"rawModeData": "{\n  \"name\": \"freelancer1023\",\n  \"image\": \"0cbe196ee3fe98d742f045abbf2b5ec0.jpg\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
+		},
+		{
+			"id": "723b6555-d76e-0dfc-ea9a-4638678e617c",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/user_contests?token={{Token}}",
+			"folder": "da00d9c6-7a92-3ba1-cc8a-28bd6f23545b",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583660049139,
+			"name": "User Contest",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "755a04cd-25fd-7e50-bd82-19ea7a4857cf",
@@ -2211,6 +2318,36 @@
 			"responses": []
 		},
 		{
+			"id": "b8f22d91-ea2b-ddc7-eac9-2f4b79dc85c5",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/contest?token={{Token}}",
+			"folder": "b1a45791-032c-1481-bbf9-082e21642be9",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583658729378,
+			"name": "Contest",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
 			"id": "be16db63-3841-efff-e298-8f7d8c8a3176",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
@@ -2313,6 +2450,28 @@
 			"isFromCollection": true,
 			"collectionRequestId": "c6604493-9d8b-c06f-1888-eedebe13f23d",
 			"timestamp": null
+		},
+		{
+			"id": "df44cced-2da3-45a8-ddcc-fc768af7d929",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/purchase/contest/verify/5",
+			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583659139278,
+			"name": "Paypal Instant Votes Purchase Verify",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "e83974ba-4d70-6b04-11a0-3434ef774a74",
