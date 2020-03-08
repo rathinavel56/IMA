@@ -1422,7 +1422,7 @@
 			"id": "723b6555-d76e-0dfc-ea9a-4638678e617c",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/user_contests?token={{Token}}",
+			"url": "{{Host}}/api/v1/user_contests/1?token={{Token}}",
 			"folder": "da00d9c6-7a92-3ba1-cc8a-28bd6f23545b",
 			"queryParams": [
 				{
@@ -1442,7 +1442,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583660049139,
+			"time": 1583661885301,
 			"name": "User Contest",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
