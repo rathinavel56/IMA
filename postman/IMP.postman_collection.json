@@ -660,12 +660,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583701030992,
+			"time": 1583726490745,
 			"name": "Product Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Shoe\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"image\": [\n    {\n      \"file\": \"a435b5cd769c80f823d41999467caecd.jpg\",\n      \"is_pirmary\": true\n    }\n  ]\n}"
+			"rawModeData": "{\n  \"name\": \"Shoe\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"image\": [\n    {\n      \"file\": \"a435b5cd769c80f823d41999467caecd.jpg\",\n      \"is_pirmary\": true\n    }\n  ],\n  \"product_colors\": [\n    {\n      \"color\": \"038cfc\"\n    }\n  ],\n  \"product_sizes\": [\n    {\n      \"size_id\": 1\n    }\n  ]\n}"
 		},
 		{
 			"id": "18856b4d-bdd7-e0db-a30f-49642b23964d",
@@ -802,7 +802,7 @@
 			"id": "37e622a5-3a8e-3808-b021-d8e3b501fdb2",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/products/me?token={{Token}}&page=1",
+			"url": "{{Host}}/api/v1/products?token={{Token}}&page=1&filter_by=me",
 			"folder": "821cc0b4-16e5-e166-3e7c-a7b697a44a82",
 			"queryParams": [
 				{
@@ -818,6 +818,13 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "filter_by",
+					"value": "me",
+					"equals": true,
+					"description": "",
+					"enabled": true
 				}
 			],
 			"preRequestScript": null,
@@ -828,15 +835,12 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582440719332,
+			"helperAttributes": {},
+			"time": 1583725422867,
 			"name": "User Products",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": [],
-			"isFromCollection": true,
-			"collectionRequestId": "37e622a5-3a8e-3808-b021-d8e3b501fdb2",
-			"timestamp": null
+			"responses": []
 		},
 		{
 			"id": "3815b71a-2928-8bd0-fe6f-ee59bdb17073",
@@ -1560,12 +1564,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583591163141,
+			"time": 1583728231277,
 			"name": "Add Cart",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \t\"id\": 1,\n    \"product_id\": 1,\n    \"quantity\": 50\n}"
+			"rawModeData": "{\n  \t\"product_id\": 1,\n    \"quantity\": 50,\n    \"product_size_id\": 1,\n    \"product_color_id\": 1\n}"
 		},
 		{
 			"id": "838aa86a-425b-8e04-3f1e-981ad4782735",
@@ -1936,12 +1940,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583701038794,
+			"time": 1583726435164,
 			"name": "Product Add",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"image\": [\n    {\n      \"file\": \"a435b5cd769c80f823d41999467caecd.jpg\",\n      \"is_pirmary\": true\n    }\n  ]\n}"
+			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_colors\": [\n    {\n      \"color\": \"038cfc\"\n    }\n  ],\n  \"product_sizes\": [\n    {\n      \"size_id\": 1\n    }\n  ],\n  \"image\": [\n    {\n      \"file\": \"a435b5cd769c80f823d41999467caecd.jpg\",\n      \"is_pirmary\": true\n    }\n  ]\n}"
 		},
 		{
 			"id": "a223bfbc-6453-2ba3-e54e-c3ba47f26dba",
@@ -2838,7 +2842,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/cart?token={{Token}}&product_id=1",
+			"url": "{{Host}}/api/v1/cart?token={{Token}}&product_id=2",
 			"folder": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
 			"queryParams": [
 				{
@@ -2850,7 +2854,7 @@
 				},
 				{
 					"key": "product_id",
-					"value": "1",
+					"value": "2",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -2865,12 +2869,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583591169368,
+			"time": 1583729158715,
 			"name": "Add Cart From Product",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "[\n  {\n  \t\"id\": 1,\n    \"product_id\": 1,\n    \"quantity\": 50\n  }\n]"
+			"rawModeData": "[\n  {\n    \"product_id\": 2,\n    \"quantity\": 1,\n    \"product_size_id\": 1,\n    \"product_color_id\": 4\n  }\n]"
 		}
 	]
 }
