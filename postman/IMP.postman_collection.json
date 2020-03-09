@@ -191,6 +191,8 @@
 				"09772767-7327-0cb6-9fa1-80463950f8aa",
 				"eeaac2ef-dfdd-e78a-53a6-f92786515315",
 				"0b2671ab-9b01-4570-5617-4e9a37ec703f",
+				"61377e63-fcd0-b273-26a2-835f825289dd",
+				"168e320f-b12b-a99b-31fd-0a44e1778718",
 				"8ce2dd84-5af1-0348-a194-f0f4086b3c8d"
 			],
 			"owner": "502680",
@@ -535,7 +537,7 @@
 			"currentHelper": "normal",
 			"helperAttributes": {},
 			"time": 1583176871113,
-			"name": "Paypal Fund Card Verify",
+			"name": "Paypal Fund Verify",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": []
@@ -605,14 +607,36 @@
 			"timestamp": null
 		},
 		{
+			"id": "168e320f-b12b-a99b-31fd-0a44e1778718",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/purchase/cart/verify/5",
+			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583694616107,
+			"name": "Paypal Cart Verify",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
 			"id": "177574b8-0756-111c-6c11-dc8e1f456312",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				}
 			],
 			"url": "{{Host}}/api/v1/product/1?token={{Token}}",
@@ -635,14 +659,13 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582439601602,
+			"helperAttributes": {},
+			"time": 1583701030992,
 			"name": "Product Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"timestamp": null,
-			"rawModeData": "{\n  \"name\": \"Shoe\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"image\": \"a435b5cd769c80f823d41999467caecd.jpg\"\n}"
+			"rawModeData": "{\n  \"name\": \"Shoe\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"image\": [\n    {\n      \"file\": \"a435b5cd769c80f823d41999467caecd.jpg\",\n      \"is_pirmary\": true\n    }\n  ]\n}"
 		},
 		{
 			"id": "18856b4d-bdd7-e0db-a30f-49642b23964d",
@@ -1218,6 +1241,44 @@
 			"rawModeData": "{\n  \"name\": \"freelancer10\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
 		},
 		{
+			"id": "61377e63-fcd0-b273-26a2-835f825289dd",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/purchase/cart?token={{Token}}&payment_gateway_id=1",
+			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "payment_gateway_id",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583694607963,
+			"name": "Paypal Cart",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
 			"id": "644f2fca-7dba-dbe2-61b8-32794a6d0a16",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
@@ -1725,12 +1786,19 @@
 			"id": "9103d232-5b9c-e4f1-ba37-a3f9124530d6",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/cart?token={{Token}}",
+			"url": "{{Host}}/api/v1/cart?token={{Token}}&is_purchase=false",
 			"folder": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
 			"queryParams": [
 				{
 					"key": "token",
 					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "is_purchase",
+					"value": "false",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -1745,7 +1813,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583591179503,
+			"time": 1583700530613,
 			"name": "User Cart",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1843,8 +1911,8 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				}
 			],
 			"url": "{{Host}}/api/v1/product?token={{Token}}",
@@ -1867,15 +1935,13 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582439401431,
+			"helperAttributes": {},
+			"time": 1583701038794,
 			"name": "Product Add",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"isFromCollection": true,
-			"timestamp": null,
-			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"image\": \"a435b5cd769c80f823d41999467caecd.jpg\"\n}"
+			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"image\": [\n    {\n      \"file\": \"a435b5cd769c80f823d41999467caecd.jpg\",\n      \"is_pirmary\": true\n    }\n  ]\n}"
 		},
 		{
 			"id": "a223bfbc-6453-2ba3-e54e-c3ba47f26dba",
