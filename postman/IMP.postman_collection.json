@@ -2869,12 +2869,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583729158715,
+			"time": 1583729602037,
 			"name": "Add Cart From Product",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "[\n  {\n    \"product_id\": 2,\n    \"quantity\": 1,\n    \"product_size_id\": 1,\n    \"product_color_id\": 4\n  }\n]"
+			"rawModeData": "[\n  {\n    \"product_id\": 2,\n    \"quantity\": 2,\n    \"product_size_id\": 1,\n    \"product_color_id\": 4\n  }\n]"
 		}
 	]
 }
