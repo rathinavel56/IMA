@@ -18,6 +18,14 @@ class PaymentGateway extends AppModel
      * @var string
      */
     protected $table = 'payment_gateways';
+	public $hidden = array(
+        'created_at',
+        'updated_at',
+		'is_active',
+		'slug',
+		'description',
+		'is_test_mode'
+    );
     protected $fillable = array(
         'name',
         'description',
@@ -31,6 +39,10 @@ class PaymentGateway extends AppModel
     {
         return $this->hasMany('Models\PaymentGatewaySetting');
     }
+	public function attachment()
+    {
+        return $this->hasOne('Models\Attachment', 'foreign_id', 'id')->where('class', 'PaymentGateway');
+    }
     public function scopeFilter($query, $params = array())
     {
         parent::scopeFilter($query, $params);
@@ -38,5 +50,6 @@ class PaymentGateway extends AppModel
             $search = $params['q'];
             $query->where('display_name', 'ilike', "%$search%");
         }
+		$query->orderBy('id', 'DESC');
     }
 }

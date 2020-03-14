@@ -1,20 +1,22 @@
 <?php
+/**
+ * Product
+ */
 namespace Models;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 
-class Company extends AppModel
+class UserContest extends AppModel
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'companies';
+    protected $table = 'user_contests';
 	public $hidden = array(
         'created_at',
         'updated_at',
-		'description',
 		'is_active'
     );
     public function user()
@@ -23,12 +25,11 @@ class Company extends AppModel
     }
     protected $fillable = array(
         'id',
-		'user_id',
-		'created_by',
+		'created_at',
 		'updated_at',
-		'name',
-		'url',
-		'description',
+		'contest_id',
+		'user_id',
+		'instant_votes',
 		'is_active'
     );
     public $rules = array(
@@ -36,22 +37,24 @@ class Company extends AppModel
 		'user_id' => 'sometimes|required',
 		'created_at' => 'sometimes|required',
 		'updated_at' => 'sometimes|required',
-		'name' => 'sometimes|required',
-		'url' => 'sometimes|required',
-		'description' => 'sometimes|required',
+		'contest_id' => 'sometimes|required',
+		'instant_votes' => 'sometimes|required',
 		'is_active' => 'sometimes|required'
     );
     public $qSearchFields = array(
         'name'
     );
+	public function contest()
+    {
+        return $this->belongsTo('Models\Contest', 'contest_id', 'id');
+    }
 	public function scopeFilter($query, $params = array())
     {
         global $authUser;
         parent::scopeFilter($query, $params);
         if (!empty($params['q'])) {
             $query->where(function ($q1) use ($params) {
-                $search = $params['q'];
-                
+                $search = $params['q'];                
             });
         }
     }

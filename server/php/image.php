@@ -20,99 +20,47 @@ $thumbsizes = array(
         'normal_thumb' => '64x64',
         'big_thumb' => '225x225',
         'large_thumb' => '152x152'
-    ) ,
-    'Post' => array(
+    ),
+	'Product' => array(
         'micro_thumb' => '16x16',
-        'small_thumb' => '32x32',
-        'normal_thumb' => '64x64'
-    ) ,
-    'ContestType' => array(
-        'micro_thumb' => '16x16',
-        'small_thumb' => '32x32',
-        'normal_thumb' => '250x200',
-        'medium_thumb' => '448x358'
-    ) ,
-    'ContestUser' => array(
-        'micro_thumb' => '16x16',
-        'small_thumb' => '32x32',
+        'small_thumb' => '42x42',
+        'medium_thumb' => '59x59',
         'normal_thumb' => '64x64',
-        'entry_big_thumb' => '694x696',
-        'medium_thumb' => '200x200',
-        'big_thumb' => '471x376'
-    ) ,
-    'MessageContent' => array(
+        'big_thumb' => '225x225',
+        'large_thumb' => '152x152'
+    ),
+	'Company' => array(
         'micro_thumb' => '16x16',
-        'small_thumb' => '32x32',
+        'small_thumb' => '42x42',
+        'medium_thumb' => '59x59',
         'normal_thumb' => '64x64',
-        'entry_big_thumb' => '694x696',
-        'medium_thumb' => '200x200',
-        'big_thumb' => '471x376'
-    ) ,
-    'QuoteService' => array(
+        'big_thumb' => '225x225',
+        'large_thumb' => '152x152'
+    ),
+	'Advertisement' => array(
         'micro_thumb' => '16x16',
-        'small_thumb' => '64x64',
-        'entry_big_thumb' => '120x120',
-        'normal_thumb' => '230x115',
-        'medium_thumb' => '201x182',
-        'large_thumb' => '284x200',
-    ) ,
-    'QuoteServicePhoto' => array(
-        'micro_thumb' => '16x16',
-        'small_thumb' => '32x32',
+        'small_thumb' => '42x42',
+        'medium_thumb' => '59x59',
         'normal_thumb' => '64x64',
-        'entry_big_thumb' => '120x120',
-        'medium_thumb' => '201x182'
-    ) ,
-    'QuoteCategory' => array(
+        'big_thumb' => '225x225',
+        'large_thumb' => '152x152'
+    ),
+	'PaymentGateway' => array(
         'micro_thumb' => '16x16',
-        'small_thumb' => '32x32',
+        'small_thumb' => '42x42',
+        'medium_thumb' => '59x59',
         'normal_thumb' => '64x64',
-        'entry_big_thumb' => '120x120',
-        'medium_thumb' => '241x193',
-        'large_thumb' => '1425x400'
-    ) ,
-    'Portfolio' => array(
-        'micro_thumb' => '16x16',
-        'small_thumb' => '32x32',
-        'normal_thumb' => '190x160',
-        'medium_thumb' => '385x400',
-        'large_thumb' => '831x701',
-        'lower_medium_thumb' => '238x238',
-        'extra_large_thumb' => '780x530',
-        'extra_medium_thumb' => '555x311',
-        'extra_normal_thumb' => '115x115',
-        'entry_big_thumb' => '120x120',
-        'medium_big_thumb' => '205x154',
-        'medium_thumb' => '284x200'
-    ) ,
-    'Company' => array(
-        'micro_thumb' => '16x16',
-        'small_thumb' => '32x32',
-        'normal_thumb' => '64x64',
-        'entry_big_thumb' => '120x120'
-    ) ,
-    'Job' => array(
-        'micro_thumb' => '16x16',
-        'small_thumb' => '56x56',
-        'small_normal_thumb' => '92x91',
-        'normal_thumb' => '179x151',
-        'medium_thumb' => '210x200',
-        'entry_big_thumb' => '120x120'
-    ) ,
-    'JobApply' => array(
-        'micro_thumb' => '16x16',
-        'small_thumb' => '32x32',
-        'normal_thumb' => '64x64',
-        'entry_big_thumb' => '120x120'
-    ) ,
+        'big_thumb' => '225x225',
+        'large_thumb' => '152x152'
+    ),
     'Watermark' => array(
         'big_thumb' => '100x100'
-    ) ,
-    'Exam' => array(
-        'small_normal_thumb' => '30x30',
-        'big_thumb' => '165x132'
     )
 );
+if (strpos($_SERVER['REQUEST_URI'], '?chrome-3xx-fix?chrome-3xx-fix') !== false) {
+    header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
+	exit;
+}
 $size = $_GET['size'];
 $model = $_GET['model'];
 $filename = $_GET['filename'];
@@ -143,7 +91,7 @@ if ($hash == md5($model . $id . $ext . $size)) {
             exit;
         }
         if (!($size = getimagesize($fullPath))) {
-            header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
+			header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
             exit;
         }
         list($currentWidth, $currentHeight, $currentType) = $size;

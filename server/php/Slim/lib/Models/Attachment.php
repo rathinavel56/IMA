@@ -18,6 +18,13 @@ class Attachment extends AppModel
      * @var string
      */
     protected $table = 'attachments';
+	public $hidden = array(
+        'created_at',
+        'updated_at',
+		'description',
+		'thumb',
+		'filesize'
+    );
     public function foreigns()
     {
         return $this->morphMany('Models\Activity', 'foreign');

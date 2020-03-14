@@ -18,4 +18,9 @@ class Role extends AppModel
      * @var string
      */
     protected $table = 'roles';
+	public $hidden = array(
+						'created_at',
+						'updated_at',
+						'is_active'
+					);
 }

@@ -19,29 +19,46 @@ class User extends AppModel
      */
     protected $table = 'users';
     protected $fillable = array(
-        'username',
-        'email',
-        'password',
-        'is_agree_terms_conditions',
-        'is_active',
-        'role_id',
-        'gender_id',
-        'is_email_confirmed',
-        'first_name',
-        'last_name',
-        'add_fund',
-        'deduct_fund',
-        'zip_code',
-        'hourly_rate',
-        'designation',
-        'about_me',
-        'full_address',
-        'is_have_unreaded_activity',
+		'created_at',
+		'updated_at',
+		'company_id',
+		'role_id',
+		'username',
+		'email',
+		'password',
+		'user_login_count',
+		'available_wallet_amount',
+		'ip_id',
+		'last_login_ip_id',
+		'last_logged_in_time',
+		'is_active',
+		'first_name',
+		'is_email_confirmed',
+		'last_name',
+		'view_count',
+		'flag_count',
+		'address',
+		'total_votes',
+		'votes',
+		'rank',
 		'instagram_url',
 		'tiktok_url',
 		'youtube_url',
 		'twitter_url',
-		'facebook_url'
+		'facebook_url',
+		'available_credit_count',
+		'vote_pay_key',
+		'vote_to_purchase',
+		'subscription_pay_key',
+		'fund_pay_key',
+		'donated',
+		'subscription_id',
+		'paypal_email',
+		'is_paypal_connect',
+		'is_stripe_connect',
+		'subscription_end_date',
+		'device_details',
+		'instant_vote_pay_key'
     );
 	
     public $qSearchFields = array(
@@ -51,44 +68,34 @@ class User extends AppModel
         'email',
     );
     public $hidden = array(
-        'role_id',
-        'password',
-        'email',
-        'available_wallet_amount',
-        'ip_id',
-        'last_login_ip_id',
-        'last_logged_in_time',
-        'is_agree_terms_conditions',
-        'is_active',
-        'total_amount_withdrawn',
-        'available_credit_count',
-        'total_credit_bought',
-		'scope',
+		'company_id',
+		'created_at',
+		'updated_at',
+		'role_id',
+		'email',
+		'password',
+		'user_login_count',
+		'available_wallet_amount',
+		'ip_id',
+		'last_login_ip_id',
+		'last_logged_in_time',
+		'is_active',
 		'is_email_confirmed',
-		'display_name',
-		'gender_id',
-		'contest_user_count',
 		'view_count',
-		'follower_count',
 		'flag_count',
-		'total_rating_as_employer',
-		'review_count_as_employer',
-		'address1',
-		'city_id',
-		'state_id',
-		'country_id',
-		'zip_code',
-		'latitude',
-		'longitude',
-		'full_address',
-		'expired_balance_credit_points',
-		'is_made_deposite',
-		'hourly_rate',
-		'total_spend_amount_as_employer',
-		'about_me',
-		'blocked_amount',
-		'is_have_unreaded_activity',
-		'user_login_count'
+		'available_credit_count',
+		'vote_pay_key',
+		'vote_to_purchase',
+		'subscription_pay_key',
+		'fund_pay_key',
+		'donated',
+		'subscription_id',
+		'paypal_email',
+		'total_votes',
+		'address',
+		'display_name',
+		'instant_vote_pay_key',
+		'instant_vote_to_purchase'
     );
     public $rules = array(
        'username' => [
@@ -106,11 +113,18 @@ class User extends AppModel
                 'max:15'
             ]
     );
-    protected $scopes_1 = array();
+    protected $scopes_1 = array(
+		'canAdmin',
+		'canUser',
+        'canContestantUser'
+	);
     // User scope
     protected $scopes_2 = array(
+        'canUser'
+    );
+	protected $scopes_3 = array(
         'canUser',
-        'canAdmin'
+        'canContestantUser'
     );
     /**
      * To check if username already exist in user table, if so generate new username with append number
@@ -152,9 +166,25 @@ class User extends AppModel
     {
         return $this->belongsTo('Models\Role', 'role_id', 'id');
     }
+	public function company()
+    {
+        return $this->belongsTo('Models\Company', 'company_id', 'id');
+    }
     public function foreign()
     {
         return $this->morphTo(null, 'class', 'foreign_id');
+    }
+	public function user_category()
+    {
+        return $this->hasMany('Models\UserCategory', 'user_id', 'id')->with('category');
+    }
+	public function contest()
+    {
+		if (isset($_GET['contest_id']) && $_GET['contest_id'] != '') {
+			return $this->hasOne('Models\UserContest', 'user_id', 'id')->where('contest_id', $_GET['contest_id']);
+		} else {
+			return $this->hasOne('Models\UserContest', 'user_id', 'id');
+		}
     }
     public function scopeFilter($query, $params = array())
     {
@@ -166,9 +196,30 @@ class User extends AppModel
         if (!empty($params['role_id'])) {
             $query->Where('role_id', $params['role_id']);
         }
+		if (!empty($params['is_active'])) {
+            $query->Where('is_active', $params['is_active']);
+        }
 		if (!empty($params['search'])) {
 			$search = $params['search'];
 			$query->where('username', 'like', "%$search%");
+        }
+		if (!empty($params['category_id'])) {
+            $category_id = explode(',', $params['category_id']);
+            $user_id = array();
+            $user_categories = UserCategory::select('user_id')->whereIn('category_id', $category_id)->get()->toArray();
+            foreach ($user_categories as $user_category) {
+                $user_id[] = $user_category['user_id'];
+            }
+            $query->whereIn('id', $user_id);
+        }
+		if (!empty($params['contest_id'])) {
+            $constests = explode(',', $params['contest_id']);
+            $user_id = array();
+			$user_constests = UserContest::whereIn('contest_id', $constests)->get()->toArray();
+			foreach ($user_constests as $user_constest) {
+                $user_id[] = $user_constest['user_id'];
+            }
+            $query->whereIn('id', $user_id);
         }
         if (!empty($authUser) && !empty($authUser['role_id'])) {
             if ($authUser['role_id'] != \Constants\ConstUserTypes::Admin) {

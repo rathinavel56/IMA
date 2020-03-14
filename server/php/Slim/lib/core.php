@@ -290,7 +290,7 @@ function getCryptHash($str)
  */
 function social_login($profile, $provider_id, $provider, $adapter, $role_id)
 {
-    $bool = false;
+	$bool = false;
     $provider_details = Models\Provider::where('name', ucfirst($provider))->first();
     $profile_picture_url = !empty($profile->photoURL) ? $profile->photoURL : '';
     $access_token = $profile->access_token;
@@ -304,8 +304,12 @@ function social_login($profile, $provider_id, $provider, $adapter, $role_id)
         $access_token_secret = $access_token_arr['oauth_token_secret'];
     }
 	$checkProviderUser = Models\ProviderUser::where('provider_id', $provider_id)->where('foreign_id', $profile->identifier)->where('is_connected', true)->first();
+	$enabledIncludes = array(
+			'attachment',
+			'role'
+		);
     if (!empty($checkProviderUser)) {
-        $isAlreadyExistingUser = Models\User::where('id', $checkProviderUser['user_id'])->first();
+        $isAlreadyExistingUser = Models\User::with($enabledIncludes)->where('id', $checkProviderUser['user_id'])->first();
         $checkProviderUser->access_token = $access_token;
         $checkProviderUser->update();
         $ip_id = saveIp();
@@ -328,7 +332,7 @@ function social_login($profile, $provider_id, $provider, $adapter, $role_id)
         }
     } else {
 		if (!empty($profile->email)) {
-            $isAlreadyExistingUser = Models\User::where('email', $profile->email)->first();
+            $isAlreadyExistingUser = Models\User::with($enabledIncludes)->where('email', $profile->email)->first();
             if (!empty($isAlreadyExistingUser)) {
                 $bool = true;
                 $provider_user = Models\ProviderUser::where('user_id', $isAlreadyExistingUser['id'])->where('provider_id', $provider_id)->first();
@@ -343,7 +347,6 @@ function social_login($profile, $provider_id, $provider, $adapter, $role_id)
                 $provider_user_ins->access_token_secret = $access_token_secret;
                 $provider_user_ins->is_connected = true;
                 $provider_user_ins->profile_picture_url = $profile_picture_url;
-				$provider_user_ins->role_id = $role_id;
 				$provider_user_ins->save();
                 $current_user_id = $isAlreadyExistingUser['id'];
                 $response = array(
@@ -360,6 +363,8 @@ function social_login($profile, $provider_id, $provider, $adapter, $role_id)
                 $ip_id = saveIp();
                 $user_data->username = Inflector::slug($username, '-');
                 $user_data->email = (property_exists($profile, 'email')) ? $profile->email : "";
+				$user_data->first_name = $profile->given_name ? $profile->given_name : '';
+				$user_data->last_name = $profile->family_name ? $profile->family_name : '';
                 $user_data->password = getCryptHash('default'); // dummy password                
                 $user_data->is_active = true;
 				$user_data->role_id = $role_id;
@@ -379,9 +384,9 @@ function social_login($profile, $provider_id, $provider, $adapter, $role_id)
 		        } else {
 					$user_data->is_email_confirmed = true;
                 }
-                $user_data->save();
+				$user_data->save();
                 $current_user_id = $user_data->id;
-                $provider_users_data->user_id = $user_data->id;
+				$provider_users_data->user_id = $user_data->id;
                 $provider_users_data->provider_id = $provider_id;
                 $provider_users_data->foreign_id = $profile->identifier;
                 $provider_users_data->access_token = $access_token;
@@ -389,7 +394,10 @@ function social_login($profile, $provider_id, $provider, $adapter, $role_id)
                 $provider_users_data->is_connected = true;
                 $provider_users_data->profile_picture_url = $profile_picture_url;
                 $provider_users_data->save();
-                $response = array(
+				if ($profile_picture_url != '') {
+					social_profile_image_save($profile_picture_url, $current_user_id);
+				}
+				$response = array(
                     'error' => array(
                         'code' => 0,
                         'message' => 'Registered and connected succesfully'
@@ -403,9 +411,10 @@ function social_login($profile, $provider_id, $provider, $adapter, $role_id)
         }
     }
     if (!empty($current_user_id)) {
-        $user = Models\User::where('id', $current_user_id)->first();
-        if (!empty($user)) {
-            // $user->makeVisible($user->hidden);
+        $user = Models\User::with($enabledIncludes)->where('id', $current_user_id)->first();
+        if (!empty($user) && $profile_picture_url != '' && $user['attachment'] == null) {
+            social_profile_image_save($profile_picture_url, $current_user_id);
+			$user = Models\User::with($enabledIncludes)->where('id', $current_user_id)->first();
         }
         $scopes = '';
         if (!empty($user['scopes_' . $user['role_id']])) {
@@ -435,6 +444,17 @@ function social_login($profile, $provider_id, $provider, $adapter, $role_id)
     $response['thrid_party_profile'] = $profile;
     $response['already_register'] = ($bool) ? '1' : '0';
     return $response;
+}
+function social_profile_image_save($profile_picture_url, $current_user_id) {
+	$type = pathinfo($profile_picture_url, PATHINFO_EXTENSION);
+	$name = md5(time());
+	$contents = _doGet($profile_picture_url);
+	$fileName = $name . '.' . $type;
+	$save_path = APP_PATH . '/media/tmp/' .$fileName;
+	$fp = fopen($save_path, 'x');
+	fwrite($fp, $contents);
+	fclose($fp);
+	saveImage('UserAvatar', $fileName, $current_user_id);
 }
 /**
  * To login using social networking site accounts
@@ -475,6 +495,8 @@ function social_auth_login($provider, $pass_value = array())
 			$profile->access_token_secret = $pass_value['idToken'];
 			$profile->email = $idTokenResponse['email'];
 			$profile->displayName = $idTokenResponse['given_name'];
+			$profile->given_name = $idTokenResponse['given_name'];
+			$profile->family_name = $idTokenResponse['family_name'];
 			$response = social_login($profile, $provider_id, $provider, $adapter, $role_id);
 		} else {
 			$response = $idTokenResponse;
@@ -1798,4 +1820,56 @@ function runPost($url, $fields) {
 	$result = curl_exec($ch);
 	curl_close($ch);        
 	return $result;
+}
+function getClientRequestIP() {
+	if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+		$ip_address = $_SERVER['HTTP_CLIENT_IP'];
+	} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+		$ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	} else {
+		$ip_address = $_SERVER['REMOTE_ADDR'];
+	 }
+	return $ip_address;
+}
+function isDeveloperIP() {
+	return (getClientRequestIP() == '49.207.136.236');
+}
+function paypal_pay($post, $method) {
+	$isLive = false;
+	$url = $isLive ? 'https://svcs.paypal.com/' : 'https://svcs.sandbox.paypal.com/';
+	$tokenUrl = $url.$method;
+	$payUrl = $isLive ? 'https://www.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=' : 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=';
+	$post_string = json_encode($post);
+	$header = array(
+			'X-PAYPAL-SECURITY-USERID: freehidehide_api1.gmail.com',
+			'X-PAYPAL-SECURITY-PASSWORD: AC3BTDPQW5DWV52W',
+			'X-PAYPAL-SECURITY-SIGNATURE: AYS.KyRPCh0NqN2ORLAMv8z1H9kWAS3rJdqYkIt.XoOnKgTHdSlTxCrx',
+			'X-PAYPAL-REQUEST-DATA-FORMAT: JSON',
+			'X-PAYPAL-RESPONSE-DATA-FORMAT: JSON',
+			'X-PAYPAL-APPLICATION-ID: APP-80W284485P519543T'
+		);
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $tokenUrl);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post_string);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$result = curl_exec($ch);
+	$errors = array(
+		'ack' => 'fail'
+	);
+	if ($result) {
+		$resultArray = json_decode($result, true);
+		if (!empty($resultArray) && !empty($resultArray['responseEnvelope']) && strtolower($resultArray['responseEnvelope']['ack']) == 'success') {
+			$data = array();
+			$data['ack'] = 'success';
+			$data['payUrl'] = $payUrl.$resultArray['payKey'];
+			$data['payKey'] = $resultArray['payKey'];
+			$data['response'] = $resultArray;
+			return $data;
+		}
+	}
+	return $errors;
 }

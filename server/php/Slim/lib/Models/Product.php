@@ -1,30 +1,25 @@
 <?php
 /**
- * Advertisement
+ * Product
  */
 namespace Models;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 
-class Advertisement extends AppModel
+class Product extends AppModel
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'advertisements';
-    public function user()
-    {
-        return $this->belongsTo('Models\User', 'user_id', 'id');
-    }
+    protected $table = 'products';
 	public $hidden = array(
         'created_at',
         'updated_at',
+		'inactive',
 		'is_active',
-		'is_approved',
-		'page_number',
-		'price'
+		'discounted_price'
     );
     protected $fillable = array(
         'id',
@@ -32,11 +27,9 @@ class Advertisement extends AppModel
 		'created_at',
 		'updated_at',
 		'name',
-		'url',
-		'page_number',
 		'price',
 		'description',
-		'is_approved',
+		'discounted_price',
 		'is_active'
     );
     public $rules = array(
@@ -45,8 +38,6 @@ class Advertisement extends AppModel
 		'created_at' => 'sometimes|required',
 		'updated_at' => 'sometimes|required',
 		'name' => 'sometimes|required',
-		'url' => 'sometimes|required',
-		'page_number' => 'sometimes|required',
 		'price' => 'sometimes|required',
 		'description' => 'sometimes|required',
 		'is_approved' => 'sometimes|required',
@@ -55,9 +46,26 @@ class Advertisement extends AppModel
     public $qSearchFields = array(
         'name'
     );
+	public function user()
+    {
+        return $this->belongsTo('Models\User', 'user_id', 'id');
+    }
 	public function attachment()
     {
-        return $this->hasOne('Models\Attachment', 'foreign_id', 'id')->where('class', 'Advertisement');
+        return $this->hasMany('Models\Attachment', 'foreign_id', 'id')->where('class', 'Product');
+    }
+	public function product_sizes()
+    {
+        return $this->hasMany('Models\ProductSize', 'product_id', 'id')->with('size')->where('is_active', true);
+	}
+	public function product_colors()
+    {
+        return $this->hasMany('Models\ProductColor', 'product_id', 'id')->where('is_active', true);
+    }
+	public function cart()
+    {
+		global $authUser;
+		return $this->hasOne('Models\Cart', 'product_id', 'id')->with('product_sizes', 'product_colors')->where('is_purchase', false)->where('user_id', $authUser->id);
     }
 	public function scopeFilter($query, $params = array())
     {
@@ -67,6 +75,12 @@ class Advertisement extends AppModel
             $query->where(function ($q1) use ($params) {
                 $search = $params['q'];                
             });
+        }
+		if (!empty($params['id'])) {
+            $query->Where('id', $params['id']);
+        }
+		if (!empty($params['user_id'])) {
+            $query->Where('user_id', $params['user_id']);
         }
     }
 }

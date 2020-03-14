@@ -8,25 +8,6 @@ global $_server_domain_url;
 $inflector = new Inflector();
 $php_path = PHP_BINDIR . DIRECTORY_SEPARATOR . 'php';
 $api_url_map = array(     
-    '/\/quote_service\/(?P<quote_service_id>\d+)\/(?P<slug>.*)/' => array(
-        'api_url' => '/api/v1/quote_services/{id}',
-    ) ,
-    '/\/portfolios\/(?P<portfolio_id>\d+)\/(?P<slug>.*)/' => array(
-        'api_url' => '/api/v1/portfolios/{id}',
-        'title' => 'Portfolios'
-    ) ,
-    '/\/contests\/(?P<contest_id>\d+)/' => array(
-        'api_url' => '/api/v1/contests/{id}',
-        'title' => 'Contests'
-    ) ,
-    '/\/projects\/view\/(?P<project_id>\d+)\/(?P<slug>.*)/' => array(
-        'api_url' => '/api/v1/projects/{id}',
-        'title' => 'Project'
-    ) ,
-    '/\/jobs\/view\/(?P<job_id>\d+)/' => array(
-        'api_url' => '/api/v1/jobs/{id}',
-        'title' => 'Job'
-    ) ,
     '/\/user\/(?P<user_id>\d+)\/(?P<slug>.*)/' => array(
         'api_url' => '/api/v1/users/{id}',
     ) ,
@@ -82,13 +63,7 @@ if (!empty($_GET['_escaped_fragment_'])) {
                 $title = $site_name . ' | ' . $values['business_name'];
             }  
             if (!empty($values['api_url'])) {
-                $id = (!empty($matches['quote_service_id']) ? $matches['quote_service_id'] :
-                      (!empty($matches['page_id']) ? $matches['page_id'] :
-                      (!empty($matches['portfolio_id']) ? $matches['portfolio_id'] :
-                      (!empty($matches['contest_id']) ? $matches['contest_id'] :
-                      (!empty($matches['project_id']) ? $matches['project_id'] :
-                      (!empty($matches['job_id']) ? $matches['job_id'] : 0
-                    ))))));
+                $id = (!empty($matches['page_id']) ? $matches['page_id'] : '');
                 if (!empty($id)) {
                     $api_url = str_replace('{id}', $id, $values['api_url']); // replacing id value
                 } else {
@@ -150,116 +125,6 @@ if (!empty($_GET['_escaped_fragment_'])) {
                             if ($key == 'slug' && $value != NULL) {
                                 $og_url = $_server_domain_url . '/quote_service/' . $quote_services_id . '/' . $value;
                             }
-                        }
-                        elseif ($values['api_url'] == '/api/v1/jobs/{id}') {
-                                $api_url = '/api/v1/jobs/{id}';
-                                $og_type = 'BusinessEvent';
-                            if ($key == 'id') {
-                                $job_id = $value;
-                            }    
-                            if ($key == 'title') {
-                                $meta_keywords = !empty($value) ? $value : '';
-                                $title =  !empty($value) ? $value: $title;
-                                $name =  !empty($value) ? $value: $title;
-                            }
-                            $location ['@type'] = 'Place';
-                            $offer['@type'] = 'Offer';
-                            $location['address']['@type'] = 'PostalAddress';
-                            if ($key == 'city') {
-                                $location['address']['streetAddress'] =  $value['name'];
-                            }
-                            if ($key == 'state') {
-                                $location['address']['addressRegion'] =  $value['name'];
-                            }
-                            if ($key == 'country') {
-                                $location['address']['addressCountry'] =  $value['name'];
-                            }
-                            if($key == 'zip_code'){
-                                $location['address']['postalCode'] =  $value;
-                            }
-                            if($key == 'company_website'){
-                                 $offer['url'] = $value;
-                            }
-                            if($key == 'salary_from'){
-                                $offer['price'] = $value;
-                            }
-                            if ($key == 'attachment' && !empty($value)) {
-                                $og_image = $_server_domain_url . '/images/medium_thumb/Job/' . $job_id . '.' . md5('Job' . $job_id . 'png' . 'medium_thumb') . '.' . 'png';
-                            }
-                            if ($key == 'slug' && $value!= NULL) {
-                                $og_url = $_server_domain_url . '/jobs/view/' . $job_id;
-                            }
-                        }
-                        elseif ($values['api_url'] == '/api/v1/projects/{id}') {
-                            $api_url = '/api/v1/projects/{id}';
-                            $og_type =  'product';
-                            $rating['@type'] = 'aggregateRating'; 
-                            if ($key == 'id') {
-                                 $projects_id = $value;
-                            }
-                            if ($key == 'name') {
-                                $meta_keywords = !empty($value) ? $value : '';
-                                $title =  !empty($value) ? $value: $title;
-                                $project_name = $value;
-                            }
-                            if ($key == 'reviews' && !empty($value)) {
-                                $rating['ratingValue'] = !empty(count($value)) ? count($value) : '';
-                            }
-                            if ($key == 'description') {
-                                 $meta_description = !empty($value) ? $value : '';
-                            }
-                            if ($key == 'slug' && $value!= NULL) {
-                                $og_url = $_server_domain_url . '/projects/view/' . $projects_id . '/' . $value;
-                            }
-                            if ($key == 'attachment' && !empty($value)) {
-                                $og_image = $_server_domain_url . '/images/medium_thumb/Job/' . $projects_id . '.' . md5('Job' . $projects_id . 'png' . 'medium_thumb') . '.' . 'png';
-                            }
-                        }
-                        elseif ($values['api_url'] == '/api/v1/contests/{id}') {
-                            $api_url = '/api/v1/contests/{id}';
-                            if ($key == 'id') {
-                                 $contest_id = $value;
-                            }
-                            if ($key == 'name') {
-                                $meta_keywords = !empty($value) ? $value : '';
-                                $title =  !empty($value) ? $value: $title;
-                                $contest_name = $value; 
-                            }
-                            if ($key == 'description') {
-                                 $meta_description = !empty($value) ? $value : '';
-                                 $offer['description'] = $meta_description;
-                            }
-                            $og_type =  'Event';
-                            $location ['@type'] = 'Place';
-                            $location['address']['@type'] = 'PostalAddress';
-                            if($key=='prize' && !empty($value)){
-                                 $offer['price'] = $value;
-                            }
-                            if ($key == 'contest_type' && !empty($value['attachment'])) {
-                                $og_image = $_server_domain_url . '/images/medium_thumb/ContestType/' . $value['id'] . '.' . md5('ContestType' . $value['id'] . 'png' . 'medium_thumb') . '.' . 'png';
-                            }
-                            if ($key == 'slug' && $value!= NULL) {
-                                $og_url = $_server_domain_url . '/contest/' . $contest_id . '/' . $value;
-                            }
-                        }
-                        elseif ($values['api_url'] == '/api/v1/portfolios/{id}') {
-                             $api_url = '/api/v1/portfolios/{id}';
-                            if ($key == 'id') {
-                                $portfolios_id = $value;
-                            }
-                            if ($key == 'title') {
-                                $meta_keywords = !empty($value) ? $value : '';
-                                $title =  !empty($value) ? $value: $title;
-                                $portfolios_name = $value; 
-                                $og_url = $_server_domain_url . '/portfolios/' . $portfolios_id . '/' . $title;
-                            }
-                            if ($key == 'description') {
-                                 $meta_description = !empty($value) ? $value : '';
-                            }
-                            $og_type =  'WebSite';
-                            if ($key == 'attachment' && !empty($value)) {
-                                $og_image = $_server_domain_url . '/images/large_thumb/Portfolio/' . $portfolios_id . '.' . md5('Portfolio' . $portfolios_id . 'png' . 'large_thumb') . '.' . 'png';
-                            }                            
                         }
                     }
                 } else {

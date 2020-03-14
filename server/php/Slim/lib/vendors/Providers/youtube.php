@@ -1,28 +1,4 @@
 <?php
-/**
- * To fetch access token, user Youtube profile details, fetch user's friends and user's interests
- *
- * PHP version 5
- *
- * @category   PHP
- * @package    ace
- * @subpackage Core
- * @author     Agriya <info@agriya.com>
- * @copyright  2014 Agriya Infoway Private Ltd
- * @license    http://www.agriya.com/ Agriya Infoway Licence
- * @link       http://www.agriya.com
- */
-/**
- * Youtube Provider API Class
- *
- * @category   PHP
- * @package    ace
- * @subpackage Core
- * @author     Agriya <info@agriya.com>
- * @copyright  2014 Agriya Infoway Private Ltd
- * @license    http://www.agriya.com/ Agriya Infoway Licence
- * @link       http://www.agriya.com
- */
 class Providers_youtube
 {
     /**

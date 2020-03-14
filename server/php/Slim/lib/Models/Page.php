@@ -18,6 +18,14 @@ class Page extends AppModel
      * @var string
      */
     protected $table = 'pages';
+	public $hidden = array(
+        'created_at',
+        'updated_at',
+		'meta_keywords',
+		'description_meta_tag',
+		'slug',
+		'is_active'
+    );
     protected $fillable = array(
         'title',
         'content',

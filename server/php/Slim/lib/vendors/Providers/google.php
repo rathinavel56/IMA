@@ -1,28 +1,4 @@
 <?php
-/**
- * To fetch access token, user Google profile details, fetch user's contacts and user's interests
- *
- * PHP version 5
- *
- * @category   PHP
- * @package    ace
- * @subpackage Core
- * @author     Agriya <info@agriya.com>
- * @copyright  2014 Agriya Infoway Private Ltd
- * @license    http://www.agriya.com/ Agriya Infoway Licence
- * @link       http://www.agriya.com
- */
-/**
- * Google Provider API Class
- *
- * @category   PHP
- * @package    ace
- * @subpackage Core
- * @author     Agriya <info@agriya.com>
- * @copyright  2014 Agriya Infoway Private Ltd
- * @license    http://www.agriya.com/ Agriya Infoway Licence
- * @link       http://www.agriya.com
- */
 class Providers_google
 {
     /**

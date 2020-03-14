@@ -1,44 +1,48 @@
 <?php
+/**
+ * Cart
+ */
 namespace Models;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 
-class Company extends AppModel
+class Card extends AppModel
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'companies';
-	public $hidden = array(
-        'created_at',
-        'updated_at',
-		'description',
-		'is_active'
-    );
+    protected $table = 'cards';
     public function user()
     {
         return $this->belongsTo('Models\User', 'user_id', 'id');
     }
+	public $hidden = array(
+        'created_at',
+        'updated_at',
+		'is_active'
+    );
     protected $fillable = array(
         'id',
-		'user_id',
-		'created_by',
-		'updated_at',
 		'name',
-		'url',
-		'description',
+		'user_id',
+		'created_at',
+		'updated_at',
+		'card_number',
+		'card_display_number',
+		'expiry_date',
 		'is_active'
     );
     public $rules = array(
         'id' => 'sometimes|required',
+		'name' => 'sometimes|required',
 		'user_id' => 'sometimes|required',
 		'created_at' => 'sometimes|required',
 		'updated_at' => 'sometimes|required',
-		'name' => 'sometimes|required',
-		'url' => 'sometimes|required',
-		'description' => 'sometimes|required',
+		'card_number' => 'sometimes|required',
+		'expiry_date' => 'sometimes|required',
+		'card_display_number' => 'sometimes|required',
 		'is_active' => 'sometimes|required'
     );
     public $qSearchFields = array(
@@ -50,8 +54,7 @@ class Company extends AppModel
         parent::scopeFilter($query, $params);
         if (!empty($params['q'])) {
             $query->where(function ($q1) use ($params) {
-                $search = $params['q'];
-                
+                $search = $params['q'];                
             });
         }
     }

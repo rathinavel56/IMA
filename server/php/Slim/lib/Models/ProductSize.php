@@ -1,57 +1,61 @@
 <?php
+/**
+ * ProductSize
+ */
 namespace Models;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 
-class Company extends AppModel
+class ProductSize extends AppModel
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'companies';
+    protected $table = 'product_sizes';
 	public $hidden = array(
         'created_at',
         'updated_at',
-		'description',
-		'is_active'
+		'product_id',
+		'is_active',
+		'id',
+		'size_id'
     );
-    public function user()
-    {
-        return $this->belongsTo('Models\User', 'user_id', 'id');
-    }
     protected $fillable = array(
         'id',
-		'user_id',
-		'created_by',
+		'created_at',
 		'updated_at',
-		'name',
-		'url',
-		'description',
+		'product_id',
+		'size_id',
 		'is_active'
     );
     public $rules = array(
         'id' => 'sometimes|required',
-		'user_id' => 'sometimes|required',
+		'product_id' => 'sometimes|required',
+		'size_id' => 'sometimes|required',
 		'created_at' => 'sometimes|required',
 		'updated_at' => 'sometimes|required',
-		'name' => 'sometimes|required',
-		'url' => 'sometimes|required',
-		'description' => 'sometimes|required',
 		'is_active' => 'sometimes|required'
     );
     public $qSearchFields = array(
         'name'
     );
+	public function product()
+    {
+        return $this->hasMany('Models\Product', 'product_id', 'id');
+    }
+	public function size()
+    {
+        return $this->belongsTo('Models\Size', 'size_id', 'id');
+    }
 	public function scopeFilter($query, $params = array())
     {
         global $authUser;
         parent::scopeFilter($query, $params);
         if (!empty($params['q'])) {
             $query->where(function ($q1) use ($params) {
-                $search = $params['q'];
-                
+                $search = $params['q'];                
             });
         }
     }

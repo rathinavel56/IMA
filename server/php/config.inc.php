@@ -34,7 +34,7 @@ define('OAUTH_CLIENT_SECRET', '14uumnygq6xyorsry8l382o3myr852hb');
 define('PAGE_LIMIT', 20);
 $_server_protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https' : 'http';
 if (!defined('STDIN')) {
-    $_server_domain_url = $_server_protocol . '://' . $_SERVER['HTTP_HOST'].'/taskmethat'; // http://localhost
+    $_server_domain_url = $_server_protocol . '://' . $_SERVER['HTTP_HOST']; // http://localhost
 }
 if (!defined('STDIN') && !file_exists(APP_PATH . '/tmp/cache/site_url_for_shell.php') && !empty($_server_domain_url)) {
     $fh = fopen(APP_PATH . '/tmp/cache/site_url_for_shell.php', 'a');
