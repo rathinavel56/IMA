@@ -89,6 +89,7 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
 				"1f7d51a2-65cf-00a7-54a6-50ec9c145f77",
+				"1a62daeb-f386-4576-2afc-3aabb854e2b9",
 				"e83974ba-4d70-6b04-11a0-3434ef774a74",
 				"838aa86a-425b-8e04-3f1e-981ad4782735",
 				"afcd094c-4778-00dd-225e-0a6f8ac2e359"
@@ -167,6 +168,7 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
 				"407ad785-0c19-a066-502b-d62d134587df",
+				"32104f8b-cb79-8014-c9f4-678532f6f556",
 				"37e622a5-3a8e-3808-b021-d8e3b501fdb2",
 				"a21a6b3c-d083-6264-3c19-877d19164c0d",
 				"177574b8-0756-111c-6c11-dc8e1f456312",
@@ -708,6 +710,58 @@
 			"timestamp": null
 		},
 		{
+			"id": "1a62daeb-f386-4576-2afc-3aabb854e2b9",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/contestants?token={{Token}}&page=1&sort=votes&sortby=desc",
+			"folder": "941ff06d-e864-1d31-b773-0c86eac29dfc",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "page",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sort",
+					"value": "votes",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sortby",
+					"value": "desc",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1583591061326,
+			"name": "Contestants Votes Highest By Category",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
 			"id": "1f7d51a2-65cf-00a7-54a6-50ec9c145f77",
 			"headers": "",
 			"headerData": [],
@@ -797,6 +851,38 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"rawModeData": "{\n  \"image\": \"484948f6c113a48427d219bbf89f073c.png\"\n}"
+		},
+		{
+			"id": "32104f8b-cb79-8014-c9f4-678532f6f556",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/product/31?token={{Token}}",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"data": null,
+			"dataMode": "params",
+			"name": "Product",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1584127071345,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "821cc0b4-16e5-e166-3e7c-a7b697a44a82"
 		},
 		{
 			"id": "37e622a5-3a8e-3808-b021-d8e3b501fdb2",
@@ -1575,26 +1661,12 @@
 			"id": "838aa86a-425b-8e04-3f1e-981ad4782735",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/contestants?token={{Token}}&page=1&category_id=1",
+			"url": "{{Host}}/api/v1/contestants/highest_votes?token={{Token}}",
 			"folder": "941ff06d-e864-1d31-b773-0c86eac29dfc",
 			"queryParams": [
 				{
 					"key": "token",
 					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "page",
-					"value": "1",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "category_id",
-					"value": "1",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -1610,7 +1682,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583590487714,
+			"time": 1584163431602,
 			"name": "Contestants Category",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
