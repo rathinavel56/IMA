@@ -713,33 +713,12 @@
 			"id": "1a62daeb-f386-4576-2afc-3aabb854e2b9",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/contestants?token={{Token}}&page=1&sort=votes&sortby=desc",
+			"url": "{{Host}}/api/v1/contestants/highest_votes?token={{Token}}",
 			"folder": "941ff06d-e864-1d31-b773-0c86eac29dfc",
 			"queryParams": [
 				{
 					"key": "token",
 					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "page",
-					"value": "1",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "sort",
-					"value": "votes",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "sortby",
-					"value": "desc",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -755,7 +734,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583591061326,
+			"time": 1584177496786,
 			"name": "Contestants Votes Highest By Category",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1661,12 +1640,33 @@
 			"id": "838aa86a-425b-8e04-3f1e-981ad4782735",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/contestants/highest_votes?token={{Token}}",
+			"url": "{{Host}}/api/v1/contestants?token={{Token}}&page=1&sortby=desc&category_id=1",
 			"folder": "941ff06d-e864-1d31-b773-0c86eac29dfc",
 			"queryParams": [
 				{
 					"key": "token",
 					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "page",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sortby",
+					"value": "desc",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "category_id",
+					"value": "1",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -1682,7 +1682,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584163431602,
+			"time": 1584177611620,
 			"name": "Contestants Category",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
