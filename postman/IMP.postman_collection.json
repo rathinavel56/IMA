@@ -41,6 +41,7 @@
 				"7d55db2b-073a-862d-0b45-f2930a15c226",
 				"ff567fab-9282-2210-a591-a220e1b207f3",
 				"9103d232-5b9c-e4f1-ba37-a3f9124530d6",
+				"c2ff873f-ddff-e091-21e9-afcc84f2fb7b",
 				"eca8a644-e538-580f-2e97-b8f4bc5c330f"
 			],
 			"owner": "502680",
@@ -104,6 +105,8 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
 				"3815b71a-2928-8bd0-fe6f-ee59bdb17073",
+				"a6b3a872-1b94-a690-50d4-a627ab746e6e",
+				"4efb9e3d-28e2-6d39-8931-8f1079cd2872",
 				"b7febb1e-c4bf-97f1-ea3f-4601c078aeaf"
 			],
 			"owner": "502680",
@@ -172,6 +175,7 @@
 				"37e622a5-3a8e-3808-b021-d8e3b501fdb2",
 				"a21a6b3c-d083-6264-3c19-877d19164c0d",
 				"177574b8-0756-111c-6c11-dc8e1f456312",
+				"7db1eb1b-f1f3-86c2-398f-a62a2fe3b6b0",
 				"69d42c39-d4f2-c544-d558-568266a6fff5"
 			],
 			"owner": "502680",
@@ -244,6 +248,7 @@
 			"order": [
 				"5a9ba3fe-e118-f683-983e-e5a965870884",
 				"4c8a112f-1c43-4547-8c43-57811b401e8b",
+				"b68f869a-070a-373f-c557-b3b9075313b9",
 				"be16db63-3841-efff-e298-8f7d8c8a3176"
 			],
 			"owner": "502680",
@@ -641,7 +646,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/product/1?token={{Token}}",
+			"url": "{{Host}}/api/v1/product/33?token={{Token}}",
 			"folder": "821cc0b4-16e5-e166-3e7c-a7b697a44a82",
 			"queryParams": [
 				{
@@ -662,12 +667,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583726490745,
+			"time": 1584283052761,
 			"name": "Product Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Shoe\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"image\": [\n    {\n      \"file\": \"a435b5cd769c80f823d41999467caecd.jpg\",\n      \"is_pirmary\": true\n    }\n  ],\n  \"product_colors\": [\n    {\n      \"color\": \"038cfc\"\n    }\n  ],\n  \"product_sizes\": [\n    {\n      \"size_id\": 1\n    }\n  ]\n}"
+			"rawModeData": "{\n  \"name\": \"Shoe Puma\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 100,\n  \"quantity\" : 20,\n  \"image\": [\n    {\n      \"file\": \"8fce1ba91971cc5332763857a85a9618.jpg\"\n    },\n    {\n    \t\"file\": \"c11ab57dae3cca4358244015274f12e5.jpg\"\n    }\n  ],\n  \"product_colors\": [\n    {\n      \"color\": \"038cfc\"\n    }\n  ],\n  \"product_sizes\": [\n    {\n      \"size_id\": 1\n    }\n  ]\n}"
 		},
 		{
 			"id": "18856b4d-bdd7-e0db-a30f-49642b23964d",
@@ -835,7 +840,8 @@
 			"id": "32104f8b-cb79-8014-c9f4-678532f6f556",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/product/31?token={{Token}}",
+			"url": "{{Host}}/api/v1/product/33?token={{Token}}",
+			"folder": "821cc0b4-16e5-e166-3e7c-a7b697a44a82",
 			"queryParams": [
 				{
 					"key": "token",
@@ -845,23 +851,21 @@
 					"enabled": true
 				}
 			],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
 			"method": "GET",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"data": null,
 			"dataMode": "params",
-			"name": "Product",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1584127071345,
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"folder": "821cc0b4-16e5-e166-3e7c-a7b697a44a82"
+			"time": 1584267395565,
+			"name": "Product",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "37e622a5-3a8e-3808-b021-d8e3b501fdb2",
@@ -911,7 +915,7 @@
 			"id": "3815b71a-2928-8bd0-fe6f-ee59bdb17073",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/images/big_thumb/UserAvatar/19.76c24bff7a76b299adb494bf5f447a19.jpg",
+			"url": "{{Host}}/images/big_thumb/UserAvatar/5.b20d85ad6ec505f81092da26b5ca9f54.jpg",
 			"folder": "4b1aeef6-01e3-9266-36c6-c1972efc9edc",
 			"queryParams": [],
 			"preRequestScript": null,
@@ -922,13 +926,12 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582347404689,
-			"name": "Image Generator",
+			"helperAttributes": {},
+			"time": 1584272769505,
+			"name": "Image UserAvatar Generator",
 			"description": "UserAvatar19jpgbig_thumb\n\n",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": [],
-			"timestamp": null
+			"responses": []
 		},
 		{
 			"id": "407ad785-0c19-a066-502b-d62d134587df",
@@ -1042,6 +1045,52 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"rawModeData": "{\n  \"first_name\": \"VJ\",\n  \"last_name\": \"VJ\",\n  \"image\": \"95fb84115da9da4f5f032687a824950e.jpg\",\n  \"username\" : \"sad\",\n  \"is_paypal_connect\": \"sad\",\n  \"is_stripe_connect\": \"asd\",\n  \"subscription_end_date\": \"asd\"\n}"
+		},
+		{
+			"id": "4efb9e3d-28e2-6d39-8931-8f1079cd2872",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/attachments?class=UserAvatar&token={{Token}}",
+			"folder": "4b1aeef6-01e3-9266-36c6-c1972efc9edc",
+			"queryParams": [
+				{
+					"key": "class",
+					"value": "UserAvatar",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "file",
+					"value": "RAJINIKANTH.jpg",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1584287269116,
+			"name": "Attachment UserAvatar Upload",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "54a47454-8e54-1f03-a34d-677bcc36047c",
@@ -1637,6 +1686,45 @@
 			"rawModeData": "{\n  \t\"product_id\": 1,\n    \"quantity\": 50,\n    \"product_size_id\": 1,\n    \"product_color_id\": 1\n}"
 		},
 		{
+			"id": "7db1eb1b-f1f3-86c2-398f-a62a2fe3b6b0",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/product/33?token={{Token}}",
+			"folder": "821cc0b4-16e5-e166-3e7c-a7b697a44a82",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1584287650324,
+			"name": "Product Edit Image",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\n  \"image\": [\n    {\n      \"file\": \"5001a28b1e570599c644974eae55aaeb.jpg\"\n    },\n    {\n      \"file\": \"0bf262d2a9cbd86a05163de4248e329f.jpg\"\n    }\n  ]\n}"
+		},
+		{
 			"id": "838aa86a-425b-8e04-3f1e-981ad4782735",
 			"headers": "",
 			"headerData": [],
@@ -2229,6 +2317,28 @@
 			"timestamp": null
 		},
 		{
+			"id": "a6b3a872-1b94-a690-50d4-a627ab746e6e",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/images/big_thumb/Product/33.ee0fdb166835159876ee87600e751eb7.jpg",
+			"folder": "4b1aeef6-01e3-9266-36c6-c1972efc9edc",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1584287791481,
+			"name": "Image Product Generator",
+			"description": "Product33jpgbig_thumb",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
 			"id": "a6e8f590-be73-2be0-0996-15a86541debb",
 			"headers": "",
 			"headerData": [],
@@ -2418,15 +2528,53 @@
 			"responses": []
 		},
 		{
+			"id": "b68f869a-070a-373f-c557-b3b9075313b9",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/users?token={{Token}}",
+			"folder": "9ba385a8-3939-95ce-4f7e-456dfe5a0005",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1584287495583,
+			"name": "User Profile Edit Image",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\n  \"image\": \"779b818269ab6d127ed5edf284fffbb2.jpg\"\n}"
+		},
+		{
 			"id": "b7febb1e-c4bf-97f1-ea3f-4601c078aeaf",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/attachments?class=PaymentGateway&token={{Token}}",
+			"url": "{{Host}}/api/v1/attachments?class=Product&token={{Token}}",
 			"folder": "4b1aeef6-01e3-9266-36c6-c1972efc9edc",
 			"queryParams": [
 				{
 					"key": "class",
-					"value": "PaymentGateway",
+					"value": "Product",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -2446,7 +2594,7 @@
 			"data": [
 				{
 					"key": "file",
-					"value": "stripe.png",
+					"value": "64ed52b4-de53-4897-bceb-45c8529f41fe.jpg",
 					"description": "",
 					"type": "file",
 					"enabled": true
@@ -2457,8 +2605,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583056916933,
-			"name": "Attachment Upload",
+			"time": 1584287418241,
+			"name": "Attachment Product Upload",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": []
@@ -2557,12 +2705,49 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583524949585,
-			"name": "Login",
+			"time": 1584286698488,
+			"name": "User Login",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"rawModeData": "{\n  \"username\": \"user\",\n  \"password\": \"1234567\",\n  \"role_id\": 2\n}"
+		},
+		{
+			"id": "c2ff873f-ddff-e091-21e9-afcc84f2fb7b",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/cart?token={{Token}}&pay_key=AP-7WW55542BL081635M",
+			"folder": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pay_key",
+					"value": "AP-7WW55542BL081635M",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1584283048281,
+			"name": "User Cart verify",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "c6604493-9d8b-c06f-1888-eedebe13f23d",
