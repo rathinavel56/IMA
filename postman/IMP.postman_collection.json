@@ -270,6 +270,20 @@
 			"id": "9ba385a8-3939-95ce-4f7e-456dfe5a0005"
 		},
 		{
+			"name": "Users Address",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"order": [
+				"afe27850-b986-3e4c-26cd-dc49589e23ad",
+				"ac84bfff-d3ee-8454-d68e-3496843adae7",
+				"96734a41-47ff-c722-7d7c-8a1914f81542",
+				"d0aba9ba-25a1-f71d-8a2d-cac33e06d625"
+			],
+			"owner": "502680",
+			"folders_order": [],
+			"id": "1ab22f78-3075-3ff9-f3ed-f823b06aad05"
+		},
+		{
 			"name": "Votes",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -287,6 +301,7 @@
 		"eecf6744-9e5f-542d-96ee-9e87215a7d7d",
 		"a5f36ab8-4dc6-a8ee-6658-dc3c3f8fdd85",
 		"9ba385a8-3939-95ce-4f7e-456dfe5a0005",
+		"1ab22f78-3075-3ff9-f3ed-f823b06aad05",
 		"cd677033-d107-7f8f-54c9-24bad7e82367",
 		"941ff06d-e864-1d31-b773-0c86eac29dfc",
 		"4b1aeef6-01e3-9266-36c6-c1972efc9edc",
@@ -1130,12 +1145,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583592758288,
+			"time": 1584849742932,
 			"name": "User Profile Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"first_name\": \"VJ\",\n  \"last_name\": \"VJ\",\n  \"image\": \"95fb84115da9da4f5f032687a824950e.jpg\",\n  \"username\" : \"sad\",\n  \"is_paypal_connect\": \"sad\",\n  \"is_stripe_connect\": \"asd\",\n  \"subscription_end_date\": \"asd\"\n}"
+			"rawModeData": "{\n  \"first_name\": \"VJ\",\n  \"last_name\": \"VJ\",\n  \"username\": \"sad\",\n  \"address\": {\n    \"addressline1\": \"2 cross street\",\n    \"addressline2\": null,\n    \"city\": \"chennai\",\n    \"state\": \"TN\",\n    \"country\": \"India\",\n    \"zipcode\": \"6000003\"\n  }\n}"
 		},
 		{
 			"id": "4efb9e3d-28e2-6d39-8931-8f1079cd2872",
@@ -1251,7 +1266,7 @@
 			"id": "562962c6-a2aa-83fe-57ab-f0aef688ff14",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/purchase/vote_package/2?token={{Token}}&payment_gateway_id=1&contestant_id=26",
+			"url": "{{Host}}/api/v1/purchase/vote_package/2?token={{Token}}&payment_gateway_id=1&contestant_id=26&category_id=1",
 			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
 			"queryParams": [
 				{
@@ -1274,6 +1289,13 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "category_id",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
 				}
 			],
 			"preRequestScript": null,
@@ -1285,7 +1307,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583610147674,
+			"time": 1584849970146,
 			"name": "Paypal Votes Purchase",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1329,7 +1351,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583659131363,
+			"time": 1584849959872,
 			"name": "Paypal Instant Votes Purchase",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1339,7 +1361,7 @@
 			"id": "5a9ba3fe-e118-f683-983e-e5a965870884",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/users/26?token={{Token}}",
+			"url": "{{Host}}/api/v1/users/5?token={{Token}}",
 			"folder": "9ba385a8-3939-95ce-4f7e-456dfe5a0005",
 			"queryParams": [
 				{
@@ -1359,7 +1381,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584812462872,
+			"time": 1584849836914,
 			"name": "User Details",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1451,7 +1473,7 @@
 			"id": "61377e63-fcd0-b273-26a2-835f825289dd",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/purchase/cart?token={{Token}}&payment_gateway_id=1",
+			"url": "{{Host}}/api/v1/purchase/cart?token={{Token}}&payment_gateway_id=1&user_address_id=2",
 			"folder": "37d16932-e231-1478-e145-daa186cfb50e",
 			"queryParams": [
 				{
@@ -1467,6 +1489,13 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "user_address_id",
+					"value": "2",
+					"equals": true,
+					"description": "",
+					"enabled": true
 				}
 			],
 			"preRequestScript": null,
@@ -1479,7 +1508,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1583694607963,
+			"time": 1584853357773,
 			"name": "Paypal Cart",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -2073,6 +2102,44 @@
 			"responses": []
 		},
 		{
+			"id": "96734a41-47ff-c722-7d7c-8a1914f81542",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/user_address/1?token={{Token}}",
+			"folder": "1ab22f78-3075-3ff9-f3ed-f823b06aad05",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1584848182410,
+			"name": "User Address Edit",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\n  \"name\": \"Default\",\n  \"addressline1\": \"2 cross street\",\n  \"addressline2\": null,\n  \"city\" : \"chennai\",\n  \"state\": \"TN\",\n  \"country\": \"India\",\n  \"zipcode\": \"6000002\"\n}"
+		},
+		{
 			"id": "9ca47189-bc96-4b02-a257-d9120e947633",
 			"headers": "",
 			"headerData": [],
@@ -2469,6 +2536,44 @@
 			"timestamp": null
 		},
 		{
+			"id": "ac84bfff-d3ee-8454-d68e-3496843adae7",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/user_address?token={{Token}}",
+			"folder": "1ab22f78-3075-3ff9-f3ed-f823b06aad05",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1584848400109,
+			"name": "User Address Add",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\n  \"name\": \"Home\",\n  \"addressline1\": \"2 cross street\",\n  \"addressline2\": null,\n  \"city\" : \"chennai\",\n  \"state\": \"TN\",\n  \"country\": \"India\",\n  \"zipcode\": \"6000001\"\n}"
+		},
+		{
 			"id": "ad0c691b-b9b4-4348-325a-2324d7873ce7",
 			"headers": "",
 			"headerData": [],
@@ -2505,16 +2610,9 @@
 			"id": "af832f10-613b-0d01-6d0a-7cb2b67b185a",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/settings?token={{Token}}&is_mobile=true",
+			"url": "{{Host}}/api/v1/settings?is_mobile=true",
 			"folder": "9f637cf2-a6cc-bb75-eac0-e41de76f6cf8",
 			"queryParams": [
-				{
-					"key": "token",
-					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
 				{
 					"key": "is_mobile",
 					"value": "true",
@@ -2532,7 +2630,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584805765959,
+			"time": 1584813660675,
 			"name": "Mobile Settings",
 			"description": null,
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc"
@@ -2578,6 +2676,36 @@
 			"helperAttributes": {},
 			"time": 1583687648592,
 			"name": "Contestants Contest",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
+			"id": "afe27850-b986-3e4c-26cd-dc49589e23ad",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/user_address?token={{Token}}",
+			"folder": "1ab22f78-3075-3ff9-f3ed-f823b06aad05",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1584846670664,
+			"name": "User Address",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": []
@@ -2951,6 +3079,45 @@
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": []
+		},
+		{
+			"id": "d0aba9ba-25a1-f71d-8a2d-cac33e06d625",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/user_address/1?token={{Token}}",
+			"folder": "1ab22f78-3075-3ff9-f3ed-f823b06aad05",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1584848390477,
+			"name": "User Address Delete",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": ""
 		},
 		{
 			"id": "df44cced-2da3-45a8-ddcc-fc768af7d929",
