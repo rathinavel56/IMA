@@ -2132,12 +2132,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584848182410,
+			"time": 1584862496663,
 			"name": "User Address Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Default\",\n  \"addressline1\": \"2 cross street\",\n  \"addressline2\": null,\n  \"city\" : \"chennai\",\n  \"state\": \"TN\",\n  \"country\": \"India\",\n  \"zipcode\": \"6000002\"\n}"
+			"rawModeData": "{\n  \"name\": \"Default\",\n  \"addressline1\": \"2 cross street\",\n  \"addressline2\": null,\n  \"city\" : \"chennai\",\n  \"state\": \"TN\",\n  \"country\": \"India\",\n  \"zipcode\": \"6000002\",\n  \"is_default\": true\n}"
 		},
 		{
 			"id": "9ca47189-bc96-4b02-a257-d9120e947633",
@@ -2566,12 +2566,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584848400109,
+			"time": 1584862478174,
 			"name": "User Address Add",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Home\",\n  \"addressline1\": \"2 cross street\",\n  \"addressline2\": null,\n  \"city\" : \"chennai\",\n  \"state\": \"TN\",\n  \"country\": \"India\",\n  \"zipcode\": \"6000001\"\n}"
+			"rawModeData": "{\n  \"name\": \"Home\",\n  \"addressline1\": \"2 cross street\",\n  \"addressline2\": null,\n  \"city\" : \"chennai\",\n  \"state\": \"TN\",\n  \"country\": \"India\",\n  \"zipcode\": \"6000001\",\n  \"is_default\": true\n}"
 		},
 		{
 			"id": "ad0c691b-b9b4-4348-325a-2324d7873ce7",
