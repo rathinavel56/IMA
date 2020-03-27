@@ -739,7 +739,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/transactions?token={{Token}}&class=Product&q=test&from=2020-03-22&to2020-03-20",
+			"url": "{{Host}}/api/v1/transactions?token={{Token}}&class=Product",
 			"folder": "8fcc7b58-d191-6b02-05f0-d5da4607c449",
 			"queryParams": [
 				{
@@ -755,27 +755,6 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
-				},
-				{
-					"key": "q",
-					"value": "test",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "from",
-					"value": "2020-03-22",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "to2020-03-20",
-					"value": "",
-					"equals": false,
-					"description": "",
-					"enabled": true
 				}
 			],
 			"preRequestScript": null,
@@ -787,7 +766,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584875154735,
+			"time": 1584898908758,
 			"name": "Product Transactions",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -886,12 +865,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584283052761,
+			"time": 1585252561010,
 			"name": "Product Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Shoe Puma\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 100,\n  \"quantity\" : 20,\n  \"image\": [\n    {\n      \"file\": \"8fce1ba91971cc5332763857a85a9618.jpg\"\n    },\n    {\n    \t\"file\": \"c11ab57dae3cca4358244015274f12e5.jpg\"\n    }\n  ],\n  \"product_colors\": [\n    {\n      \"color\": \"038cfc\"\n    }\n  ],\n  \"product_sizes\": [\n    {\n      \"size_id\": 1\n    }\n  ]\n}"
+			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"image\": \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\",\n      \"color\": \"038cfc\",\n      \"sizes\": {\n        \"size_id\": 1,\n        \"quantity\": 10,\n        \"price\": 10,\n        \"discount_percentage\": 10,\n        \"coupon_count\" : 10\n      },\n      \"is_pirmary\": false\n    },\n    {\n      \"file\": \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\",\n      \"color\": \"038cfc\",\n      \"size_id\": 1,\n      \"sizes\": {\n        \"size_id\": 1,\n        \"quantity\": 10,\n        \"price\": 10,\n        \"discount\": {\n          \"percentage\": 2,\n          \"quantity\": 10\n        }\n      },\n      \"is_pirmary\": false\n    }\n  ]\n}"
 		},
 		{
 			"id": "18856b4d-bdd7-e0db-a30f-49642b23964d",
@@ -1156,16 +1135,9 @@
 			"id": "407ad785-0c19-a066-502b-d62d134587df",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/products?token={{Token}}&page=1",
+			"url": "{{Host}}/api/v1/products?page=1",
 			"folder": "821cc0b4-16e5-e166-3e7c-a7b697a44a82",
 			"queryParams": [
-				{
-					"key": "token",
-					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
 				{
 					"key": "page",
 					"value": "1",
@@ -1182,15 +1154,12 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582438418521,
+			"helperAttributes": {},
+			"time": 1585251933554,
 			"name": "Products",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": [],
-			"isFromCollection": true,
-			"collectionRequestId": "407ad785-0c19-a066-502b-d62d134587df",
-			"timestamp": null
+			"responses": []
 		},
 		{
 			"id": "4092f089-692c-5fbf-9417-f4a93e7ba574",
@@ -1258,12 +1227,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584849742932,
+			"time": 1585233697022,
 			"name": "User Profile Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"first_name\": \"VJ\",\n  \"last_name\": \"VJ\",\n  \"username\": \"sad\",\n  \"address\": {\n    \"addressline1\": \"2 cross street\",\n    \"addressline2\": null,\n    \"city\": \"chennai\",\n    \"state\": \"TN\",\n    \"country\": \"India\",\n    \"zipcode\": \"6000003\"\n  }\n}"
+			"rawModeData": "{\n  \"first_name\": \"VJ\",\n  \"last_name\": \"VJ\",\n  \"image\": \"779b818269ab6d127ed5edf284fffbb2.jpg\",\n  \"address\": {\n    \"addressline1\": \"2 cross street\",\n    \"addressline2\": null,\n    \"city\": \"chennai\",\n    \"state\": \"TN\",\n    \"country\": \"India\",\n    \"zipcode\": \"6000003\"\n  }\n}"
 		},
 		{
 			"id": "4efb9e3d-28e2-6d39-8931-8f1079cd2872",
@@ -1474,7 +1443,7 @@
 			"id": "5a9ba3fe-e118-f683-983e-e5a965870884",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/users/5?token={{Token}}",
+			"url": "{{Host}}/api/v1/users/26?token={{Token}}",
 			"folder": "9ba385a8-3939-95ce-4f7e-456dfe5a0005",
 			"queryParams": [
 				{
@@ -1494,7 +1463,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584849836914,
+			"time": 1584899887095,
 			"name": "User Details",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1677,7 +1646,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/transactions?token={{Token}}&class=VotePackage&q=test&from=2020-03-22&to2020-03-20",
+			"url": "{{Host}}/api/v1/transactions?token={{Token}}&class=VotePackage",
 			"folder": "2370c6c7-1e7f-882c-42f1-d83644c27bf5",
 			"queryParams": [
 				{
@@ -1693,27 +1662,6 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
-				},
-				{
-					"key": "q",
-					"value": "test",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "from",
-					"value": "2020-03-22",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "to2020-03-20",
-					"value": "",
-					"equals": false,
-					"description": "",
-					"enabled": true
 				}
 			],
 			"preRequestScript": null,
@@ -1725,7 +1673,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584875170769,
+			"time": 1584899059356,
 			"name": "VotePackage Transactions",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1942,7 +1890,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584878774971,
+			"time": 1584899570431,
 			"name": "Filter Transactions",
 			"description": "class=Fund\nforeign_id=1\nto_user_id=1\ntype=today\ntype=this_week\ntype=this_month\ntype=custom&from_date=2020-03-22&to_date=2020-03-20",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -2181,16 +2129,9 @@
 			"id": "85be8fed-f188-68bb-07ba-c92cee4cc09c",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/advertisements?token={{Token}}&page=1",
+			"url": "{{Host}}/api/v1/advertisements?page=1",
 			"folder": "70742691-a1e2-0057-d3a9-1cf9c7565e80",
 			"queryParams": [
-				{
-					"key": "token",
-					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
 				{
 					"key": "page",
 					"value": "1",
@@ -2207,15 +2148,12 @@
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582373540614,
+			"helperAttributes": {},
+			"time": 1585159951335,
 			"name": "Advertisements",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": [],
-			"isFromCollection": true,
-			"collectionRequestId": "85be8fed-f188-68bb-07ba-c92cee4cc09c",
-			"timestamp": null
+			"responses": []
 		},
 		{
 			"id": "8ce2dd84-5af1-0348-a194-f0f4086b3c8d",
@@ -2357,7 +2295,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/user_address/1?token={{Token}}",
+			"url": "{{Host}}/api/v1/user_address/22?token={{Token}}",
 			"folder": "1ab22f78-3075-3ff9-f3ed-f823b06aad05",
 			"queryParams": [
 				{
@@ -2377,12 +2315,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584862496663,
+			"time": 1584907435197,
 			"name": "User Address Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Default\",\n  \"addressline1\": \"2 cross street\",\n  \"addressline2\": null,\n  \"city\" : \"chennai\",\n  \"state\": \"TN\",\n  \"country\": \"India\",\n  \"zipcode\": \"6000002\",\n  \"is_default\": true\n}"
+			"rawModeData": "{\n  \"name\": \"Default\",\n  \"addressline1\": \"2 cross street\",\n  \"addressline2\": null,\n  \"city\" : \"chennai\",\n  \"state\": \"TN\",\n  \"country\": \"India\",\n  \"zipcode\": \"6000002\",\n  \"is_default\": 1\n}"
 		},
 		{
 			"id": "9ca47189-bc96-4b02-a257-d9120e947633",
@@ -2514,12 +2452,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584789047752,
+			"time": 1585251805638,
 			"name": "Product Add",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"image\": [\n    {\n      \"file\": \"a435b5cd769c80f823d41999467caecd.jpg\",\n      \"color\": \"038cfc\",\n      \"size_id\": 1,\n      \"quantity\": 10,\n      \"is_pirmary\": false\n    }\n  ]\n}"
+			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"image\": \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\",\n      \"color\": \"038cfc\",\n      \"sizes\": {\n        \"size_id\": 1,\n        \"quantity\": 10,\n        \"price\": 10,\n        \"discount_percentage\": 10,\n        \"coupon_count\" : 10\n      },\n      \"is_pirmary\": false\n    },\n    {\n      \"file\": \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\",\n      \"color\": \"038cfc\",\n      \"size_id\": 1,\n      \"sizes\": {\n        \"size_id\": 1,\n        \"quantity\": 10,\n        \"price\": 10,\n        \"discount\": {\n          \"percentage\": 2,\n          \"quantity\": 10\n        }\n      },\n      \"is_pirmary\": false\n    }\n  ]\n}"
 		},
 		{
 			"id": "a223bfbc-6453-2ba3-e54e-c3ba47f26dba",
@@ -2755,24 +2693,9 @@
 			"id": "a6e8f590-be73-2be0-0996-15a86541debb",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/catagories?token={{Token}}&page=1",
+			"url": "{{Host}}/api/v1/catagories&page=1&sort=name&sortby=asc",
 			"folder": "cd677033-d107-7f8f-54c9-24bad7e82367",
-			"queryParams": [
-				{
-					"key": "token",
-					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "page",
-					"value": "1",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
@@ -2782,15 +2705,12 @@
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1582443398183,
+			"helperAttributes": {},
+			"time": 1584911844607,
 			"name": "Catagories",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": [],
-			"isFromCollection": true,
-			"collectionRequestId": "a6e8f590-be73-2be0-0996-15a86541debb",
-			"timestamp": null
+			"responses": []
 		},
 		{
 			"id": "ac4c1180-685f-4145-c591-fef2cc856666",
@@ -2803,7 +2723,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/transactions?token={{Token}}&class=InstantPackage&q=test&from=2020-03-22&to2020-03-20",
+			"url": "{{Host}}/api/v1/transactions?token={{Token}}&class=SubscriptionPackage",
 			"folder": "2370c6c7-1e7f-882c-42f1-d83644c27bf5",
 			"queryParams": [
 				{
@@ -2815,29 +2735,8 @@
 				},
 				{
 					"key": "class",
-					"value": "InstantPackage",
+					"value": "SubscriptionPackage",
 					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "q",
-					"value": "test",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "from",
-					"value": "2020-03-22",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "to2020-03-20",
-					"value": "",
-					"equals": false,
 					"description": "",
 					"enabled": true
 				}
@@ -2851,7 +2750,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584875175609,
+			"time": 1584899364550,
 			"name": "Instant VotePackage Transactions",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -2889,12 +2788,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584862478174,
+			"time": 1584898477015,
 			"name": "User Address Add",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Home\",\n  \"addressline1\": \"2 cross street\",\n  \"addressline2\": null,\n  \"city\" : \"chennai\",\n  \"state\": \"TN\",\n  \"country\": \"India\",\n  \"zipcode\": \"6000001\",\n  \"is_default\": true\n}"
+			"rawModeData": "{\n  \"name\": \"Home\",\n  \"addressline1\": \"2 cross street\",\n  \"addressline2\": null,\n  \"city\" : \"chennai\",\n  \"state\": \"TN\",\n  \"country\": \"India\",\n  \"zipcode\": \"6000001\",\n  \"is_default\": 1\n}"
 		},
 		{
 			"id": "ad0c691b-b9b4-4348-325a-2324d7873ce7",
@@ -3369,7 +3268,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/transactions?token={{Token}}&class=SubscriptionPackage&q=test&from=2020-03-22&to2020-03-20",
+			"url": "{{Host}}/api/v1/transactions?token={{Token}}&class=SubscriptionPackage",
 			"folder": "2370c6c7-1e7f-882c-42f1-d83644c27bf5",
 			"queryParams": [
 				{
@@ -3385,27 +3284,6 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
-				},
-				{
-					"key": "q",
-					"value": "test",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "from",
-					"value": "2020-03-22",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "to2020-03-20",
-					"value": "",
-					"equals": false,
-					"description": "",
-					"enabled": true
 				}
 			],
 			"preRequestScript": null,
@@ -3417,7 +3295,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584875179993,
+			"time": 1584899393463,
 			"name": "Subscription Transactions",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -3480,7 +3358,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/user_address/1?token={{Token}}",
+			"url": "{{Host}}/api/v1/user_address/21?token={{Token}}",
 			"folder": "1ab22f78-3075-3ff9-f3ed-f823b06aad05",
 			"queryParams": [
 				{
@@ -3501,7 +3379,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584848390477,
+			"time": 1584906670067,
 			"name": "User Address Delete",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -3683,7 +3561,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/transactions?token={{Token}}&class=Fund&q=test&from=2020-03-22&to2020-03-20",
+			"url": "{{Host}}/api/v1/transactions?token={{Token}}&class=Fund",
 			"folder": "2370c6c7-1e7f-882c-42f1-d83644c27bf5",
 			"queryParams": [
 				{
@@ -3699,27 +3577,6 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
-				},
-				{
-					"key": "q",
-					"value": "test",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "from",
-					"value": "2020-03-22",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "to2020-03-20",
-					"value": "",
-					"equals": false,
-					"description": "",
-					"enabled": true
 				}
 			],
 			"preRequestScript": null,
@@ -3731,7 +3588,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584875184538,
+			"time": 1584899410770,
 			"name": "Fund Transactions",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
