@@ -177,6 +177,7 @@
 				"32104f8b-cb79-8014-c9f4-678532f6f556",
 				"37e622a5-3a8e-3808-b021-d8e3b501fdb2",
 				"a21a6b3c-d083-6264-3c19-877d19164c0d",
+				"6dffab5b-3592-cd66-a28e-0c94a790ea75",
 				"177574b8-0756-111c-6c11-dc8e1f456312",
 				"7db1eb1b-f1f3-86c2-398f-a62a2fe3b6b0",
 				"69d42c39-d4f2-c544-d558-568266a6fff5"
@@ -395,7 +396,7 @@
 			"id": "05ba5637-144f-5209-f020-da937ec5d040",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/attachments?class=UserProfile&token={{Token}}",
+			"url": "{{Host}}/api/v1/attachments?class=UserProfile&token={{Token}}&category_id=1",
 			"folder": "4b1aeef6-01e3-9266-36c6-c1972efc9edc",
 			"queryParams": [
 				{
@@ -411,6 +412,13 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "category_id",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
 				}
 			],
 			"preRequestScript": null,
@@ -420,7 +428,7 @@
 			"data": [
 				{
 					"key": "file",
-					"value": "SampleVideo_1280x720_1mb.mp4",
+					"value": "",
 					"description": "",
 					"type": "file",
 					"enabled": true
@@ -431,7 +439,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584809853535,
+			"time": 1585339198210,
 			"name": "Attachment UserProfile Image Or Video",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1443,12 +1451,19 @@
 			"id": "5a9ba3fe-e118-f683-983e-e5a965870884",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/users/26?token={{Token}}",
+			"url": "{{Host}}/api/v1/users/26?token={{Token}}&category_id=1",
 			"folder": "9ba385a8-3939-95ce-4f7e-456dfe5a0005",
 			"queryParams": [
 				{
 					"key": "token",
 					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "category_id",
+					"value": "1",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -1463,7 +1478,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584899887095,
+			"time": 1585379829954,
 			"name": "User Details",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1832,6 +1847,45 @@
 			"rawModeData": "{\n  \"name\": \"freelancer1023\",\n  \"image\": \"0cbe196ee3fe98d742f045abbf2b5ec0.jpg\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
 		},
 		{
+			"id": "6dffab5b-3592-cd66-a28e-0c94a790ea75",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/product?token={{Token}}",
+			"folder": "821cc0b4-16e5-e166-3e7c-a7b697a44a82",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1585337071651,
+			"name": "Product Add Dress Or Shoe",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"color\": \"038cfc\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": 10,\n      \"sizes\": [\n        0\n      ],\n      \"images\": [\n        \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\"\n      ]\n    }\n  ]\n}"
+		},
+		{
 			"id": "753e2b80-99da-693e-cf75-7f6ae3f26a6c",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
@@ -2039,16 +2093,9 @@
 			"id": "838aa86a-425b-8e04-3f1e-981ad4782735",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/contestants?token={{Token}}&page=1&sortby=desc&category_id=1",
+			"url": "{{Host}}/api/v1/contestants?page=1&sortby=desc&category_id=1",
 			"folder": "941ff06d-e864-1d31-b773-0c86eac29dfc",
 			"queryParams": [
-				{
-					"key": "token",
-					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
 				{
 					"key": "page",
 					"value": "1",
@@ -2081,7 +2128,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584177611620,
+			"time": 1585375706496,
 			"name": "Contestants Category",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -2452,12 +2499,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585251805638,
-			"name": "Product Add",
+			"time": 1585303494725,
+			"name": "Product Add General",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"image\": \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\",\n      \"color\": \"038cfc\",\n      \"sizes\": {\n        \"size_id\": 1,\n        \"quantity\": 10,\n        \"price\": 10,\n        \"discount_percentage\": 10,\n        \"coupon_count\" : 10\n      },\n      \"is_pirmary\": false\n    },\n    {\n      \"file\": \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\",\n      \"color\": \"038cfc\",\n      \"size_id\": 1,\n      \"sizes\": {\n        \"size_id\": 1,\n        \"quantity\": 10,\n        \"price\": 10,\n        \"discount\": {\n          \"percentage\": 2,\n          \"quantity\": 10\n        }\n      },\n      \"is_pirmary\": false\n    }\n  ]\n}"
+			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"color\": \"038cfc\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": 10,\n      \"sizes\": [\n        1\n      ],\n      \"images\": [\n        \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\"\n      ]\n    },\n    {\n      \"color\": \"038cfc\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": 10,\n      \"sizes\": [\n        1\n      ],\n      \"images\": [\n        \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\"\n      ]\n    }\n  ]\n}"
 		},
 		{
 			"id": "a223bfbc-6453-2ba3-e54e-c3ba47f26dba",
@@ -2624,25 +2671,24 @@
 				}
 			],
 			"url": "{{Host}}/api/v1/users/login",
+			"folder": "eecf6744-9e5f-542d-96ee-9e87215a7d7d",
 			"queryParams": [],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
 			"method": "POST",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"data": [],
 			"dataMode": "raw",
-			"name": "Constestant Login",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1583524917460,
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"folder": "eecf6744-9e5f-542d-96ee-9e87215a7d7d",
-			"rawModeData": "{\n  \"username\": \"contest\",\n  \"password\": \"1234567\",\n  \"role_id\": 3\n}"
+			"time": 1585344986342,
+			"name": "Constestant Login",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\n  \"username\": \"natalie_portman\",\n  \"password\": \"1234567\",\n  \"role_id\": 3\n}"
 		},
 		{
 			"id": "a67d9e8f-380a-76a4-0f10-2248b1325e81",
@@ -3306,12 +3352,19 @@
 			"id": "cbaea11f-affd-0a66-b36a-344654f86e11",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/attachments?class=UserProfile&token={{Token}}&url=https://youtu.be/vxzfsBDx590",
+			"url": "{{Host}}/api/v1/attachments?class=UserProfile&category_id=1&token={{Token}}&url=https://www.youtube.com/watch?v=IC0KsgRDoOI",
 			"folder": "4b1aeef6-01e3-9266-36c6-c1972efc9edc",
 			"queryParams": [
 				{
 					"key": "class",
 					"value": "UserProfile",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "category_id",
+					"value": "1",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -3325,7 +3378,7 @@
 				},
 				{
 					"key": "url",
-					"value": "https://youtu.be/vxzfsBDx590",
+					"value": "https://www.youtube.com/watch?v=IC0KsgRDoOI",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -3341,7 +3394,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584809979283,
+			"time": 1585345457138,
 			"name": "Attachment UserProfile Video Url",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
