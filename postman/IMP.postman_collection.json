@@ -106,6 +106,7 @@
 				"a6b3a872-1b94-a690-50d4-a627ab746e6e",
 				"0bff91f1-8d28-94be-7906-d09969167abf",
 				"4efb9e3d-28e2-6d39-8931-8f1079cd2872",
+				"382597d6-9d7c-c891-78de-2785078b6ebb",
 				"05ba5637-144f-5209-f020-da937ec5d040",
 				"cbaea11f-affd-0a66-b36a-344654f86e11",
 				"b7febb1e-c4bf-97f1-ea3f-4601c078aeaf"
@@ -1094,6 +1095,52 @@
 			"responses": []
 		},
 		{
+			"id": "382597d6-9d7c-c891-78de-2785078b6ebb",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/attachments?class=UserAvatar&token={{Token}}",
+			"folder": "4b1aeef6-01e3-9266-36c6-c1972efc9edc",
+			"queryParams": [
+				{
+					"key": "class",
+					"value": "UserAvatar",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "file",
+					"value": "Chrysanthemum.jpg",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1585426847014,
+			"name": "Attachment UserAvatar Upload",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
 			"id": "407ad785-0c19-a066-502b-d62d134587df",
 			"headers": "",
 			"headerData": [],
@@ -1200,16 +1247,9 @@
 			"id": "4efb9e3d-28e2-6d39-8931-8f1079cd2872",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/attachments?class=UserAvatar&token={{Token}}",
+			"url": "{{Host}}/api/v1/attachments?token={{Token}}",
 			"folder": "4b1aeef6-01e3-9266-36c6-c1972efc9edc",
 			"queryParams": [
-				{
-					"key": "class",
-					"value": "UserAvatar",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
 				{
 					"key": "token",
 					"value": "{{Token}}",
@@ -1221,7 +1261,7 @@
 			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"method": "POST",
+			"method": "PUT",
 			"data": [
 				{
 					"key": "file",
@@ -1236,8 +1276,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585416139289,
-			"name": "Attachment UserAvatar Upload",
+			"time": 1585426860613,
+			"name": "Attachment Admin Approval",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": []
@@ -1517,7 +1557,7 @@
 			"id": "60239698-1c65-4c0a-5c64-a98093b74d38",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/users/26?token={{Token}}&&category_id=1",
+			"url": "{{Host}}/api/v1/users/15?token={{Token}}&&category_id=2",
 			"folder": "9ba385a8-3939-95ce-4f7e-456dfe5a0005",
 			"queryParams": [
 				{
@@ -1529,7 +1569,7 @@
 				},
 				{
 					"key": "category_id",
-					"value": "1",
+					"value": "2",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -1544,7 +1584,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585416696252,
+			"time": 1585419597480,
 			"name": "User Details Logined",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
