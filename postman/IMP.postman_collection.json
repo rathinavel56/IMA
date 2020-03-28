@@ -1902,12 +1902,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585337071651,
+			"time": 1585427071931,
 			"name": "Product Add Dress Or Shoe",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"color\": \"038cfc\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": 10,\n      \"sizes\": [\n        0\n      ],\n      \"images\": [\n        \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\"\n      ]\n    }\n  ]\n}"
+			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"color\": \"038cfc\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": 10,\n      \"sizes\": [\n        1\n      ],\n      \"images\": [\n        \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\"\n      ]\n    }\n  ]\n}"
 		},
 		{
 			"id": "753e2b80-99da-693e-cf75-7f6ae3f26a6c",
@@ -2523,12 +2523,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585303494725,
+			"time": 1585427060382,
 			"name": "Product Add General",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"color\": \"038cfc\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": 10,\n      \"sizes\": [\n        1\n      ],\n      \"images\": [\n        \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\"\n      ]\n    },\n    {\n      \"color\": \"038cfc\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": 10,\n      \"sizes\": [\n        1\n      ],\n      \"images\": [\n        \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\"\n      ]\n    }\n  ]\n}"
+			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"color\": \"038cfc\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": 10,\n      \"sizes\": [\n        0\n      ],\n      \"images\": [\n        \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\"\n      ]\n    },\n    {\n      \"color\": \"038cfc\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": 10,\n      \"sizes\": [\n        1\n      ],\n      \"images\": [\n        \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\"\n      ]\n    }\n  ]\n}"
 		},
 		{
 			"id": "a223bfbc-6453-2ba3-e54e-c3ba47f26dba",
