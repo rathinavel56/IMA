@@ -89,9 +89,7 @@
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
-				"1f7d51a2-65cf-00a7-54a6-50ec9c145f77",
 				"1a62daeb-f386-4576-2afc-3aabb854e2b9",
-				"e83974ba-4d70-6b04-11a0-3434ef774a74",
 				"838aa86a-425b-8e04-3f1e-981ad4782735",
 				"afcd094c-4778-00dd-225e-0a6f8ac2e359"
 			],
@@ -278,6 +276,7 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
 				"5a9ba3fe-e118-f683-983e-e5a965870884",
+				"60239698-1c65-4c0a-5c64-a98093b74d38",
 				"4c8a112f-1c43-4547-8c43-57811b401e8b",
 				"b68f869a-070a-373f-c557-b3b9075313b9",
 				"be16db63-3841-efff-e298-8f7d8c8a3176"
@@ -427,8 +426,15 @@
 			"method": "POST",
 			"data": [
 				{
-					"key": "file",
-					"value": "",
+					"key": "file[]",
+					"value": "fake-eyeglasses-1200x630.jpg",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				},
+				{
+					"key": "file[]",
+					"value": "Bolon-sunglasses-1024x608.png",
 					"description": "",
 					"type": "file",
 					"enabled": true
@@ -439,7 +445,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585339198210,
+			"time": 1585417893293,
 			"name": "Attachment UserProfile Image Or Video",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -952,58 +958,6 @@
 			"responses": []
 		},
 		{
-			"id": "1f7d51a2-65cf-00a7-54a6-50ec9c145f77",
-			"headers": "",
-			"headerData": [],
-			"url": "{{Host}}/api/v1/contestants?token={{Token}}&page=1&sort=votes&sortby=desc",
-			"folder": "941ff06d-e864-1d31-b773-0c86eac29dfc",
-			"queryParams": [
-				{
-					"key": "token",
-					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "page",
-					"value": "1",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "sort",
-					"value": "votes",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "sortby",
-					"value": "desc",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1583591061326,
-			"name": "Contestants Votes",
-			"description": "",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": []
-		},
-		{
 			"id": "24b33a39-790c-4085-e1fa-3ef96015400b",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
@@ -1271,7 +1225,7 @@
 			"data": [
 				{
 					"key": "file",
-					"value": "RAJINIKANTH.jpg",
+					"value": "Chrysanthemum.jpg",
 					"description": "",
 					"type": "file",
 					"enabled": true
@@ -1282,7 +1236,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584287269116,
+			"time": 1585416139289,
 			"name": "Attachment UserAvatar Upload",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1451,16 +1405,9 @@
 			"id": "5a9ba3fe-e118-f683-983e-e5a965870884",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/users/26?token={{Token}}&category_id=1",
+			"url": "{{Host}}/api/v1/users/26?category_id=1",
 			"folder": "9ba385a8-3939-95ce-4f7e-456dfe5a0005",
 			"queryParams": [
-				{
-					"key": "token",
-					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
 				{
 					"key": "category_id",
 					"value": "1",
@@ -1478,7 +1425,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585379829954,
+			"time": 1585416102185,
 			"name": "User Details",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1565,6 +1512,43 @@
 			"isFromCollection": true,
 			"timestamp": null,
 			"rawModeData": "{\n  \"name\": \"freelancer10\",\n  \"url\": \"http://abc.com/\",\n  \"description\": \"Test\"\n}"
+		},
+		{
+			"id": "60239698-1c65-4c0a-5c64-a98093b74d38",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/users/26?token={{Token}}&&category_id=1",
+			"folder": "9ba385a8-3939-95ce-4f7e-456dfe5a0005",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "category_id",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1585416696252,
+			"name": "User Details Logined",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "61377e63-fcd0-b273-26a2-835f825289dd",
@@ -2093,7 +2077,7 @@
 			"id": "838aa86a-425b-8e04-3f1e-981ad4782735",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/contestants?page=1&sortby=desc&category_id=1",
+			"url": "{{Host}}/api/v1/contestants?page=1&sort=desc&category_id=1",
 			"folder": "941ff06d-e864-1d31-b773-0c86eac29dfc",
 			"queryParams": [
 				{
@@ -2104,7 +2088,7 @@
 					"enabled": true
 				},
 				{
-					"key": "sortby",
+					"key": "sort",
 					"value": "desc",
 					"equals": true,
 					"description": "",
@@ -2128,7 +2112,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585375706496,
+			"time": 1585416141745,
 			"name": "Contestants Category",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -2739,9 +2723,24 @@
 			"id": "a6e8f590-be73-2be0-0996-15a86541debb",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/catagories&page=1&sort=name&sortby=asc",
+			"url": "{{Host}}/api/v1/catagories?sort=name&sortby=asc",
 			"folder": "cd677033-d107-7f8f-54c9-24bad7e82367",
-			"queryParams": [],
+			"queryParams": [
+				{
+					"key": "sort",
+					"value": "name",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sortby",
+					"value": "asc",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
 			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
@@ -2752,7 +2751,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584911844607,
+			"time": 1585416122508,
 			"name": "Catagories",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -3085,52 +3084,6 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"rawModeData": "{\n  \"image\": \"779b818269ab6d127ed5edf284fffbb2.jpg\"\n}"
-		},
-		{
-			"id": "b7febb1e-c4bf-97f1-ea3f-4601c078aeaf",
-			"headers": "",
-			"headerData": [],
-			"url": "{{Host}}/api/v1/attachments?class=Product&token={{Token}}",
-			"folder": "4b1aeef6-01e3-9266-36c6-c1972efc9edc",
-			"queryParams": [
-				{
-					"key": "class",
-					"value": "Product",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "token",
-					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [
-				{
-					"key": "file",
-					"value": "va-antique-type-chained-pocket-watch-in-wooden-box-with-special-original-imaf3sa6fwtvhpdh.jpeg",
-					"description": "",
-					"type": "file",
-					"enabled": true
-				}
-			],
-			"dataMode": "params",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1584378405611,
-			"name": "Attachment Product Upload",
-			"description": "",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": []
 		},
 		{
 			"id": "b8f22d91-ea2b-ddc7-eac9-2f4b79dc85c5",
@@ -3472,58 +3425,6 @@
 			"helperAttributes": {},
 			"time": 1584874359233,
 			"name": "Paypal Instant Votes Purchase Verify",
-			"description": "",
-			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
-			"responses": []
-		},
-		{
-			"id": "e83974ba-4d70-6b04-11a0-3434ef774a74",
-			"headers": "",
-			"headerData": [],
-			"url": "{{Host}}/api/v1/contestants?token={{Token}}&page=1&sort=rank&sortby=asc",
-			"folder": "941ff06d-e864-1d31-b773-0c86eac29dfc",
-			"queryParams": [
-				{
-					"key": "token",
-					"value": "{{Token}}",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "page",
-					"value": "1",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "sort",
-					"value": "rank",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "sortby",
-					"value": "asc",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1583590200330,
-			"name": "Contestants Rank",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": []
