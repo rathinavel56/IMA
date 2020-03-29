@@ -53,7 +53,8 @@
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"order": [
-				"a6e8f590-be73-2be0-0996-15a86541debb"
+				"a6e8f590-be73-2be0-0996-15a86541debb",
+				"f1e5671d-1e60-2684-9eb3-f70bf557b66b"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -107,7 +108,9 @@
 				"0bff91f1-8d28-94be-7906-d09969167abf",
 				"4efb9e3d-28e2-6d39-8931-8f1079cd2872",
 				"382597d6-9d7c-c891-78de-2785078b6ebb",
+				"bc9debf0-a1aa-8920-117c-e185ac9156d8",
 				"05ba5637-144f-5209-f020-da937ec5d040",
+				"6586e4db-b63d-b33a-0f2f-2338d2ed4975",
 				"cbaea11f-affd-0a66-b36a-344654f86e11",
 				"b7febb1e-c4bf-97f1-ea3f-4601c078aeaf"
 			],
@@ -396,7 +399,7 @@
 			"id": "05ba5637-144f-5209-f020-da937ec5d040",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/attachments?class=UserProfile&token={{Token}}&category_id=1",
+			"url": "{{Host}}/api/v1/attachments?class=UserProfile&token={{Token}}&category_id=1&location=test&caption=test",
 			"folder": "4b1aeef6-01e3-9266-36c6-c1972efc9edc",
 			"queryParams": [
 				{
@@ -416,6 +419,20 @@
 				{
 					"key": "category_id",
 					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "location",
+					"value": "test",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "caption",
+					"value": "test",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -446,8 +463,8 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585417893293,
-			"name": "Attachment UserProfile Image Or Video",
+			"time": 1585492760388,
+			"name": "Attachment UserProfile Image",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": []
@@ -880,12 +897,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585252561010,
+			"time": 1585432608685,
 			"name": "Product Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"image\": \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\",\n      \"color\": \"038cfc\",\n      \"sizes\": {\n        \"size_id\": 1,\n        \"quantity\": 10,\n        \"price\": 10,\n        \"discount_percentage\": 10,\n        \"coupon_count\" : 10\n      },\n      \"is_pirmary\": false\n    },\n    {\n      \"file\": \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\",\n      \"color\": \"038cfc\",\n      \"size_id\": 1,\n      \"sizes\": {\n        \"size_id\": 1,\n        \"quantity\": 10,\n        \"price\": 10,\n        \"discount\": {\n          \"percentage\": 2,\n          \"quantity\": 10\n        }\n      },\n      \"is_pirmary\": false\n    }\n  ]\n}"
+			"rawModeData": "{\n  \"quantity\": 10,\n  \"discount_percentage\": 10,\n  \"coupon_code\": 10\n}"
 		},
 		{
 			"id": "18856b4d-bdd7-e0db-a30f-49642b23964d",
@@ -1262,21 +1279,13 @@
 			"pathVariables": {},
 			"pathVariableData": [],
 			"method": "PUT",
-			"data": [
-				{
-					"key": "file",
-					"value": "Chrysanthemum.jpg",
-					"description": "",
-					"type": "file",
-					"enabled": true
-				}
-			],
+			"data": [],
 			"dataMode": "params",
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585426860613,
+			"time": 1585431769436,
 			"name": "Attachment Admin Approval",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1557,7 +1566,7 @@
 			"id": "60239698-1c65-4c0a-5c64-a98093b74d38",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/users/15?token={{Token}}&&category_id=2",
+			"url": "{{Host}}/api/v1/users/26?token={{Token}}&category_id=1",
 			"folder": "9ba385a8-3939-95ce-4f7e-456dfe5a0005",
 			"queryParams": [
 				{
@@ -1569,7 +1578,7 @@
 				},
 				{
 					"key": "category_id",
-					"value": "2",
+					"value": "1",
 					"equals": true,
 					"description": "",
 					"enabled": true
@@ -1584,7 +1593,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585419597480,
+			"time": 1585493131968,
 			"name": "User Details Logined",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -1718,6 +1727,80 @@
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
 			"rawModeData": "{\n  \t\"product_detail_id\": 1,\n  \t\"product_size_id\": 1,\n    \"quantity\": 2\n}"
+		},
+		{
+			"id": "6586e4db-b63d-b33a-0f2f-2338d2ed4975",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/attachments?class=UserProfile&token={{Token}}&category_id=1&location=test&caption=test",
+			"folder": "4b1aeef6-01e3-9266-36c6-c1972efc9edc",
+			"queryParams": [
+				{
+					"key": "class",
+					"value": "UserProfile",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "category_id",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "location",
+					"value": "test",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "caption",
+					"value": "test",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "file[]",
+					"value": "SampleVideo_1280x720_1mb_1584810372.mp4",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				},
+				{
+					"key": "image[]",
+					"value": "fake-eyeglasses-1200x630.jpg",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1585485405254,
+			"name": "Attachment UserProfile Video",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
 		},
 		{
 			"id": "695ea6ba-cf3e-eef7-b06c-14e2100c433f",
@@ -1902,12 +1985,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585427071931,
+			"time": 1585431242171,
 			"name": "Product Add Dress Or Shoe",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"color\": \"038cfc\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": 10,\n      \"sizes\": [\n        1\n      ],\n      \"images\": [\n        \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\"\n      ]\n    }\n  ]\n}"
+			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"color\": \"038cfc\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": \"sadsdasda\",\n      \"sizes\": [\n        1\n      ],\n      \"images\": [\n        \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\"\n      ]\n    }\n  ]\n}"
 		},
 		{
 			"id": "753e2b80-99da-693e-cf75-7f6ae3f26a6c",
@@ -2707,12 +2790,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585344986342,
+			"time": 1585431721788,
 			"name": "Constestant Login",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"username\": \"natalie_portman\",\n  \"password\": \"1234567\",\n  \"role_id\": 3\n}"
+			"rawModeData": "{\n  \"username\": \"contest\",\n  \"password\": \"1234567\",\n  \"role_id\": 3\n}"
 		},
 		{
 			"id": "a67d9e8f-380a-76a4-0f10-2248b1325e81",
@@ -2763,24 +2846,9 @@
 			"id": "a6e8f590-be73-2be0-0996-15a86541debb",
 			"headers": "",
 			"headerData": [],
-			"url": "{{Host}}/api/v1/catagories?sort=name&sortby=asc",
+			"url": "{{Host}}/api/v1/catagories",
 			"folder": "cd677033-d107-7f8f-54c9-24bad7e82367",
-			"queryParams": [
-				{
-					"key": "sort",
-					"value": "name",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "sortby",
-					"value": "asc",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
+			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
@@ -2791,7 +2859,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585416122508,
+			"time": 1585483208307,
 			"name": "Catagories",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
@@ -3151,6 +3219,52 @@
 			"helperAttributes": {},
 			"time": 1583658729378,
 			"name": "Contest",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
+			"id": "bc9debf0-a1aa-8920-117c-e185ac9156d8",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/attachments?class=Product&token={{Token}}",
+			"folder": "4b1aeef6-01e3-9266-36c6-c1972efc9edc",
+			"queryParams": [
+				{
+					"key": "class",
+					"value": "Product",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "file",
+					"value": "Chrysanthemum.jpg",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1585482607923,
+			"name": "Attachment Product Upload",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": []
@@ -3540,6 +3654,44 @@
 			"helperAttributes": {},
 			"time": 1583176613315,
 			"name": "Paypal Fund",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": []
+		},
+		{
+			"id": "f1e5671d-1e60-2684-9eb3-f70bf557b66b",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Host}}/api/v1/catagories?token={{Token}}&type=user",
+			"folder": "cd677033-d107-7f8f-54c9-24bad7e82367",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "type",
+					"value": "user",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1585483220954,
+			"name": "User Catagories",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": []
