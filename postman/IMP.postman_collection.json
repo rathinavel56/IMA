@@ -182,7 +182,8 @@
 				"6dffab5b-3592-cd66-a28e-0c94a790ea75",
 				"177574b8-0756-111c-6c11-dc8e1f456312",
 				"7db1eb1b-f1f3-86c2-398f-a62a2fe3b6b0",
-				"69d42c39-d4f2-c544-d558-568266a6fff5"
+				"69d42c39-d4f2-c544-d558-568266a6fff5",
+				"1a2ff1ff-627c-2083-ffa0-33db32c2fab8"
 			],
 			"owner": "502680",
 			"folders_order": [],
@@ -876,7 +877,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{Host}}/api/v1/product/33?token={{Token}}",
+			"url": "{{Host}}/api/v1/product/60?token={{Token}}",
 			"folder": "821cc0b4-16e5-e166-3e7c-a7b697a44a82",
 			"queryParams": [
 				{
@@ -897,12 +898,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585432608685,
+			"time": 1585500178566,
 			"name": "Product Edit",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"quantity\": 10,\n  \"discount_percentage\": 10,\n  \"coupon_code\": 10\n}"
+			"rawModeData": "{\n  \"quantity\": 25,\n  \"discount_percentage\": 20,\n  \"coupon_code\": \"tdfdfgdgf\",\n  \"is_active\": true\n}"
 		},
 		{
 			"id": "18856b4d-bdd7-e0db-a30f-49642b23964d",
@@ -943,6 +944,45 @@
 			"isFromCollection": true,
 			"collectionRequestId": "18856b4d-bdd7-e0db-a30f-49642b23964d",
 			"timestamp": null
+		},
+		{
+			"id": "1a2ff1ff-627c-2083-ffa0-33db32c2fab8",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{Host}}/api/v1/coupon?token={{Token}}",
+			"folder": "821cc0b4-16e5-e166-3e7c-a7b697a44a82",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "{{Token}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1585502234487,
+			"name": "Coupon Check",
+			"description": "",
+			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
+			"responses": [],
+			"rawModeData": "{\n  \"product_detail_id\": 519,\n  \"coupon_code\": \"tdfdfgdgf\"\n}"
 		},
 		{
 			"id": "1a62daeb-f386-4576-2afc-3aabb854e2b9",
@@ -2150,12 +2190,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1584803694360,
+			"time": 1585500880937,
 			"name": "Add Cart",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \t\"product_detail_id\": 1,\n  \t\"product_size_id\": 1,\n    \"quantity\": 2\n}"
+			"rawModeData": "{\n  \t\"product_detail_id\": 1,\n  \t\"product_size_id\": 1,\n    \"quantity\": 2,\n    \"coupon_code\": \"tdfdfgdgf\"\n}"
 		},
 		{
 			"id": "7db1eb1b-f1f3-86c2-398f-a62a2fe3b6b0",
@@ -2606,12 +2646,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585427060382,
+			"time": 1585497813926,
 			"name": "Product Add General",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
 			"responses": [],
-			"rawModeData": "{\n  \"name\": \"Shoes\",\n  \"description\": \"Pairs of shoes\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"color\": \"038cfc\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": 10,\n      \"sizes\": [\n        0\n      ],\n      \"images\": [\n        \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\"\n      ]\n    },\n    {\n      \"color\": \"038cfc\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": 10,\n      \"sizes\": [\n        1\n      ],\n      \"images\": [\n        \"ef2e48ee76cc63cba0b76d75aaa8c92a.jpg\"\n      ]\n    }\n  ]\n}"
+			"rawModeData": "{\n  \"name\": \"Nail Polish\",\n  \"description\": \"Nail Polish\",\n  \"price\": 10,\n  \"product_details\": [\n    {\n      \"color\": \"f7b0a1\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": \"tdfdfgdgf\",\n      \"sizes\": [\n        0\n      ],\n      \"images\": [\n        \"615517a977d97c6ca407785d5ad5652c.jpg\"\n      ]\n    },\n    {\n      \"color\": \"da1332\",\n      \"quantity\": 10,\n      \"price\": 10,\n      \"discount_percentage\": 10,\n      \"coupon_code\": \"tdfdfgdgf\",\n      \"sizes\": [\n        1\n      ],\n      \"images\": [\n        \"caac634b12dda87eac051b03f0f26d5d.jpg\"\n      ]\n    }\n  ]\n}"
 		},
 		{
 			"id": "a223bfbc-6453-2ba3-e54e-c3ba47f26dba",
@@ -3252,7 +3292,7 @@
 			"data": [
 				{
 					"key": "file",
-					"value": "Chrysanthemum.jpg",
+					"value": "debelle-apricot-dew-nail-polish-pastel-pink-nail-polish-glossy-8-ml_1_display_1563864221_a6e7203b.jpg",
 					"description": "",
 					"type": "file",
 					"enabled": true
@@ -3263,7 +3303,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1585482607923,
+			"time": 1585497639045,
 			"name": "Attachment Product Upload",
 			"description": "",
 			"collectionId": "60aaabea-64a8-e816-e50d-ef7bd85719fc",
