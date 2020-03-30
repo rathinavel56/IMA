@@ -39,5 +39,19 @@ class PaymentGateways
 }
 class TransactionType
 {
-    const AmountAddedToWallet = 1;
+    const Contest = 1;
+	const VotePackage = 2;
+	const Product = 3;
+	const InstantPackage = 4;
+	const SubscriptionPackage = 5;
+	const Fund = 6;
+}
+class TransactionClass
+{
+    const Contest = 'Contest';
+	const VotePackage = 'VotePackage';
+	const Product = 'Product';
+	const InstantPackage = 'InstantPackage';
+	const SubscriptionPackage = 'SubscriptionPackage';
+	const Fund = 'Fund';
 }

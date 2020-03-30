@@ -17,9 +17,6 @@ class Product extends AppModel
 	public $hidden = array(
         'created_at',
         'updated_at',
-		'inactive',
-		'is_active',
-		'discounted_price'
     );
     protected $fillable = array(
         'id',
@@ -27,9 +24,7 @@ class Product extends AppModel
 		'created_at',
 		'updated_at',
 		'name',
-		'price',
 		'description',
-		'discounted_price',
 		'is_active'
     );
     public $rules = array(
@@ -38,9 +33,7 @@ class Product extends AppModel
 		'created_at' => 'sometimes|required',
 		'updated_at' => 'sometimes|required',
 		'name' => 'sometimes|required',
-		'price' => 'sometimes|required',
 		'description' => 'sometimes|required',
-		'is_approved' => 'sometimes|required',
 		'is_active' => 'sometimes|required'
     );
     public $qSearchFields = array(
@@ -48,19 +41,23 @@ class Product extends AppModel
     );
 	public function user()
     {
-        return $this->belongsTo('Models\User', 'user_id', 'id');
+        return $this->belongsTo('Models\User', 'user_id', 'id')->with('attachment');
     }
 	public function attachment()
     {
+        return $this->hasOne('Models\Attachment', 'foreign_id', 'id')->where('class', 'Product');
+    }
+	public function attachments()
+    {
         return $this->hasMany('Models\Attachment', 'foreign_id', 'id')->where('class', 'Product');
     }
-	public function product_sizes()
-    {
-        return $this->hasMany('Models\ProductSize', 'product_id', 'id')->with('size')->where('is_active', true);
-	}
-	public function product_colors()
+	public function colors()
     {
         return $this->hasMany('Models\ProductColor', 'product_id', 'id')->where('is_active', true);
+    }
+	public function details()
+    {
+        return $this->hasMany('Models\ProductDetail', 'product_id', 'id')->where('is_active', true)->with('attachments', 'sizes', 'amount_detail');
     }
 	public function cart()
     {

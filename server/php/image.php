@@ -53,6 +53,22 @@ $thumbsizes = array(
         'big_thumb' => '225x225',
         'large_thumb' => '152x152'
     ),
+	'UserProfile' => array(
+        'micro_thumb' => '16x16',
+        'small_thumb' => '42x42',
+        'medium_thumb' => '59x59',
+        'normal_thumb' => '64x64',
+        'big_thumb' => '225x225',
+        'large_thumb' => '152x152'
+    ),
+	'UserProfileVideoImage' => array(
+        'micro_thumb' => '16x16',
+        'small_thumb' => '42x42',
+        'medium_thumb' => '59x59',
+        'normal_thumb' => '64x64',
+        'big_thumb' => '225x225',
+        'large_thumb' => '152x152'
+    ),
     'Watermark' => array(
         'big_thumb' => '100x100'
     )
@@ -72,7 +88,7 @@ if ($hash == md5($model . $id . $ext . $size)) {
         $id,
         $model
     );
-    $s_result = Models\Attachment::where('foreign_id', $id)->where('class', $model)->select('filename', 'dir')->first();
+    $s_result = Models\Attachment::where('id', $id)->where('class', $model)->select('filename', 'dir')->first();
     $fullPath = APP_PATH . '/media/' . $s_result->dir . '/' . $s_result->filename;
     $is_aspect = false;
     if (!empty($aspect[$model][$size])) {
@@ -195,10 +211,22 @@ if ($hash == md5($model . $id . $ext . $size)) {
 	    }
     } else {
         copy($fullPath, $writeTo);
+		// compressImage($fullPath, $writeTo, 100);
     }
     header('Location:' . $_SERVER['REQUEST_URI'] . '?chrome-3xx-fix');
 } else {
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
+}
+function compressImage($source, $destination, $quality) {
+  $info = getimagesize($source);
+  if ($info['mime'] == 'image/jpeg') {
+    $image = imagecreatefromjpeg($source);
+  } elseif ($info['mime'] == 'image/gif') { 
+    $image = imagecreatefromgif($source);
+  } elseif ($info['mime'] == 'image/png') {
+    $image = imagecreatefrompng($source);
+  }
+  imagejpeg($image, $destination, $quality);
 }
 function watermark($temp, $class, $size, $currentWidth, $currentHeight, $width, $height)
 {

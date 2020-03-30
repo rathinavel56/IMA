@@ -22,11 +22,23 @@ class Transaction extends AppModel
     protected $table = 'transactions';
     public function user()
     {
-        return $this->belongsTo('Models\User', 'user_id', 'id');
+        return $this->belongsTo('Models\User', 'user_id', 'id')->select('id', 'first_name', 'last_name')->with('attachment');
     }
     public function other_user()
     {
-        return $this->belongsTo('Models\User', 'to_user_id', 'id');
+        return $this->belongsTo('Models\User', 'to_user_id', 'id')->select('id', 'first_name', 'last_name')->with('attachment');
+    }
+	public function detail()
+    {
+        return $this->belongsTo('Models\ProductDetail', 'foreign_id', 'id')->select('id','product_id')->with('attachment', 'product_detail');
+    }
+	public function package()
+    {
+        return $this->belongsTo('Models\VotePackage', 'foreign_id', 'id');
+    }
+	public function subscription()
+    {
+        return $this->belongsTo('Models\Subscription', 'foreign_id', 'id');
     }
     public function foreign_transaction()
     {
@@ -56,12 +68,6 @@ class Transaction extends AppModel
         if (!empty($params['to_user_id'])) {
             $query->where('to_user_id', $params['to_user_id']);
         }
-        if (!empty($params['model_id'])) {
-            $query->where('model_id', $params['model_id']);
-        }
-        if (!empty($params['model_class'])) {
-            $query->where('model_class', $params['model_class']);
-        }
         if (!empty($params['type'])) {
             $now = date('Y-m-d h:i:s');
             if ($params['type'] == 'today') {
@@ -87,6 +93,6 @@ class Transaction extends AppModel
     }
     protected static function boot()
     {
-        Relation::morphMap(['Contest' => Contest::class , 'Job' => Job::class , 'QuoteService' => QuoteService::class , 'Wallet' => Wallet::class , 'QuoteBid' => QuoteBid::class , 'CreditPurchaseLog' => CreditPurchaseLog::class , 'Project' => Project::class , 'Milestone' => Milestone::class , 'ProjectBidInvoice' => ProjectBidInvoice::class , 'ExamsUser' => ExamsUser::class , 'UserCashWithdrawal' => UserCashWithdrawal::class , ]);
+        Relation::morphMap(['Contest' => Contest::class]);
     }
 }

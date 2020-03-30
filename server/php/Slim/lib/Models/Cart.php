@@ -14,14 +14,9 @@ class Cart extends AppModel
      * @var string
      */
     protected $table = 'carts';
-    public function user()
-    {
-        return $this->belongsTo('Models\User', 'user_id', 'id');
-    }
-	public $hidden = array(
+    public $hidden = array(
         'created_at',
         'updated_at',
-		'pay_key',
 		'is_active'
     );
     protected $fillable = array(
@@ -29,9 +24,17 @@ class Cart extends AppModel
 		'user_id',
 		'created_at',
 		'updated_at',
-		'product_id',
+		'product_detail_id',
 		'quantity',
 		'pay_key',
+		'pay_status',
+		'addressline1',
+		'addressline2',
+		'city',
+		'state',
+		'country',
+		'zipcode',
+		'price',
 		'is_active'
     );
     public $rules = array(
@@ -39,7 +42,7 @@ class Cart extends AppModel
 		'user_id' => 'sometimes|required',
 		'created_at' => 'sometimes|required',
 		'updated_at' => 'sometimes|required',
-		'product_id' => 'sometimes|required',
+		'product_detail_id' => 'sometimes|required',
 		'quantity' => 'sometimes|required',
 		'is_active' => 'sometimes|required',
 		'pay_key' => 'sometimes|required'
@@ -49,20 +52,17 @@ class Cart extends AppModel
     );
 	public function attachment()
     {
-        return $this->hasOne('Models\Attachment', 'foreign_id', 'product_id')->where('class', 'Product')->where('is_primary', true);
+        return $this->hasOne('Models\Attachment', 'foreign_id', 'product_detail_id')->where('class', 'Product');
+		// ->where('is_primary', true)
     }
-	public function product()
+	public function detail()
     {
-        return $this->belongsTo('Models\Product', 'product_id', 'id');
+        return $this->belongsTo('Models\ProductDetail', 'product_detail_id', 'id')->with('attachment', 'product');
     }
-	public function product_sizes()
+	public function size()
     {
-        return $this->belongsTo('Models\ProductSize', 'product_id', 'id')->with('size');
+        return $this->belongsTo('Models\ProductSize', 'product_size_id', 'id')->with('size');
 	}
-	public function product_colors()
-    {
-        return $this->belongsTo('Models\ProductColor', 'product_id', 'id');
-    }
 	public function scopeFilter($query, $params = array())
     {
         global $authUser;

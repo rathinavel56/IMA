@@ -17,22 +17,27 @@ class ProductSize extends AppModel
 	public $hidden = array(
         'created_at',
         'updated_at',
-		'product_id',
+		'product_detail_id',
 		'is_active',
-		'id',
-		'size_id'
+		'size_id',
+		'discount_percentage',
+		'coupon_code'
     );
     protected $fillable = array(
         'id',
 		'created_at',
 		'updated_at',
-		'product_id',
+		'product_detail_id',
 		'size_id',
-		'is_active'
+		'is_active',
+		'price',
+		'quantity',
+		'discount_percentage',
+		'coupon_code'
     );
     public $rules = array(
         'id' => 'sometimes|required',
-		'product_id' => 'sometimes|required',
+		'product_detail_id' => 'sometimes|required',
 		'size_id' => 'sometimes|required',
 		'created_at' => 'sometimes|required',
 		'updated_at' => 'sometimes|required',
@@ -41,10 +46,6 @@ class ProductSize extends AppModel
     public $qSearchFields = array(
         'name'
     );
-	public function product()
-    {
-        return $this->hasMany('Models\Product', 'product_id', 'id');
-    }
 	public function size()
     {
         return $this->belongsTo('Models\Size', 'size_id', 'id');

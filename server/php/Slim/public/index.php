@@ -150,11 +150,20 @@ $app->POST('/api/v1/users/register', function ($request, $response, $args) {
                     'scope' => $scopes
                 );
                 $response = getToken($post_val);
-                $result = $response + $user->toArray();
+				$enabledIncludes = array(
+                    'attachment',
+                    // 'cover_photo',
+					'address',
+					'role'
+                );
+                $userData = Models\User::with($enabledIncludes)->find($user->id);
+                $result = $response + $userData->toArray();
             } else {
                 $enabledIncludes = array(
                     'attachment',
-                    'cover_photo'
+                    // 'cover_photo',
+					'address',
+					'role'
                 );
                 $user = Models\User::with($enabledIncludes)->find($user->id);
                 $result = $user->toArray();
@@ -239,8 +248,12 @@ $app->POST('/api/v1/users/login', function ($request, $response, $args) {
 		$user = new Models\User;
 		$enabledIncludes = array(
 			'attachment',
-			'role'
+			'role',
+			'address'
 		);		
+		if ($body['username'] == 'admin') {
+			$body['role_id'] = \Constants\ConstUserTypes::Admin;
+		}
 		if (USER_USING_TO_LOGIN == 'username') {
 			$log_user = $user->where('username', $body['username'])->with($enabledIncludes)->where('is_active', 1)->where('is_email_confirmed', 1)->where('role_id', $body['role_id'])->first();
 		} else {
@@ -274,6 +287,7 @@ $app->POST('/api/v1/users/login', function ($request, $response, $args) {
 				$userLogin->ip_id = saveIp();
 				$userLogin->user_agent = $_SERVER['HTTP_USER_AGENT'];
 				$userLogin->save();
+				$result['cart_count'] = Models\Cart::where('is_purchase', false)->where('user_id', $userLogin->user_id)->count();
 				return renderWithJson($result, 'LoggedIn Successfully');
 			} else {
 				return renderWithJson($result, 'Your login credentials are invalid.', '', 1);
@@ -313,6 +327,7 @@ $app->POST('/api/v1/users/social_login', function ($request, $response, $args) {
 		if (!empty($_GET['type'])) {
 			$response = social_auth_login($_GET['type'], $body);
 			// return (($response && $response['error'] && $response['error']['code'] == 1) ? renderWithJson($response) : renderWithJson($result, 'Unable to fetch details', '', 1));
+			// $response['cart_count'] = Models\Cart::where('is_purchase', false)->where('user_id', $response['id'])->count();
 			return renderWithJson($response, 'LoggedIn Successfully');
 		} else {
 			return renderWithJson($result, 'Please choose one provider.', '', 1);
@@ -463,10 +478,16 @@ $app->GET('/api/v1/contestants', function ($request, $response, $args) {
         $queryParams['role_id'] = \Constants\ConstUserTypes::Employer;
 		$queryParams['is_email_confirmed'] = true;
 		$queryParams['is_active'] = true;
-		$enabledIncludes = array(
-            'attachment',
-			'company'
-        );
+		if (isset($queryParams['category_id'])) {
+			$enabledIncludes = array(
+				'attachment',
+				'category'
+			);
+		} else {
+			$enabledIncludes = array(
+				'attachment'
+			);
+		}
 		if (!empty($queryParams['contest_id'])) {
 			$enabledIncludes = array_merge($enabledIncludes,array('contest'));
         }
@@ -487,9 +508,9 @@ $app->GET('/api/v1/contestants', function ($request, $response, $args) {
     } catch (Exception $e) {
         return renderWithJson($result, $message = 'No record found', $fields = '', $isError = 1);
     }
-})->add(new ACL('canAdmin canUser canContestantUser'));
+});
 $app->GET('/api/v1/contestants/highest_votes', function ($request, $response, $args) {
-    $queryParams = $request->getQueryParams();    
+    $queryParams = $request->getQueryParams();
     global $authUser;
     $result = array();
     try {
@@ -500,6 +521,9 @@ $app->GET('/api/v1/contestants/highest_votes', function ($request, $response, $a
 		$third_highest_votes = Models\User::select('votes')->where('is_email_confirmed', true)->where('is_active', true)->where('role_id', \Constants\ConstUserTypes::Employer)->where('votes','<>', 0)->orderBy('votes', 'DESC')->limit(1)->skip(2)->get()->toArray();
 		$highest_votes = array();
 		if (!empty($third_highest_votes)) {
+			$enabledIncludes = array(
+				'attachment'
+			);
 			$highest_votes = Models\User::with($enabledIncludes)->where('is_email_confirmed', true)->where('is_active', true)->where('role_id', \Constants\ConstUserTypes::Employer)->where('votes','<>', 0)->where('votes','>=', $third_highest_votes[0]['votes'])->orderBy('votes', 'DESC')->get()->toArray();
 		}
 		$highest_votes_list = array();
@@ -510,12 +534,12 @@ $app->GET('/api/v1/contestants/highest_votes', function ($request, $response, $a
 			$highest_votes_list = array();
 		}	
 		$sql = "select * from(
-				SELECT user_categories.user_id,user_categories.category_id, users.votes,users.first_name,categories.name,
-				rank() over(partition by user_categories.category_id order by users.votes desc) as rank_vote
+				SELECT user_categories.user_id,user_categories.category_id, user_categories.votes,users.first_name,categories.id,categories.name,
+				rank() over(partition by user_categories.category_id order by user_categories.votes desc) as rank_vote
 				FROM user_categories,users,categories
 				where user_categories.user_id = users.id
 				and user_categories.category_id = categories.id
-				and users.votes <> 0
+				and user_categories.votes <> 0
 				and users.role_id = ".\Constants\ConstUserTypes::Employer."
 				and users.is_email_confirmed = 1
 				and users.is_active = 1
@@ -534,7 +558,7 @@ $app->GET('/api/v1/contestants/highest_votes', function ($request, $response, $a
 															});
 				$category_data = array();
 				$category_data = current($user_data);
-				$category_data['category_name'] = $category_highest_vote['name'];
+				$category_data['category'] = array('id' => $category_highest_vote['id'],'name' => $category_highest_vote['name']);
 				$users[] = $category_data;
 			}
 		}
@@ -547,7 +571,7 @@ $app->GET('/api/v1/contestants/highest_votes', function ($request, $response, $a
     } catch (Exception $e) {
         return renderWithJson($result, $message = 'No record found', $e->getMessage(), $isError = 1);
     }
-})->add(new ACL('canAdmin canUser canContestantUser'));
+});
 /**
  * POST UserPost
  * Summary: Create New user by admin
@@ -620,28 +644,76 @@ $app->POST('/api/v1/users', function ($request, $response, $args) {
  * Output-Formats: [application/json]
  */
 $app->GET('/api/v1/users/{userId}', function ($request, $response, $args) {
-    global $authUser;
-    $result = array();
-    $enabledIncludes = array(
-        'attachment',
-        'role'
-    );
-    $user = Models\User::with($enabledIncludes)->where('id', $request->getAttribute('userId'))->first();
-    if (!empty($authUser['id']) && $authUser->role_id == '1') {
-        $user_model = new Models\User;
-        $user->makeVisible($user_model->hidden);
-    }
-    if (!empty($user)) {
-        $result['data'] = $user;
-        $isAllowToViewBadge = false;
-        if (!empty($_GET['type']) && $_GET['type'] == 'view' && (empty($authUser) || (!empty($authUser) && $authUser['id'] != $request->getAttribute('userId')))) {
-            insertViews($request->getAttribute('userId'), 'User');
-        }
-        return renderWithJson($result, 'Success','', 0);
-    } else {
-        return renderWithJson($result, 'No record found', '', 1, 404);
-    }
-})->add(new ACL('canAdmin canUser canContestantUser'));
+	try {
+		global $authUser;
+		$queryParams = $request->getQueryParams();
+		$result = array();
+		$enabledIncludes = array(
+			'attachment',
+			'address',
+			'role',
+			// 'social'
+		);
+		$_GET['user_id'] = $request->getAttribute('userId');
+		$user = Models\User::with($enabledIncludes)->where('id', $request->getAttribute('userId'))->first();
+		$authUserId = null;
+		if (!empty($authUser['id'])) {
+			$authUserId = $authUser['id'];
+			$current_user = '';
+			if ($request->getAttribute('userId') != $authUserId) {
+				$current_user = Models\User::with($enabledIncludes)->where('id', $authUserId)->first();
+				$user_model = new Models\User;
+				$current_user->makeVisible($user_model->hidden);
+				$user->subscription_end_date = $current_user->subscription_end_date;
+			} else {
+				$user_model = new Models\User;
+				$user->makeVisible($user_model->hidden);
+				$count = Models\Attachment::where('user_id', $authUser->id)->where('is_admin_approval', 0)->count();
+				$user->is_admin_approval = ($count > 0) ? true : false;
+			}
+			$user->is_subscribed = ($current_user && $current_user->subscription_end_date && strtotime($current_user->subscription_end_date) >= strtotime(date('Y-m-d'))) ? true : false;
+			if ($request->getAttribute('userId') == $authUserId || (!empty($user) && $user->is_subscribed)) {
+				$enabledIncludes = array(
+					'category',
+					'attachments'
+				);
+				if (isset($queryParams['category_id']) && $queryParams['category_id'] != "") {
+					$category_ids = Models\Category::select('id')->where('is_active', true)->where('id', $queryParams['category_id'])->get()->toArray();
+					if (!empty($category_ids)) {
+						$category_ids = array_column($category_ids, 'id');
+						$categoryIdArr = Models\Attachment::select('id', 'foreign_id')->whereIn('foreign_id', $category_ids)->where('user_id', $request->getAttribute('userId'))->where('foreign_id', $queryParams['category_id'])->where('class', 'UserProfile')->where('is_admin_approval', 2)->get()->toArray();
+					}
+				} else {
+					$category_ids = Models\Category::select('id')->where('is_active', true)->get()->toArray();				
+					if (!empty($category_ids)) {
+						$category_ids = array_column($category_ids, 'id');
+						$categoryIdArr = Models\Attachment::select('id', 'foreign_id')->whereIn('foreign_id', $category_ids)->where('user_id', $request->getAttribute('userId'))->where('class', 'UserProfile')->where('is_admin_approval', 2)->get()->toArray();
+					}
+				}
+				if (!empty($categoryIdArr)) {
+					$category_ids = array_column($categoryIdArr, 'foreign_id');
+					$user->subscribed_data = (!empty($category_ids)) ? Models\UserCategory::with($enabledIncludes)->where('is_active', true)->whereIn('id', $category_ids)->where('user_id', $request->getAttribute('userId'))->get() : array();
+				} else {
+					$user->subscribed_data = array();
+				}
+			} else {
+				$user->subscribed_data = array();
+			}
+		}
+		
+		if (!empty($user)) {
+			$result['data'] = $user;
+			if (!empty($_GET['type']) && $_GET['type'] == 'view' && (empty($authUser) || (!empty($authUser) && $authUser['id'] != $request->getAttribute('userId')))) {
+				insertViews($request->getAttribute('userId'), 'User');
+			}
+			return renderWithJson($result, 'Success','', 0);
+		} else {
+			return renderWithJson($result, 'No record found', '', 1, 404);
+		}
+	} catch (Exception $e) {
+		return renderWithJson($result, 'error', $e->getMessage(), 1);
+	}
+});
 /**
  * GET AuthUserID
  * Summary: Get particular user details
@@ -677,9 +749,6 @@ $app->PUT('/api/v1/users', function ($request, $response, $args) {
     $result = array();
     $user = Models\User::find($authUser->id);
     $validation = true;
-	if (!empty($args['address'])) {
-		$user->address = $args['address'];
-	}
     if (!empty($user)) {
 		if ($authUser['role_id'] != \Constants\ConstUserTypes::Admin) {
 			unset($args['username']);
@@ -690,19 +759,26 @@ $app->PUT('/api/v1/users', function ($request, $response, $args) {
 			unset($args['rank']);
 		}
         if ($validation) {
-            $user->fill($args);
-            unset($user->image);
-            unset($user->cover_photo);
+            $address = $args['address'];
+			if (isset($args['image']) && $args['image'] != '') {
+				saveImage('UserAvatar', $image, $user->id);
+				$image = $args['image'];
+				unset($args['image']);
+			}
+			if (isset($args['cover_photo']) && $args['cover_photo'] != '') {
+				saveImage('CoverPhoto', $args['cover_photo'], $user->id);
+				unset($args['cover_photo']);
+			}
+			if (isset($args['image']) && $args['image'] != '') {
+				Models\UserAddress::where('user_id', $authUser->id)->where('is_default', true)->update($args['address']);
+				unset($args['address']);
+			}
+			$user->fill($args);
             try {
-                $user->save();
-                if (!empty($args['image'])) {
-                    saveImage('UserAvatar', $args['image'], $user->id);
-                }
-                if (!empty($args['cover_photo'])) {
-                    saveImage('CoverPhoto', $args['cover_photo'], $user->id);
-                }
+                $user->save();                
                 $enabledIncludes = array(
-                    'attachment'
+                    'attachment',
+					'address'
                 );
                 $user = Models\User::with($enabledIncludes)->find($user->id);
                 $result['data'] = $user->toArray();
@@ -878,38 +954,6 @@ $app->GET('/api/v1/roles/{roleId}', function ($request, $response, $args) {
         return renderWithJson($result, 'No record found', '', 1);
     }
 })->add(new ACL('canAdmin'));
-/**
- * GET TransactionGet
- * Summary: Get all transactions list.
- * Notes: Get all transactions list.
- * Output-Formats: [application/json]
- */
-$app->GET('/api/v1/transactions', function ($request, $response, $args) {
-    $queryParams = $request->getQueryParams();
-    $result = array();
-    try {
-        $count = PAGE_LIMIT;
-        if (!empty($queryParams['limit'])) {
-            $count = $queryParams['limit'];
-        }
-        $enabledIncludes = array(
-            'user',
-            'other_user',
-            'foreign_transaction',
-            'payment_gateway'
-        );
-        $transactions = Models\Transaction::with($enabledIncludes)->Filter($queryParams);
-        $transactions = $transactions->paginate($count);
-        $transactionsNew = $transactions->toArray();
-        $result = array(
-            'data' => $transactions->toArray(),
-            '_metadata' => $transactionsNew
-        );
-        return renderWithJson($result, 'Success','', 0);
-    } catch (Exception $e) {
-        return renderWithJson($result, $message = 'No record found', $fields = '', $isError = 1);
-    }
-})->add(new ACL('canAdmin canUser canContestantUser'));
 /**
  * GET UsersUserIdTransactionsGet
  * Summary: Get user transactions list.
@@ -1181,24 +1225,22 @@ $app->GET('/api/v1/settings', function ($request, $response, $args) {
     $result = array();
     try {
         $count = PAGE_LIMIT;
-        if (!empty($queryParams['limit'])) {
-            $count = $queryParams['limit'];
-        }
-        if (empty($queryParams['sortby'])) {
-            $queryParams['sortby'] = 'ASC';
-        }
-        if (!empty($queryParams['limit']) && $queryParams['limit'] == 'all') {
-            $settings = $settings->get()->toArray();
-            $result['data'] = $settings;
-        } else {
-            $settings = $settings->paginate($count)->toArray();
-            $data = $settings['data'];
-            unset($settings['data']);
-            $result = array(
-                'data' => $data,
-                '_metadata' => $settings
-            );
-        }
+        if (!empty($queryParams['is_mobile'])) {
+            $settings = Models\Setting::select('name', 'value')->where('is_mobile', true)->get()->toArray();
+        } else if (!empty($queryParams['is_web'])) {
+			$settings = Models\Setting::select('name', 'value')->where('is_web', true)->get()->toArray();
+		}
+		$data = array();
+		foreach($settings as $setting) {
+			$data[$setting['name']] = $setting['value'];
+		}
+		$subscription = Models\Subscription::where('is_active', true)->get()->toArray();
+		$data['SUBSCRIBE_NAME'] = $subscription[0]['description'];
+		$data['SUBSCRIBE_PRICE'] = $subscription[0]['price'];
+		$data['SUBSCRIBE_DAYS'] = $subscription[0]['days'];
+		$result = array(
+			'data' => $data
+		);
         return renderWithJson($result, 'Success','', 0);
     } catch (Exception $e) {
         return renderWithJson($result, $message = 'No record found', $fields = '', $isError = 1);
@@ -1346,125 +1388,246 @@ $app->PUT('/api/v1/email_templates/{emailTemplateId}', function ($request, $resp
         return renderWithJson($result, 'Email template could not be updated. Please, try again', $validationErrorFields, 1);
     }
 })->add(new ACL('canAdmin'));
+$app->GET('/api/v1/attachments_profile', function ($request, $response, $args) {
+	global $authUser;
+	$userFiles = Models\Attachment::where('foreign_id', $authUser->id)->where('class', 'UserProfile')->get()->toArray();
+	$response = array(
+		'data' => $userFiles,
+		'error' => array(
+			'code' => 0,
+			'message' => ''
+		)
+	);
+	return renderWithJson($response);
+})->add(new ACL('canAdmin canUser canContestantUser'));
 $app->POST('/api/v1/attachments', function ($request, $response, $args) {
     global $configuration;
 	global $authUser;
     $args = $request->getQueryParams();
     $file = $request->getUploadedFiles();
-	
-    if(!empty($file)) {
-        $newfile = $file['file'];
-        $type = pathinfo($newfile->getClientFilename(), PATHINFO_EXTENSION);
-        $fileName = str_replace('.'.$type,"",$newfile->getClientFilename()).'_'.time().'.'.$type;
-        $name = md5(time());
-        $class = $args['class'];
-        $attachment_settings = getAttachmentSettings($class);
-        $file = $_FILES['file'];
-        
-        $file_formats = explode(",", $attachment_settings['allowed_file_formats']);
-        $file_formats = array_map('trim', $file_formats);
-        $max_file_size = $attachment_settings['allowed_file_size'];
-        $kilobyte = 1024;
-        $megabyte = $kilobyte * 1024;
-        $file["type"] = get_mime($file['tmp_name']);  
-        
-        $current_file_size = round($file["size"] / $megabyte, 2);
-        if (in_array($file["type"], $file_formats) || empty($attachment_settings['allowed_file_formats'])) {
-            if (empty($max_file_size) || (!empty($max_file_size) && $current_file_size <= $max_file_size)) {
-                if ($class == "UsersMyFile") {
-                    $filePath = APP_PATH.DIRECTORY_SEPARATOR.'client'.APP_PATH.DIRECTORY_SEPARATOR.'images'.APP_PATH.DIRECTORY_SEPARATOR.'media'.DIRECTORY_SEPARATOR.'UsersMyFile'.DIRECTORY_SEPARATOR.$authUser->id.DIRECTORY_SEPARATOR;
-                    if (!file_exists($filePath)) {
-                        mkdir($filePath,0777,true);
-                    }
-                    if ($type == 'php') {
-                        $type = 'txt';
-                    }
-                
-                    if (move_uploaded_file($newfile->file, $filePath.$fileName) === true) {
-                        $attachment = new Models\Attachment;
-                        $info = getimagesize( $filePath.$file['name']);
-                        $width = $info[0];
-                        $height = $info[1];
-                        $attachment->filename = $fileName;
-                        $attachment->width = $width;
-                        $attachment->height = $height;
-                        $attachment->dir = $class .DIRECTORY_SEPARATOR . $authUser->id;
-                        $attachment->foreign_id = $authUser->id;
-                        $attachment->class = $class;
-                        $attachment->mimetype = $info['mime'];
-                        $attachment->save();
-                        $userFiles = Models\Attachment::where('foreign_id', $authUser->id)->where('class', $class)->get()->toArray();
-                        $response = array(
-                            'data' => $userFiles,
-                            'error' => array(
-                                'code' => 0,
-                                'message' => ''
-                            )
-                        );
-                    } else {
-                        $response = array(
-                            'error' => array(
-                                'code' => 1,
-                                'message' => 'Attachment could not be added.',
-                                'fields' => ''
-                            )
-                        );
-                    }
-                } else {
-                    if (!file_exists(APP_PATH . '/media/tmp/')) {
-                        mkdir(APP_PATH . '/media/tmp/',0777,true);
-                    }
-                    if ($type == 'php') {
-                        $type = 'txt';
-                    }
-                    if (move_uploaded_file($newfile->file, APP_PATH . '/media/tmp/' . $name . '.' . $type) === true) {
-                        $filename = $name . '.' . $type;
-                        $response = array(
-                            'attachment' => $filename,
-                            'error' => array(
-                                'code' => 0,
-                                'message' => ''
-                            )
-                        );
-                    } else {
-                        $response = array(
-                            'error' => array(
-                                'code' => 1,
-                                'message' => 'Attachment could not be added.',
-                                'fields' => ''
-                            )
-                        );
-                    }
-                }
-            } else {
-                $response = array(
-                    'error' => array(
-                        'code' => 1,
-                        'message' => "The uploaded file size exceeds the allowed " . $attachment_settings['allowed_file_size'] . "MB",
-                        'fields' => ''
-                    )
-                );
-            }
-        } else {
-            $response = array(
-                'error' => array(
-                    'code' => 1,
-                    'message' => "File couldn't be uploaded. Allowed extensions: " . $attachment_settings['allowed_file_extensions'],
-                    'fields' => ''
-                )
-            );
-        }
-    } else {
-        $userFiles = Models\Attachment::where('foreign_id', $authUser->id)->where('class', 'UsersMyFile')->get()->toArray();
-        $response = array(
-            'data' => $userFiles,
-            'error' => array(
-                'code' => 0,
-                'message' => ''
-            )
-        );
-    }
-    return renderWithJson($response);
+	$class = $args['class'];
+	if ($class == "UserProfile") {
+		if (isset($args['url']) && $args['url'] != '') {
+			$attachment = new Models\Attachment;
+			$width = $info[0];
+			$height = $info[1];
+			$attachment->filename = $args['url'];
+			$attachment->width = $width;
+			$attachment->height = $height;
+			$attachment->dir = '';
+			$attachment->location = $args['location'];
+			$attachment->caption = $args['caption'];
+			$attachment->foreign_id = $user_category->id;
+			$attachment->class = $class;
+			$attachment->user_id = $authUser->id;
+			$attachment->mimetype = $info['mime'];
+			if (videoType($args['url']) == 'youtube') {
+				$video_id = explode("?v=", $args['url']);
+				$video_id = $video_id[1];
+				$attachment->thumb = 'https://img.youtube.com/vi/'. $video_id.'/0.jpg';
+			}
+			$attachment->save();
+			$response = array(
+				'error' => array(
+					'code' => 0,
+					'message' => 'Successfully uploaded'
+				)
+			);
+			return renderWithJson($response);
+		}
+		$i = 0;
+		$fileArray = $_FILES['file'];
+		$imageFileArray = $_FILES['image'];
+		$isError = false;
+		$user_category = null; 
+		$user_category = Models\UserCategory::where('user_id', $authUser->id)->where('category_id', $args['category_id'])->first();
+		if(!empty($file['file'])) {
+			foreach($file['file'] as $newfile) {
+				$type = pathinfo($newfile->getClientFilename(), PATHINFO_EXTENSION);
+				$fileName = str_replace('.'.$type,"",$newfile->getClientFilename()).'_'.time().'.'.$type;
+				$name = md5(time());
+				$attachment_settings = getAttachmentSettings($class);
+				$file_formats = explode(",", $attachment_settings['allowed_file_formats']);
+				$file_formats = array_map('trim', $file_formats);
+				$kilobyte = 1024;
+				$megabyte = $kilobyte * 1024;
+				$fileArray["type"][$i] = get_mime($fileArray['tmp_name'][$i]);				
+				$current_file_size = round($fileArray["size"][$i] / $megabyte, 2);
+				//if (in_array($fileArray["type"][$i], $file_formats) || empty($attachment_settings['allowed_file_formats'])) {
+					if ($class == "UserProfile" && preg_match('/video\/*/',$fileArray["type"][$i])) {
+						$filePath = APP_PATH.DIRECTORY_SEPARATOR.'media'.DIRECTORY_SEPARATOR.'UserProfile'.DIRECTORY_SEPARATOR.$user_category->id.DIRECTORY_SEPARATOR;
+						if (!file_exists($filePath)) {
+							mkdir($filePath,0777,true);
+						}
+						$filename = $name . '.' . $type;
+						if (move_uploaded_file($newfile->file, $filePath.$filename) === true) {
+							$info = getimagesize($filePath.$filename);
+							$width = $info[0];
+							$height = $info[1];
+							$attachment = new Models\Attachment;
+							$attachment->filename = $filename;
+							$attachment->width = $width;
+							$attachment->height = $height;
+							$attachment->location = $args['location'];
+							$attachment->caption = $args['caption'];
+							$attachment->dir = $class .DIRECTORY_SEPARATOR . $user_category->id;
+							$attachment->foreign_id = $user_category->id;
+							$attachment->class = $class;
+							$attachment->mimetype = $info['mime'];
+							$attachment->user_id = $user_category->id;
+							$attachment->save();
+							$attAttImageId = $attachment->id;
+							$j = 0;
+							foreach($file['image'] as $imageNewfile) {
+								$imagetype = pathinfo($imageNewfile->getClientFilename(), PATHINFO_EXTENSION);
+								$imageFileName = str_replace('.'.$imagetype, '',$imageNewfile->getClientFilename()).'_'.time().'.'.$imagetype;
+								$imageFilename = md5(time()) . '.' . $imagetype;
+								$imageFileArray["type"][$j] = get_mime($imageFileArray['tmp_name'][$j]);				
+								$current_file_size = round($imageFileArray["size"][$j] / $megabyte, 2);
+								$imageClass = 'UserProfileVideoImage';
+								$imageFilePath = APP_PATH.DIRECTORY_SEPARATOR.'media'.DIRECTORY_SEPARATOR.$imageClass.DIRECTORY_SEPARATOR.$user_category->id.DIRECTORY_SEPARATOR;
+								if (!file_exists($imageFilePath)) {
+									mkdir($imageFilePath,0777,true);
+								}
+								if (move_uploaded_file($imageNewfile->file, $imageFilePath.$imageFilename) === true) {
+									$attachment = new Models\Attachment;
+									$imageInfo = getimagesize($imageFilePath.$imageFilename);
+									$width = $imageInfo[0];
+									$height = $imageInfo[1];
+									$attachment->filename = $imageFilename;
+									$attachment->width = $width;
+									$attachment->height = $height;
+									$attachment->location = $args['location'];
+									$attachment->caption = $args['caption'];
+									$attachment->dir = $imageClass .DIRECTORY_SEPARATOR . $user_category->id;
+									$attachment->foreign_id = $attAttImageId;
+									$attachment->class = $imageClass;
+									$attachment->mimetype = $imageInfo['mime'];
+									$attachment->user_id = $authUser->id;
+									$attachment->save();
+								}
+								$j++;
+							}
+						} else {
+							$isError = true;
+						}
+					} else {
+						if (!file_exists(APP_PATH . '/media/tmp/')) {
+							mkdir(APP_PATH . '/media/tmp/',0777,true);
+						}
+						if ($type == 'php') {
+							$type = 'txt';
+						}
+						if (move_uploaded_file($newfile->file, APP_PATH . '/media/tmp/' . $name . '.' . $type) === true) {
+							$filename = $name . '.' . $type;
+							if ($class == "UserProfile") {
+								$category_id = isset($args['category_id']) ? $args['category_id']: null;
+								saveImage('UserProfile', $filename, $user_category->id, true, $authUser->id, null);
+							}
+						} else {
+							$isError = true;
+						}
+					}
+				//}
+				$i++;
+			}
+		}
+		if ($isError != true) {		
+			$response = array(
+								'error' => array(
+									'code' => 0,
+									'message' => 'Successfully uploaded'
+								)
+							);
+		} else {
+			$response = array(
+									'error' => array(
+										'code' => 1,
+										'message' => 'Attachment could not be added.',
+										'fields' => ''
+									)
+								);
+		}
+		return renderWithJson($response);
+	} else {
+		$class = $args['class'];
+		$user_category = null; 
+		if(!empty($file)) {
+			$newfile = $file['file'];
+			$type = pathinfo($newfile->getClientFilename(), PATHINFO_EXTENSION);
+			$fileName = str_replace('.'.$type,"",$newfile->getClientFilename()).'_'.time().'.'.$type;
+			$name = md5(time());
+			$attachment_settings = getAttachmentSettings($class);
+			$file = $_FILES['file'];
+			
+			$file_formats = explode(",", $attachment_settings['allowed_file_formats']);
+			$file_formats = array_map('trim', $file_formats);
+			$max_file_size = $attachment_settings['allowed_file_size'];
+			$kilobyte = 1024;
+			$megabyte = $kilobyte * 1024;
+			$file["type"] = get_mime($file['tmp_name']);  
+			
+			$current_file_size = round($file["size"] / $megabyte, 2);
+			if (in_array($file["type"], $file_formats) || empty($attachment_settings['allowed_file_formats'])) {
+				if (empty($max_file_size) || (!empty($max_file_size) && $current_file_size <= $max_file_size)) {
+					if (!file_exists(APP_PATH . '/media/tmp/')) {
+						mkdir(APP_PATH . '/media/tmp/',0777,true);
+					}
+					if ($type == 'php') {
+						$type = 'txt';
+					}
+					if (move_uploaded_file($newfile->file, APP_PATH . '/media/tmp/' . $name . '.' . $type) === true) {
+						$filename = $name . '.' . $type;
+						if ($class == "UserProfile") {
+							$category_id = isset($args['category_id']) ? $args['category_id']: null;
+							saveImage('UserProfile', $filename, $user_category->id, true, $authUser->id, null);
+						}
+						$response = array(
+							'attachment' => $filename,
+							'error' => array(
+								'code' => 0,
+								'message' => 'Successfully uploaded'
+							)
+						);
+					} else {
+						$response = array(
+							'error' => array(
+								'code' => 1,
+								'message' => 'Attachment could not be added.',
+								'fields' => ''
+							)
+						);
+					}
+				} else {
+					$response = array(
+						'error' => array(
+							'code' => 1,
+							'message' => "The uploaded file size exceeds the allowed " . $attachment_settings['allowed_file_size'] . "MB",
+							'fields' => ''
+						)
+					);
+				}
+			} else {
+				$response = array(
+					'error' => array(
+						'code' => 1,
+						'message' => "File couldn't be uploaded. Allowed extensions: " . $attachment_settings['allowed_file_extensions'],
+						'fields' => ''
+					)
+				);
+			}
+		} else {
+			$userFiles = Models\Attachment::where('foreign_id', $authUser->id)->where('class', 'UserProfile')->get()->toArray();
+			$response = array(
+				'data' => $userFiles,
+				'error' => array(
+					'code' => 0,
+					'message' => ''
+				)
+			);
+		}
+		return renderWithJson($response);
+	}
 })->add(new ACL('canAdmin canUser canContestantUser'));
 /**
  * GET ipsGet
@@ -1648,7 +1811,7 @@ $app->DELETE('/api/v1/company/{id}', function ($request, $response, $args) {
 		$validationErrorFields = $company->validate($args);
 		if (empty($validationErrorFields)) {
 			$company->save();
-			return renderWithJson(array(), 'Company delete sucessfully','', 0);
+			return renderWithJson(array(), 'Company delete successfully','', 0);
 		} else {
 			return renderWithJson($result, 'Company could not be delete. Please, try again.', $validationErrorFields, 1);
 		}
@@ -1676,7 +1839,7 @@ $app->GET('/api/v1/advertisements', function ($request, $response, $args) {
     } catch (Exception $e) {
         return renderWithJson($results, $message = 'No record found', $fields = '', $isError = 1);
     }
-})->add(new ACL('canAdmin canUser canContestantUser'));
+});
 $app->GET('/api/v1/advertisement/{id}', function ($request, $response, $args) {
     global $authUser;
 	
@@ -1756,11 +1919,122 @@ $app->DELETE('/api/v1/advertisement/{id}', function ($request, $response, $args)
 	$result = array();
 	try {
 		$advertisement->save();
-		return renderWithJson(array(), 'Advertisement delete sucessfully','', 0);
+		return renderWithJson(array(), 'Advertisement delete successfully','', 0);
 	} catch (Exception $e) {
 		return renderWithJson($result, 'Advertisement could not be delete. Please, try again.', $e->getMessage(), 1);
 	}
 })->add(new ACL('canAdmin'));
+$app->GET('/api/v1/user_address', function ($request, $response, $args) {
+    global $authUser;
+	$queryParams = $request->getQueryParams();
+    $results = array();
+    try {
+		$count = PAGE_LIMIT;
+		if (!empty($queryParams['limit'])) {
+			$count = $queryParams['limit'];
+		}
+		$userAddress = Models\UserAddress::where('user_id', $authUser->id)->where('is_active', true)->get()->toArray();
+		$results = array(
+            'data' => $userAddress
+        );
+		return renderWithJson($results, 'Address details list fetched successfully','', 0);
+    } catch (Exception $e) {
+        return renderWithJson($results, $message = 'No record found', $fields = '', $isError = 1);
+    }
+})->add(new ACL('canAdmin canUser canContestantUser'));
+$app->GET('/api/v1/user_address/{id}', function ($request, $response, $args) {
+    global $authUser;
+	
+	$queryParams = $request->getQueryParams();
+    $results = array();
+    try {
+        $userAddress = Models\UserAddress::find($request->getAttribute('id'));
+        if (!empty($userAddress)) {
+            $result['data'] = $userAddress;
+            return renderWithJson($result, 'Success','', 0);
+        } else {
+            return renderWithJson($result, 'No record found', '', 1);
+        }
+    } catch (Exception $e) {
+        return renderWithJson($results, $message = 'No record found', $fields = '', $isError = 1);
+    }
+})->add(new ACL('canAdmin canUser canContestantUser'));
+$app->POST('/api/v1/user_address', function ($request, $response, $args) {
+    global $authUser, $_server_domain_url;
+	$result = array();
+    $args = $request->getParsedBody();
+    $userAddress = new Models\UserAddress($args);
+    try {
+        $validationErrorFields = $userAddress->validate($args);
+        if (empty($validationErrorFields)) {
+            $userAddress->is_active = 1;
+			if ($userAddress->is_default && $userAddress->is_default == 1) {
+				Models\UserAddress::where('user_id', $authUser->id)->update(array(
+					'is_default' => 0
+				));
+				$userAddress->is_default = 1;
+			} else {
+				$userAddress->is_default = 0;
+			}
+            $userAddress->user_id = $authUser->id;
+            if ($userAddress->save()) {
+				$result['data'] = $userAddress->toArray();
+				return renderWithJson($result, 'Success','', 0);
+            } else {
+				return renderWithJson($result, 'Address details could not be added. Please, try again.', '', 1);
+			}
+        } else {
+            return renderWithJson($result, 'Address details could not be added. Please, try again.', $validationErrorFields, 1);
+        }
+    } catch (Exception $e) {
+        return renderWithJson($result, 'Address details could not be added. Please, try again.'.$e->getMessage(), '', 1);
+    }
+})->add(new ACL('canAdmin canUser canContestantUser'));
+$app->PUT('/api/v1/user_address/{id}', function ($request, $response, $args) {
+    global $authUser;
+	$args = $request->getParsedBody();
+	$userAddress = Models\UserAddress::find($request->getAttribute('id'));
+	$userAddress->fill($args);
+	$result = array();
+	try {
+		$validationErrorFields = $userAddress->validate($args);
+		if (empty($validationErrorFields)) {
+			if ($args['is_default'] && $args['is_default'] == 1) {
+				Models\UserAddress::where('user_id', $authUser->id)->update(array(
+					'is_default' => 0
+				));
+			}
+			Models\UserAddress::where('user_id', $authUser->id)->where('id', $request->getAttribute('id'))->update($args);
+			return renderWithJson($result, 'Address details updated successfully','', 0);
+		} else {
+			return renderWithJson($result, 'Address details could not be updated. Please, try again.', $validationErrorFields, 1);
+		}
+	} catch (Exception $e) {
+		return renderWithJson($result, 'Address details could not be updated. Please, try again.', $e->getMessage(), 1);
+	}
+})->add(new ACL('canAdmin canUser canContestantUser'));
+$app->DELETE('/api/v1/user_address/{id}', function ($request, $response, $args) {
+    global $authUser;
+	$args = array();
+	$args['is_active'] = 0;
+	try {
+		$count = Models\UserAddress::where('user_id', $authUser->id)->where('is_active', 1)->count();
+		if ($count != 1) {
+			Models\UserAddress::where('user_id', $authUser->id)->where('id', $request->getAttribute('id'))->update($args);
+			$update = array();
+			$update['is_default'] = 1;
+			$userAdd = Models\UserAddress::where('user_id', $authUser->id)->where('is_active', 1)->first();
+			if ($userAdd && !empty($userAdd)) {
+				Models\UserAddress::where('id', $userAdd->id)->update($args);
+			}
+		} else {
+			return renderWithJson(array(), 'Default address details could not be deleted','', 1);
+		}
+		return renderWithJson(array(), 'Address details delete successfully','', 0);
+	} catch (Exception $e) {
+		return renderWithJson($result, 'Address details could not be delete. Please, try again.', $e->getMessage(), 1);
+	}
+})->add(new ACL('canAdmin canUser canContestantUser'));
 $app->GET('/api/v1/products', function ($request, $response, $args) {
     global $authUser;
     $queryParams = $request->getQueryParams();
@@ -1773,10 +2047,8 @@ $app->GET('/api/v1/products', function ($request, $response, $args) {
 		$queryParams['is_active'] = true;
 		if (!empty($queryParams['filter_by']) && $queryParams['filter_by'] == 'me') {
 			$queryParams['user_id'] = $authUser->id;
-		} else {
-			$queryParams['inactive'] = false;
 		}
-		$products = Models\Product::with('attachment', 'product_sizes', 'product_colors')->Filter($queryParams)->paginate($count)->toArray();
+		$products = Models\Product::with('user', 'details', 'colors')->Filter($queryParams)->paginate($count)->toArray();
 		$data = $products['data'];
 		unset($products['data']);
 		$results = array(
@@ -1785,14 +2057,14 @@ $app->GET('/api/v1/products', function ($request, $response, $args) {
         );
 		return renderWithJson($results, 'Success', '', 0);
     } catch (Exception $e) {
-        return renderWithJson($results, $message = 'No record found', $fields = '', $isError = 1);
+        return renderWithJson($results, $e->getMessage(), $fields = '', $isError = 1);
     }
-})->add(new ACL('canAdmin canUser canContestantUser'));
+});
 $app->GET('/api/v1/product/{id}', function ($request, $response, $args) {
     $queryParams = $request->getQueryParams();
     $results = array();
     try {
-		$product = Models\Product::with('attachment', 'product_sizes', 'product_colors')->where('id', $request->getAttribute('id'))->get()->toArray();
+		$product = Models\Product::with('user', 'details', 'colors')->where('id', $request->getAttribute('id'))->get()->toArray();
         if (!empty($product)) {
             $result['data'] = $product[0];
             return renderWithJson($result, 'Success','', 0);
@@ -1814,34 +2086,46 @@ $app->POST('/api/v1/product', function ($request, $response, $args) {
             $product->is_active = 1;
             $product->user_id = $authUser->id;
             if ($product->save()) {
-				if ($product->id) {
-					if (!empty($args['image'])) {
-						foreach($args['image'] as $image) {
-							saveImage('Product', $image['file'], $product->id);
-						}
-					}
-					if (!empty($args['product_sizes'])) {
-						foreach($args['product_sizes'] as $product_size) {
-							$productSize = new Models\ProductSize;
-							$productSize->product_id = $product->id;
-							$productSize->size_id = $product_size['size_id'];
-							$productSize->save();
-						}
-					}
-					if (!empty($args['product_colors'])) {
-						foreach($args['product_colors'] as $product_color) {
+				$productId = $product->id;
+				if ($productId) {
+					if (!empty($args['product_details'])) {
+						foreach($args['product_details'] as $product_detail) {
 							$productColor = new Models\ProductColor;
-							$productColor->product_id = $product->id;
-							$productColor->color = $product_color['color'];
+							$productColor->product_id = $productId;
+							$productColor->color = $product_detail['color'];
+							$productDetail->is_active = true;
 							$productColor->save();
+							$productColorId = $productColor->id;
+							$productDetail = new Models\ProductDetail;
+							$productDetail->product_id = $productId;
+							$productDetail->product_color_id = $productColorId;
+							$productDetail->is_active = true;
+							$productDetail->save();
+							$product_detail_id = $productDetail->id;
+							foreach($product_detail['images'] as $image) {
+								saveImage('Product', $image, $productId, true, $authUser->id, $product_detail_id);
+							}
+							foreach($product_detail['sizes'] as $size) {
+								$productSize = new Models\ProductSize;
+								$productSize->product_detail_id = $product_detail_id;
+								$productSize->size_id = $size;
+								$productSize->quantity = $product_detail['quantity'];
+								$productSize->price = $product_detail['price'];
+								if (isset($product_detail['discount_percentage']) && $product_detail['discount_percentage'] != '') {
+									$productSize->discount_percentage = $product_detail['discount_percentage'];
+									$productSize->coupon_code = ($product_detail['coupon_code'] != "") ? $product_detail['coupon_code'] : null;
+								}
+								$productSize->is_active = true;
+								$productSize->save();								
+							}							
 						}
 					}
-					$result['data'] = $product->toArray();
-					return renderWithJson($result, 'Success','', 0);
+					$product = Models\Product::with('user', 'details', 'colors')->where('id', $productId)->get()->toArray();
+					$result['data'] = $product[0];
+					return renderWithJson($result, 'Product successfully created','', 0);
 				}
-            } else {
-				return renderWithJson($result, 'Product could not be added. Please, try again.', '', 1);
-			}
+            }
+			return renderWithJson($result, 'Product could not be added. Please, try again.', '', 1);
         } else {
             return renderWithJson($result, 'Product could not be added. Please, try again.', $validationErrorFields, 1);
         }
@@ -1853,52 +2137,26 @@ $app->PUT('/api/v1/product/{id}', function ($request, $response, $args) {
     global $authUser;
 	$args = $request->getParsedBody();
 	$product = Models\Product::find($request->getAttribute('id'));
+	
 	if ($authUser->id != $product->user_id) {
 		return renderWithJson(array(), 'Invalid Request', '', 1);
 	}
-	$product->fill($args);
-	$result = array();
-	try {
-		$validationErrorFields = $product->validate($args);
-		if (empty($validationErrorFields)) {
-			$product->save();
-			if (!empty($args['image'])) {
-				if (!empty($args['image'])) {
-					foreach($args['image'] as $image) {
-						saveImage('Product', $image['file'], $product->id);
-					}
-				}
-			}
-			if (!empty($args['product_sizes'])) {
-				Models\ProductSize::where('product_id', $product->id)->update(array(
-					'is_active' => false
-				));
-				foreach($args['product_sizes'] as $product_size) {
-					$productSize = new Models\ProductSize;
-					$productSize->product_id = $product->id;
-					$productSize->size_id = $product_size['size_id'];
-					$productSize->save();
-				}
-			}
-			if (!empty($args['product_colors'])) {
-				Models\ProductColor::where('product_id', $product->id)->update(array(
-					'is_active' => false
-				));
-				foreach($args['product_colors'] as $product_color) {
-					$productColor = new Models\ProductColor;
-					$productColor->product_id = $product->id;
-					$productColor->color = $product_color['color'];
-					$productColor->save();
-				}
-			}
-			$result = $product->toArray();
-			return renderWithJson($result, 'Success','', 0);
-		} else {
-			return renderWithJson($result, 'Product could not be updated. Please, try again.', $validationErrorFields, 1);
-		}
-	} catch (Exception $e) {
-		return renderWithJson($result, 'Product could not be updated. Please, try again.', $e->getMessage(), 1);
+	if (isset($args['is_active']) && $args['is_active'] != '') {
+		Models\Product::where('id', $request->getAttribute('id'))->update(array(
+						'is_active' => $args['is_active']
+					));
 	}
+	$productDetails = Models\ProductDetail::where('product_id', $request->getAttribute('id'))->get()->toArray();
+	if (!empty($productDetails)) {
+		foreach($productDetails as $productDetail) {
+				Models\ProductSize::where('product_detail_id', $productDetail['id'])->update(array(
+						'quantity' => $args['quantity'],
+						'discount_percentage' => $args['discount_percentage'],
+						'coupon_code' => $args['coupon_code']
+					));
+		}
+	}
+	return renderWithJson(array(), 'Product successfully updated','', 0);
 })->add(new ACL('canAdmin canContestantUser'));
 $app->DELETE('/api/v1/product/{id}', function ($request, $response, $args) {
     global $authUser;
@@ -1912,53 +2170,55 @@ $app->DELETE('/api/v1/product/{id}', function ($request, $response, $args) {
 	$result = array();
 	try {
 		$product->save();
-		return renderWithJson(array(), 'Product delete sucessfully','', 0);
+		return renderWithJson(array(), 'Product delete successfully','', 0);
 	} catch (Exception $e) {
 		return renderWithJson($result, 'Product could not be delete. Please, try again.', $e->getMessage(), 1);
 	}
 })->add(new ACL('canAdmin canContestantUser'));
+$app->POST('/api/v1/coupon', function ($request, $response, $args) {
+	global $authUser;
+    $args = $request->getParsedBody();
+    $results = array();
+    try {
+		if (!empty($args['product_detail_id']) && $args['product_detail_id'] != '' && !empty($args['coupon_code']) && $args['coupon_code'] != '') {
+			$couponSize = Models\ProductSize::where('coupon_code', $args['coupon_code'])->where('product_detail_id', $args['product_detail_id'])->first();
+			if (!empty($couponSize)) {
+				$results = array(
+					'data' => true
+				);
+				return renderWithJson($results, 'Valid Code','', 0);
+			} else {
+				$results = array(
+					'data' => false
+				);
+				return renderWithJson($results, 'Invalid Code','', 0);
+			}			
+		}
+		return renderWithJson($results, 'Invaild Request','', 0);
+    } catch (Exception $e) {
+        return renderWithJson($results, $message = 'No record found', $fields = '', $isError = 1);
+    }
+})->add(new ACL('canAdmin canUser canContestantUser'));
 $app->GET('/api/v1/catagories', function ($request, $response, $args) {
     global $authUser;
     $queryParams = $request->getQueryParams();
     $results = array();
     try {
-		$count = PAGE_LIMIT;
-		if (!empty($queryParams['limit'])) {
-			$count = $queryParams['limit'];
+		if (!empty($queryParams['type']) && $queryParams['type'] == 'user') {
+			$category_id = Models\UserCategory::where('user_id', $authUser->id)->get()->toArray();
+			$category_ids = array_column($category_id, 'category_id');
+			$categories = Models\Category::where('is_active', true)->whereIn('id', $category_ids)->orderBy('name', 'asc')->get()->toArray();
+		} else {
+			$categories = Models\Category::where('is_active', true)->orderBy('name', 'asc')->get()->toArray();
 		}
-		$categories = Models\Category::Filter($queryParams)->paginate($count)->toArray();
-		$data = $categories['data'];
-		unset($categories['data']);
 		$results = array(
-            'data' => $data,
-            '_metadata' => $categories
+            'data' => $categories
         );
-		return renderWithJson($results, 'Success','', 0);
+		return renderWithJson($results, 'Categories Successfully fetched','', 0);
     } catch (Exception $e) {
         return renderWithJson($results, $message = 'No record found', $fields = '', $isError = 1);
     }
-})->add(new ACL('canAdmin canUser canContestantUser'));
-$app->GET('/api/v1/user_catagories', function ($request, $response, $args) {
-    global $authUser;
-    $queryParams = $request->getQueryParams();
-    $results = array();
-    try {
-		$count = PAGE_LIMIT;
-		if (!empty($queryParams['limit'])) {
-			$count = $queryParams['limit'];
-		}
-		$user_categories = Models\UserCategory::with('user', 'attachment')->Filter($queryParams)->paginate($count)->toArray();
-		$data = $user_categories['data'];
-		unset($user_categories['data']);
-		$results = array(
-            'data' => $data,
-            '_metadata' => $user_categories
-        );
-		return renderWithJson($results, 'Success','', 0);
-    } catch (Exception $e) {
-        return renderWithJson($results, $message = 'No record found', $fields = '', $isError = 1);
-    }
-})->add(new ACL('canAdmin canUser'));
+});
 $app->POST('/api/v1/user_catagory', function ($request, $response, $args) {
     global $authUser;
     $result = array();
@@ -1993,20 +2253,27 @@ $app->GET('/api/v1/cart', function ($request, $response, $args) {
     $results = array();
     try {
 		$enabledIncludes = array(
-                    'attachment',
-					'product',
-					'product_sizes',
-					'product_colors'
+                    'detail',
+					'size'
                 );
 		$is_purchase = false;
-		if (isset($queryParams['is_purchase']) && $queryParams['is_purchase'] == 'true') {
-			$is_purchase = true;
-		}			
-        $carts = Models\Cart::with($enabledIncludes)->where('user_id', $authUser->id)->where('is_purchase', $is_purchase)->get()->toArray();
+		if (isset($queryParams['pay_key']) && $queryParams['pay_key'] != '') {
+			$enabledIncludes = array(
+                    'user',
+					'detail',
+					'size'
+                );
+			$carts = Models\Cart::with($enabledIncludes)->where('user_id', $authUser->id)->where('pay_key', $queryParams['pay_key'])->get()->toArray();
+		} else if (isset($queryParams['is_purchase']) && $queryParams['is_purchase'] == 'true') {
+			$is_purchase = true;			
+			$carts = Models\Cart::with($enabledIncludes)->where('user_id', $authUser->id)->where('is_purchase', $is_purchase)->get()->toArray();
+		} else {
+			$carts = Models\Cart::with($enabledIncludes)->where('user_id', $authUser->id)->where('is_purchase', $is_purchase)->get()->toArray();
+		}        
 		$total_amount = 0;
 		if (!empty($carts)) {
 			foreach ($carts as $cart) {
-				$total_amount = $total_amount + ($cart['product']['price']*$cart['quantity']);
+				$total_amount = $total_amount + ($cart['detail']['product']['price']*$cart['quantity']);
 			}
 		}
         $results = array(
@@ -2032,32 +2299,38 @@ $app->PUT('/api/v1/cart', function ($request, $response, $args) {
 				$datas = $args;
 			}
 			foreach ($datas as $arg) {
-				$cart = Models\Cart::where('user_id', $authUser->id)->where('product_id', $arg['product_id'])->where('product_size_id', $arg['product_size_id'])->where('product_color_id', $arg['product_color_id'])->where('is_purchase', false)->get()->toArray();
+				$cart = Models\Cart::where('user_id', $authUser->id)->where('product_detail_id', $arg['product_detail_id'])->where('product_size_id', $arg['product_size_id'])->where('is_purchase', false)->get()->toArray();
 				if (!empty($cart)) {
-					Models\Cart::where('user_id', $authUser->id)->where('product_id', $arg['product_id'])->where('product_size_id', $arg['product_size_id'])->where('product_color_id', $arg['product_color_id'])->where('is_purchase', false)->update(array(
+					Models\Cart::where('user_id', $authUser->id)->where('product_detail_id', $arg['product_detail_id'])->where('product_size_id', $arg['product_size_id'])->where('is_purchase', false)->update(array(
 							'quantity' => $arg['quantity']
 						));
 				} else {
 					$cart = new Models\Cart;
 					$cart->is_active = 1;
 					$cart->user_id = $authUser->id;
-					$cart->product_id = $arg['product_id'];
+					$cart->user_address_id = $arg['user_address_id'];
+					$cart->product_detail_id = $arg['product_detail_id'];
 					$cart->quantity = $arg['quantity'];
 					$cart->product_size_id = $arg['product_size_id'];
-					$cart->product_color_id = $arg['product_color_id'];
+					if (!empty($arg['coupon_code'])) {
+						$couponSize = Models\ProductSize::where('coupon_code', $args['coupon_code'])->where('product_detail_id', $arg['product_detail_id'])->first();
+						if (!empty($couponSize)) {
+							$cart->coupon_id = $arg['product_detail_id'];
+						}
+					}
 					$cart->save();
 				}
 			}
 			if (isset($queryParams['product_id'])) {
-				$products = Models\Product::with('attachment', 'cart', 'product_sizes', 'product_colors')->where('id', $queryParams['product_id'])->first()->toArray();
+				$products = Models\Product::with('cart', 'user', 'details', 'colors')->where('id', $queryParams['product_id'])->first()->toArray();
 				$results = array(
 					'data' => $products
 				);
 				return renderWithJson($results, 'Success','', 0);
 			} else {
 				$enabledIncludes = array(
-							'attachment',
-							'product'
+							'detail',
+							'size'
 						);
 				$carts = Models\Cart::with($enabledIncludes)->where('user_id', $authUser->id)->get()->toArray();
 				$total_amount = 0;
@@ -2071,7 +2344,7 @@ $app->PUT('/api/v1/cart', function ($request, $response, $args) {
 				'data' => $carts,
 				'total_amount' => $total_amount
 			);
-			return renderWithJson($results, 'Success','', 0);
+			return renderWithJson($results, 'Cart updated successfully','', 0);
 		}
     } catch (Exception $e) {
         return renderWithJson($result, 'Cart could not be added. Please, try again.'.$e->getMessage(), '', 1);
@@ -2081,7 +2354,7 @@ $app->DELETE('/api/v1/cart/{id}', function ($request, $response, $args) {
     global $authUser;
 	try {
 		Models\Cart::where('id', $request->getAttribute('id'))->where('user_id', $authUser->id)->delete();
-		return renderWithJson(array(), 'Success','', 0);
+		return renderWithJson(array(), 'Cart deleted successfully','', 0);
 	} catch (Exception $e) {
 		return renderWithJson(array(), 'Cart could not be delete. Please, try again.', $e->getMessage(), 1);
 	}
@@ -2193,6 +2466,8 @@ $app->GET('/api/v1/purchase/contest/{packageId}', function ($request, $response,
 			if (!empty($paymentGateway)) {
 				try {
 					$paymentGateway = current($paymentGateway);
+					$is_sanbox = $paymentGateway['is_test_mode'];
+					$hash = encrypt_decrypt('encrypt', $authUser->id.'/'.$queryParams['contestant_id'].'/'.$queryParams['payment_gateway_id'].'/'.$queryParams['is_sanbox'].'/'.$request->getAttribute('packageId'));
 					if ($paymentGateway['name'] == 'PayPal') {
 						$post = array(
 							'actionType' => 'PAY',
@@ -2208,8 +2483,8 @@ $app->GET('/api/v1/purchase/contest/{packageId}', function ($request, $response,
 							'requestEnvelope' => array(
 								'errorLanguage' => 'en_US'
 							),
-							'returnUrl' => $_server_domain_url.'/api/v1/purchase/contest/verify/'. $authUser->id.'/'.$queryParams['contestant_id'].'?success=0',
-							'cancelUrl' => $_server_domain_url.'/api/v1/purchase/contest/verify/'. $authUser->id.'/'.$queryParams['contestant_id'].'?success=1'
+							'returnUrl' => $_server_domain_url.'/api/v1/purchase/contestant/verify?success=0&hash='.$hash,
+							'cancelUrl' => $_server_domain_url.'/api/v1/purchase/contestant/verify?success=1&hash='.$hash
 						);
 						$method = 'AdaptivePayments/Pay';
 						$response = paypal_pay($post, $method);
@@ -2219,6 +2494,8 @@ $app->GET('/api/v1/purchase/contest/{packageId}', function ($request, $response,
 							$user->instant_vote_to_purchase = $vote_package->vote;
 							$user->save();
 							$data['payUrl'] = $response['payUrl'];
+							$data['verifyUrl'] = $_server_domain_url.'/api/v1/purchase/contestant/verify?success=0&hash='.$hash;
+							$data['cancelUrl'] = $_server_domain_url.'/api/v1/purchase/contestant/verify?success=1&hash='.$hash;
 							return renderWithJson($data, 'Success','', 0);
 						} else {	
 							return renderWithJson(array(),'Please check with Administrator', '', 1);
@@ -2248,39 +2525,65 @@ $app->GET('/api/v1/purchase/contest/{packageId}', function ($request, $response,
 		return renderWithJson(array(), $message = 'contestant is required', $fields = '', $isError = 1);
 	}	
 })->add(new ACL('canAdmin canUser canContestantUser'));	
-$app->GET('/api/v1/purchase/contest/verify/{user_id}/{contestant_id}', function ($request, $response, $args) {
-	$user = Models\User::find($request->getAttribute('user_id'));
-	if (!empty($user) && $user->instant_vote_pay_key != '') {
-		$post = array(
-				'payKey' => $user->instant_vote_pay_key,
-				'requestEnvelope' => array(
-					'errorLanguage' => 'en_US'
-				)
-			);
-		$method = 'AdaptivePayments/PaymentDetails';
-		$response = paypal_pay($post, $method);
-		if (!empty($response) && $response['ack'] == 'success' && !empty($response['response']) && strtolower($response['response']['status']) == 'completed') {
-			$contestant_details = Models\UserContest::where('user_id', $request->getAttribute('contestant_id'))->first();
-			$contestant_details->instant_votes = $contestant_details->instant_votes + $user->instant_vote_to_purchase;
-			$contestant_details->save();
-			$user->instant_vote_pay_key = '';
-			$user->save();
-			return renderWithJson(array(), 'Success','', 0);
+$app->GET('/api/v1/purchase/contestant/verify', function ($request, $response, $args) {
+	$queryParams = $request->getQueryParams();
+	if ($queryParams['hash'] != '') {
+		$pay_data = explode('/',encrypt_decrypt('decrypt', $queryParams['hash']));
+		if (!empty($pay_data)) {
+			$user_id = $pay_data[0];
+			$contestant_id = $pay_data[1];
+			$payment_gateway_id = $pay_data[2];
+			$is_sanbox = $pay_data[3];
+			$foreign_id = $pay_data[4];
+			$user = Models\User::find($user_id);
+			if (!empty($user) && $user->instant_vote_pay_key != '') {
+				$post = array(
+						'payKey' => $user->instant_vote_pay_key,
+						'requestEnvelope' => array(
+							'errorLanguage' => 'en_US'
+						)
+					);
+				$method = 'AdaptivePayments/PaymentDetails';
+				$response = paypal_pay($post, $method);
+				if (!empty($response) && $response['ack'] == 'success' && !empty($response['response'])) {
+					if (strtolower($response['response']['status']) == 'completed') {
+						$contestant_details = Models\UserContest::where('user_id', $contestant_id)->first();
+						$contestant_details->instant_votes = $contestant_details->instant_votes + $user->instant_vote_to_purchase;
+						$contestant_details->save();
+						$user->instant_vote_pay_key = '';
+						$user->save();
+						insertTransaction($user_id, $contestant_id, \Constants\TransactionClass::InstantPackage, \Constants\TransactionType::InstantPackage, $payment_gateway_id, $response['response']['paymentInfoList']['paymentInfo'][0]['receiver']['amount'], 0, 0, 0, 0, $foreign_id, $is_sanbox);
+						return renderWithJson(array(), 'Voted added Successfully','', 0);
+					} else if (strtolower($response['response']['status']) == 'created') {
+						$data = array(
+										'pay_status' => strtolower($response['response']['status'])
+									);
+						return renderWithJson($data, 'Payment Pending','', 0);
+					} else  {
+						$data = array(
+										'pay_status' => strtolower($response['response']['status'])
+									);
+						return renderWithJson($data, 'Payment Failed','', 0);
+					}
+				}
+			}
 		}
-	}
+	}	
 	return renderWithJson(array(),'Please check with Administrator', '', 1);
 });
 $app->GET('/api/v1/purchase/vote_package/{packageId}', function ($request, $response, $args) {
     global $authUser;
 	global $_server_domain_url;
 	$queryParams = $request->getQueryParams();
-	if (!empty($queryParams['contestant_id']) && $queryParams['contestant_id'] != '') { 
+	if (!empty($queryParams['contestant_id']) && $queryParams['contestant_id'] != '' && $queryParams['category_id'] != '') {
 		$vote_package = Models\VotePackage::where('id', $request->getAttribute('packageId'))->first();
 		if (!empty($vote_package)) {
 			$paymentGateway = Models\PaymentGateway::select('id', 'name', 'is_active')->where('id', $queryParams['payment_gateway_id'])->where('is_active', true)->get()->toArray();
 			if (!empty($paymentGateway)) {
 				try {
 					$paymentGateway = current($paymentGateway);
+					$is_sanbox = $paymentGateway['is_test_mode'];
+					$hash = encrypt_decrypt('encrypt', $authUser->id.'/'.$queryParams['contestant_id'].'/'.$queryParams['category_id'].'/'.$queryParams['payment_gateway_id'].'/'.$queryParams['is_sanbox'].'/'.$request->getAttribute('packageId'));
 					if ($paymentGateway['name'] == 'PayPal') {
 						$post = array(
 							'actionType' => 'PAY',
@@ -2296,8 +2599,8 @@ $app->GET('/api/v1/purchase/vote_package/{packageId}', function ($request, $resp
 							'requestEnvelope' => array(
 								'errorLanguage' => 'en_US'
 							),
-							'returnUrl' => $_server_domain_url.'/api/v1/purchase/vote_package/verify/'. $authUser->id.'/'.$queryParams['contestant_id'].'?success=0',
-							'cancelUrl' => $_server_domain_url.'/api/v1/purchase/vote_package/verify/'. $authUser->id.'/'.$queryParams['contestant_id'].'?success=1'
+							'returnUrl' => $_server_domain_url.'/api/v1/purchase/package/verify?success=0&hash='.$hash,
+							'cancelUrl' => $_server_domain_url.'/api/v1/purchase/package/verify?success=1&hash='.$hash,
 						);
 						$method = 'AdaptivePayments/Pay';
 						$response = paypal_pay($post, $method);
@@ -2307,6 +2610,8 @@ $app->GET('/api/v1/purchase/vote_package/{packageId}', function ($request, $resp
 							$user->vote_to_purchase = $vote_package->vote;
 							$user->save();
 							$data['payUrl'] = $response['payUrl'];
+							$data['verifyUrl'] = $_server_domain_url.'/api/v1/purchase/package/verify?success=0&hash='.$hash;
+							$data['cancelUrl'] = $_server_domain_url.'/api/v1/purchase/package/verify?success=1&hash='.$hash;
 							return renderWithJson($data, 'Success','', 0);
 						} else {	
 							return renderWithJson(array(),'Please check with Administrator', '', 1);
@@ -2336,27 +2641,56 @@ $app->GET('/api/v1/purchase/vote_package/{packageId}', function ($request, $resp
 		return renderWithJson(array(), $message = 'contestant is required', $fields = '', $isError = 1);
 	}	
 })->add(new ACL('canAdmin canUser canContestantUser'));	
-$app->GET('/api/v1/purchase/vote_package/verify/{user_id}/{contestant_id}', function ($request, $response, $args) {
-	$user = Models\User::find($request->getAttribute('user_id'));
-	if (!empty($user) && $user->vote_pay_key != '') {
-		$post = array(
-				'payKey' => $user->vote_pay_key,
-				'requestEnvelope' => array(
-					'errorLanguage' => 'en_US'
-				)
-			);
-		$method = 'AdaptivePayments/PaymentDetails';
-		$response = paypal_pay($post, $method);
-		if (!empty($response) && $response['ack'] == 'success' && !empty($response['response']) && strtolower($response['response']['status']) == 'completed') {
-			// $user->total_votes = $user->total_votes + $user->vote_to_purchase;
-			$contestant_details = Models\User::find($request->getAttribute('contestant_id'));
-			$contestant_details->votes = $contestant_details->votes + $user->vote_to_purchase;
-			$contestant_details->save();
-			$user->vote_pay_key = '';
-			$user->save();
-			return renderWithJson(array(), 'Success','', 0);
+$app->GET('/api/v1/purchase/package/verify', function ($request, $response, $args) {
+	$queryParams = $request->getQueryParams();
+	if ($queryParams['hash'] != '') {
+		$pay_data = explode('/',encrypt_decrypt('decrypt', $queryParams['hash']));
+		if (!empty($pay_data)) {
+			$user_id = $pay_data[0];
+			$contestant_id = $pay_data[1];
+			$category_id = $pay_data[2];
+			$payment_gateway_id = $pay_data[3];
+			$is_sanbox = $pay_data[4];
+			$foreign_id = $pay_data[5];
+			$user = Models\User::find($user_id);
+			if (!empty($user) && $user->vote_pay_key != '') {
+				$post = array(
+						'payKey' => $user->vote_pay_key,
+						'requestEnvelope' => array(
+							'errorLanguage' => 'en_US'
+						)
+					);
+				$method = 'AdaptivePayments/PaymentDetails';
+				$response = paypal_pay($post, $method);
+				if (!empty($response) && $response['ack'] == 'success' && !empty($response['response'])) {
+					if (strtolower($response['response']['status']) == 'completed') {
+						// $user->total_votes = $user->total_votes + $user->vote_to_purchase;
+						$contestant_details = Models\User::find($contestant_id);
+						$contestant_details->votes = $contestant_details->votes + $user->vote_to_purchase;
+						$contestant_details->save();
+						$userCategory = Models\UserCategory::where('user_id',$contestant_id)->where('category_id', $category_id)->first();
+						Models\UserCategory::where('user_id', $contestant_id)->where('category_id', $category_id)->update(array(
+										'votes' => $userCategory->votes + $user->vote_to_purchase
+									));
+						insertTransaction($user_id, $contestant_id, \Constants\TransactionClass::VotePackage, \Constants\TransactionType::VotePackage, $payment_gateway_id, $response['response']['paymentInfoList']['paymentInfo'][0]['receiver']['amount'], 0, 0, 0, 0, $foreign_id, $is_sanbox);
+						$user->vote_pay_key = '';
+						$user->save();
+						return renderWithJson(array(), 'Voted added Successfully','', 0);
+					} else if (strtolower($response['response']['status']) == 'created') {
+						$data = array(
+										'pay_status' => strtolower($response['response']['status'])
+									);
+						return renderWithJson($data, 'Payment Pending','', 0);
+					} else  {
+						$data = array(
+										'pay_status' => strtolower($response['response']['status'])
+									);
+						return renderWithJson($data, 'Payment Failed','', 0);
+					}
+				}
+			}
 		}
-	}
+	}	
 	return renderWithJson(array(),'Please check with Administrator', '', 1);
 });
 $app->GET('/api/v1/purchase/cart', function ($request, $response, $args) {
@@ -2364,20 +2698,28 @@ $app->GET('/api/v1/purchase/cart', function ($request, $response, $args) {
 	global $_server_domain_url;
 	$queryParams = $request->getQueryParams();
 	$enabledIncludes = array(
-				'product'
+				'detail',
+				'size'
 			);
-	$carts = Models\Cart::with($enabledIncludes)->where('user_id', $authUser->id)->get()->toArray();
+	$carts = Models\Cart::with($enabledIncludes)->where('user_id', $authUser->id)->where('is_purchase' , false)->get()->toArray();
 	if (!empty($carts)) {
 		$total_amount = 0;
 		if (!empty($carts)) {
+			$parentId = $carts[0]['id'];
 			foreach ($carts as $cart) {
-				$total_amount = $total_amount + ($cart['product']['price']*$cart['quantity']);
+				$total_amount = $total_amount + ($cart['detail']['product']['price']*$cart['size']['quantity']);
+				Models\Cart::where('user_id', $authUser->id)->where('id', $cart['id'])->update(array(
+							'price' => $cart['detail']['product']['price'],
+							'parent_id' => $parentId
+						));
 			}
 		}
 		$paymentGateway = Models\PaymentGateway::select('id', 'name', 'is_active')->where('id', $queryParams['payment_gateway_id'])->where('is_active', true)->get()->toArray();
 		if (!empty($paymentGateway)) {
 			try {
 				$paymentGateway = current($paymentGateway);
+				$is_sanbox = $paymentGateway['is_test_mode'];
+				$hash = encrypt_decrypt('encrypt', $authUser->id.'/'.$queryParams['user_address_id'].'/'.$queryParams['payment_gateway_id'].'/'.$queryParams['is_sanbox']);
 				if ($paymentGateway['name'] == 'PayPal') {
 					$post = array(
 						'actionType' => 'PAY',
@@ -2393,16 +2735,20 @@ $app->GET('/api/v1/purchase/cart', function ($request, $response, $args) {
 						'requestEnvelope' => array(
 							'errorLanguage' => 'en_US'
 						),
-						'returnUrl' => $_server_domain_url.'/api/v1/purchase/cart/verify/'. $authUser->id.'?success=0',
-						'cancelUrl' => $_server_domain_url.'/api/v1/purchase/cart/verify/'. $authUser->id.'?success=1'
+						'returnUrl' => $_server_domain_url.'/api/v1/purchase/cart/verify?success=0&hash='.$hash,
+						'cancelUrl' => $_server_domain_url.'/api/v1/purchase/cart/verify?success=1'
 					);
 					$method = 'AdaptivePayments/Pay';
 					$response = paypal_pay($post, $method);
 					if (!empty($response) && $response['ack'] == 'success') {
 						Models\Cart::where('user_id', $authUser->id)->update(array(
-							'pay_key' => $response['payKey']
+							'pay_key' => $response['payKey'],
+							'user_address_id' => $queryParams['user_address_id']
 						));
 						$data['payUrl'] = $response['payUrl'];
+						$data['payKey'] = $response['payKey'];
+						$data['verifyUrl'] = $_server_domain_url.'/api/v1/purchase/cart/verify?success=0&hash='.$hash;
+						$data['cancelUrl'] = $_server_domain_url.'/api/v1/purchase/cart/verify?success=1';
 						return renderWithJson($data, 'Success','', 0);
 					} else {	
 						return renderWithJson(array(),'Please check with Administrator', '', 1);
@@ -2429,26 +2775,69 @@ $app->GET('/api/v1/purchase/cart', function ($request, $response, $args) {
 		return renderWithJson(array(), $message = 'Invalid Package is empty', $fields = '', $isError = 1);
 	}
 })->add(new ACL('canAdmin canUser canContestantUser'));	
-$app->GET('/api/v1/purchase/cart/verify/{user_id}', function ($request, $response, $args) {
-	$cart = Models\Cart::where('user_id', $request->getAttribute('user_id'))->first();
-	if (!empty($cart) && $cart->pay_key != '') {
-		$post = array(
-				'payKey' => $cart->pay_key,
-				'requestEnvelope' => array(
-					'errorLanguage' => 'en_US'
-				)
-			);
-		$method = 'AdaptivePayments/PaymentDetails';
-		$response = paypal_pay($post, $method);
-		if (!empty($response) && $response['ack'] == 'success' && !empty($response['response']) && strtolower($response['response']['status']) == 'completed') {
-			Models\Cart::where('user_id', $request->getAttribute('user_id'))->where('pay_key', $cart->pay_key)->update(array(
-								'pay_key' => '',
-								'is_purchase' => true
-							));
-			return renderWithJson(array(), 'Success','', 0);
+$app->GET('/api/v1/purchase/cart/verify', function ($request, $response, $args) {
+	$queryParams = $request->getQueryParams();
+	if ($queryParams['hash'] && $queryParams['hash'] != '') {
+		$pay_data = explode('/',encrypt_decrypt('decrypt', $queryParams['hash']));
+		if (!empty($pay_data[0])) {
+			$user_id = $pay_data[0];
+			$address_id = $pay_data[1];
+			$payment_gateway_id = $pay_data[2];
+			$is_sanbox = $pay_data[3];
+			$cart = Models\Cart::where('user_id', $user_id)->where('is_purchase', false)->first();
+			if (!empty($cart) && $cart->pay_key != '') {
+				$post = array(
+						'payKey' => $cart->pay_key,
+						'requestEnvelope' => array(
+							'errorLanguage' => 'en_US'
+						)
+					);
+				$method = 'AdaptivePayments/PaymentDetails';
+				$response = paypal_pay($post, $method);
+				if (!empty($response) && $response['ack'] == 'success' && !empty($response['response'])) {
+					$data = array();
+					if (strtolower($response['response']['status']) == 'completed') {
+						$address_data = Models\UserAddress::where('id', $address_id)->first();
+						$data = array(
+										'is_purchase' => true,
+										'pay_status' => strtolower($response['response']['status']),
+										'addressline1' => $address_data->addressline1,
+										'addressline2' => $address_data->addressline2,
+										'city' => $address_data->city,
+										'state' => $address_data->state,
+										'country' => $address_data->country,
+										'zipcode'=> $address_data->zipcode
+									);
+						Models\Cart::where('user_id', $user_id)->where('pay_key', $cart->pay_key)->update($data);
+						$enabledIncludes = array(
+								'detail',
+								'size'
+							);
+						$carts = Models\Cart::with($enabledIncludes)->where('pay_key', $cart->pay_key)->get()->toArray();
+						foreach ($carts as $cart) {
+							insertTransaction($user_id, $cart['detail']['product']['user']['id'], \Constants\TransactionClass::Product, \Constants\TransactionType::Product, $payment_gateway_id, $cart['price'], 0, 0, 0, 0, $cart['detail']['id'], $is_sanbox);
+						}
+						return renderWithJson(array(), 'Products added Successfully','', 0);
+					} else if (strtolower($response['response']['status']) == 'created') {
+						$data = array(
+										'pay_status' => strtolower($response['response']['status'])
+									);
+						Models\Cart::where('user_id', $user_id)->where('pay_key', $cart->pay_key)->update($data);
+						return renderWithJson(array(), 'Payment Pending','', 0);
+					} else  {
+						$data = array(
+										'pay_status' => strtolower($response['response']['status'])
+									);
+						Models\Cart::where('user_id', $user_id)->where('pay_key', $cart->pay_key)->update($data);
+						return renderWithJson(array(), 'Payment Failed','', 0);
+					}
+				}
+			}
+			return renderWithJson(array(),'Please check with Administrator', '', 1);
 		}
+	} else {
+		return renderWithJson(array(),'Payment couldn\'t be verified', '', 1);
 	}
-	return renderWithJson(array(),'Please check with Administrator', '', 1);
 });
 $app->GET('/api/v1/purchase/subscription/{packageId}', function ($request, $response, $args) {
     global $authUser;
@@ -2460,6 +2849,8 @@ $app->GET('/api/v1/purchase/subscription/{packageId}', function ($request, $resp
 		if (!empty($paymentGateway)) {
 			try {
 				$paymentGateway = current($paymentGateway);
+				$is_sanbox = $paymentGateway['is_test_mode'];
+				$hash = encrypt_decrypt('encrypt', $authUser->id.'/'.$queryParams['payment_gateway_id'].'/'.$queryParams['is_sanbox'].'/'.$request->getAttribute('packageId'));
 				if ($paymentGateway['name'] == 'PayPal') {
 					$post = array(
 						'actionType' => 'PAY',
@@ -2475,8 +2866,8 @@ $app->GET('/api/v1/purchase/subscription/{packageId}', function ($request, $resp
 						'requestEnvelope' => array(
 							'errorLanguage' => 'en_US'
 						),
-						'returnUrl' => $_server_domain_url.'/api/v1/purchase/subscription/verify/'. $authUser->id.'?success=0',
-						'cancelUrl' => $_server_domain_url.'/api/v1/purchase/subscription/verify/'. $authUser->id.'?success=1'
+						'returnUrl' => $_server_domain_url.'/api/v1/purchase/subscribe/verify?success=0&hash='.$hash,
+						'cancelUrl' => $_server_domain_url.'/api/v1/purchase/subscribe/verify?success=1&hash='.$hash
 					);
 					$method = 'AdaptivePayments/Pay';
 					$response = paypal_pay($post, $method);
@@ -2486,6 +2877,8 @@ $app->GET('/api/v1/purchase/subscription/{packageId}', function ($request, $resp
 						$user->subscription_id = $request->getAttribute('packageId');
 						$user->save();
 						$data['payUrl'] = $response['payUrl'];
+						$data['verifyUrl'] = $_server_domain_url.'/api/v1/purchase/subscribe/verify?success=0&hash='.$hash;
+						$data['cancelUrl'] = $_server_domain_url.'/api/v1/purchase/subscribe/verify?success=1&hash='.$hash;
 						return renderWithJson($data, 'Success','', 0);
 					} else {	
 						return renderWithJson(array(),'Please check with Administrator', '', 1);
@@ -2512,25 +2905,46 @@ $app->GET('/api/v1/purchase/subscription/{packageId}', function ($request, $resp
 		return renderWithJson(array(), $message = 'Invalid Package', $fields = '', $isError = 1);
 	}
 })->add(new ACL('canAdmin canUser canContestantUser'));
-$app->GET('/api/v1/purchase/subscription/verify/{user_id}', function ($request, $response, $args) {
-	$user = Models\User::find($request->getAttribute('user_id'));
-	if (!empty($user) && $user->subscription_pay_key != '') {
-		$post = array(
-					'payKey' => $user->subscription_pay_key,
-					'requestEnvelope' => array(
-						'errorLanguage' => 'en_US'
-					)
-				);
-		$method = 'AdaptivePayments/PaymentDetails';
-		$response = paypal_pay($post, $method);
-		if (!empty($response) && $response['ack'] == 'success' && !empty($response['response']) && strtolower($response['response']['status']) == 'completed') {
-			$subscription = Models\Subscription::where('id', $user->subscription_id)->first();
-			Models\User::where('id', $request->getAttribute('user_id'))->update(array(
-					'subscription_end_date' => date('Y-m-d', strtotime('+'.$subscription->days.' days')),
-					'subscription_pay_key' => '',
-					'subscription_id' => null
-			));
-			return renderWithJson(array(), 'Success','', 0);
+$app->GET('/api/v1/purchase/subscribe/verify', function ($request, $response, $args) {
+	$queryParams = $request->getQueryParams();
+	if ($queryParams['hash'] != '') {
+		$pay_data = explode('/',encrypt_decrypt('decrypt', $queryParams['hash']));
+		$user_id = $pay_data[0];
+		$payment_gateway_id = $pay_data[1];
+		$is_sanbox = $pay_data[2];
+		$foreign_id = $pay_data[3];
+		$user = Models\User::find($user_id);
+		if (!empty($user) && $user->subscription_pay_key != '') {
+			$post = array(
+						'payKey' => $user->subscription_pay_key,
+						'requestEnvelope' => array(
+							'errorLanguage' => 'en_US'
+						)
+					);
+			$method = 'AdaptivePayments/PaymentDetails';
+			$response = paypal_pay($post, $method);
+			if (!empty($response) && $response['ack'] == 'success' && !empty($response['response'])) {
+				if (strtolower($response['response']['status']) == 'completed') {
+					$subscription = Models\Subscription::where('id', $user->subscription_id)->first();
+					Models\User::where('id', $user_id)->update(array(
+							'subscription_end_date' => date('Y-m-d', strtotime('+'.$subscription->days.' days')),
+							'subscription_pay_key' => '',
+							'subscription_id' => null
+					));
+					insertTransaction($user_id, 1, \Constants\TransactionClass::SubscriptionPackage, \Constants\TransactionType::SubscriptionPackage, $payment_gateway_id, $response['response']['paymentInfoList']['paymentInfo'][0]['receiver']['amount'], 0, 0, 0, 0, $foreign_id, $is_sanbox);
+					return renderWithJson(array(), 'Subscribed added Successfully','', 0);
+				} else if (strtolower($response['response']['status']) == 'created') {
+					$data = array(
+									'pay_status' => strtolower($response['response']['status'])
+								);
+					return renderWithJson($data, 'Payment Pending','', 0);
+				} else  {
+					$data = array(
+									'pay_status' => strtolower($response['response']['status'])
+								);
+					return renderWithJson($data, 'Payment Failed','', 0);
+				}
+			}
 		}
 	}
 	return renderWithJson(array(),'Please check with Administrator', '', 1);
@@ -2544,6 +2958,8 @@ $app->GET('/api/v1/fund', function ($request, $response, $args) {
 		if (!empty($paymentGateway)) {
 			try {
 				$paymentGateway = current($paymentGateway);
+				$is_sanbox = $paymentGateway['is_test_mode'];
+				$hash = encrypt_decrypt('encrypt', $authUser->id.'/'.$queryParams['payment_gateway_id'].'/'.$queryParams['is_sanbox']);
 				if ($paymentGateway['name'] == 'PayPal') {
 					$post = array(
 						'actionType' => 'PAY',
@@ -2559,8 +2975,8 @@ $app->GET('/api/v1/fund', function ($request, $response, $args) {
 						'requestEnvelope' => array(
 							'errorLanguage' => 'en_US'
 						),
-						'returnUrl' => $_server_domain_url.'/api/v1/fund/verify/'. $authUser->id.'?success=0',
-						'cancelUrl' => $_server_domain_url.'/api/v1/fund/verify/'. $authUser->id.'?success=1'
+						'returnUrl' => $_server_domain_url.'/api/v1/funded/verify?success=0&hash='.$hash,
+						'cancelUrl' => $_server_domain_url.'/api/v1/funded/verify?success=1&hash='.$hash
 					);
 					$method = 'AdaptivePayments/Pay';
 					$response = paypal_pay($post, $method);
@@ -2569,6 +2985,8 @@ $app->GET('/api/v1/fund', function ($request, $response, $args) {
 						$user->fund_pay_key = $response['payKey'];
 						$user->save();
 						$data['payUrl'] = $response['payUrl'];
+						$data['verifyUrl'] = $_server_domain_url.'/api/v1/funded/verify?success=0&hash='.$hash;
+						$data['cancelUrl'] = $_server_domain_url.'/api/v1/funded/verify?success=1&hash='.$hash;
 						return renderWithJson($data, 'Success','', 0);
 					} else {	
 						return renderWithJson(array(),'Please check with Administrator', '', 1);
@@ -2595,23 +3013,45 @@ $app->GET('/api/v1/fund', function ($request, $response, $args) {
 		return renderWithJson(array(), $message = 'Invalid Amount', $fields = '', $isError = 1);
 	}
 })->add(new ACL('canAdmin canUser canContestantUser'));
-$app->GET('/api/v1/fund/verify/{user_id}', function ($request, $response, $args) {
-	$user = Models\User::find($request->getAttribute('user_id'));
-	if (!empty($user) && $user->fund_pay_key != '') {
-		$post = array(
-				'payKey' => $user->fund_pay_key,
-				'requestEnvelope' => array(
-					'errorLanguage' => 'en_US'
-				)
-			);
-		$method = 'AdaptivePayments/PaymentDetails';
-		$response = paypal_pay($post, $method);
-		if (!empty($response) && $response['ack'] == 'success' && !empty($response['response']) && strtolower($response['response']['status']) == 'completed') {
-			$user->donated = $user->donated + $response['response']['paymentInfoList']['paymentInfo'][0]['receiver']['amount'];
-			$user->fund_pay_key = '';
-			$user->save();
-			return renderWithJson(array(), 'Success','', 0);
-		}
+$app->GET('/api/v1/funded/verify', function ($request, $response, $args) {
+	$queryParams = $request->getQueryParams();
+	if ($queryParams['hash'] != '') {
+		$pay_data = explode('/',encrypt_decrypt('decrypt', $queryParams['hash']));
+		$user_id = $pay_data[0];
+		$payment_gateway_id = $pay_data[1];
+		$is_sanbox = $pay_data[2];
+		$user = Models\User::find($user_id);
+		if (!empty($user) && $user->fund_pay_key != '') {				
+				if (!empty($pay_data)) {					
+					$post = array(
+							'payKey' => $user->fund_pay_key,
+							'requestEnvelope' => array(
+								'errorLanguage' => 'en_US'
+							)
+						);
+					$method = 'AdaptivePayments/PaymentDetails';
+					$response = paypal_pay($post, $method);
+					if (!empty($response) && $response['ack'] == 'success' && !empty($response['response'])) {
+						if (strtolower($response['response']['status']) == 'completed') {
+							$user->donated = $user->donated + $response['response']['paymentInfoList']['paymentInfo'][0]['receiver']['amount'];
+							$user->fund_pay_key = '';
+							$user->save();
+							insertTransaction($user_id, 1, \Constants\TransactionClass::Fund, \Constants\TransactionType::Fund, $payment_gateway_id, $response['response']['paymentInfoList']['paymentInfo'][0]['receiver']['amount'], 0, 0, 0, 0, null, $is_sanbox);
+							return renderWithJson(array(), 'Fund added Successfully','', 0);
+						} else if (strtolower($response['response']['status']) == 'created') {
+							$data = array(
+											'pay_status' => strtolower($response['response']['status'])
+										);
+							return renderWithJson($data, 'Payment Pending','', 0);
+						} else  {
+							$data = array(
+											'pay_status' => strtolower($response['response']['status'])
+										);
+							return renderWithJson($data, 'Payment Failed','', 0);
+						}
+					}
+				}
+			}
 	}
 	return renderWithJson(array(),'Please check with Administrator', '', 1);
 });
@@ -2717,7 +3157,7 @@ $app->POST('/api/v1/paypal_connect', function ($request, $response, $args) {
 					$data = array(
 						'is_paypal_connect' => $user->is_paypal_connect
 					);					
-					return renderWithJson($data, 'Invalid','', 0);
+					return renderWithJson($data, 'Invalid','', 1);
 				}
 			}
 			return renderWithJson(array(),'Please check with Administrator', '', 1);
@@ -2737,6 +3177,80 @@ $app->DELETE('/api/v1/card/{id}', function ($request, $response, $args) {
 		return renderWithJson(array(), 'Card could not be delete. Please, try again.', $e->getMessage(), 1);
 	}
 })->add(new ACL('canAdmin canUser canContestantUser'));
+$app->GET('/api/v1/transactions', function ($request, $response, $args) {
+	global $authUser;
+    $queryParams = $request->getQueryParams();
+    $result = array();
+    try {
+        $count = PAGE_LIMIT;
+        if (!empty($queryParams['limit'])) {
+            $count = $queryParams['limit'];
+        }
+        $enabledIncludes = array(
+			'user',
+            'other_user',
+			'payment_gateway'
+		);
+		if (!empty($queryParams['class'])) {
+			if ($queryParams['class'] == 'Product') {
+				$enabledIncludes = array_merge($enabledIncludes,array('detail'));
+			} else if ($queryParams['class'] == 'VotePackage' || $queryParams['class'] == 'InstantPackage') {
+				$enabledIncludes = array_merge($enabledIncludes,array('package'));
+			} else if ($queryParams['class'] == 'SubscriptionPackage') {
+				$enabledIncludes = array_merge($enabledIncludes,array('subscription'));
+			}
+        }
+        $transactions = Models\Transaction::select('created_at', 'user_id', 'to_user_id', 'foreign_id','payment_gateway_id', 'amount')->with($enabledIncludes);
+		if (!empty($authUser['id'])) {
+            $user_id = $authUser['id'];
+            $transactions->where(function ($q) use ($user_id) {
+                $q->where('user_id', $user_id)->orWhere('to_user_id', $user_id);
+            });
+        }
+		$transactions = $transactions->Filter($queryParams)->paginate($count);
+		$transactionsNew = $transactions;
+        /*$transactions = $transactions->map(function ($transaction) {
+            if ($transaction->class == 'Milestone' || $transaction->class == 'ProjectBidInvoice') {
+                $project = Models\Project::select('id', 'name', 'slug')->where('id', $transaction->foreign_transaction->project_id)->first();
+                if (!empty($project)) {
+                    $transaction->project = $project->toArray();
+                }
+            }
+            if ($transaction->class == 'ExamsUser') {
+                $exam = Models\Exam::select('id', 'title', 'slug')->where('id', $transaction->foreign_transaction->exam_id)->first();
+                if (!empty($exam)) {
+                    $transaction->exam = $exam->toArray();
+                }
+            }
+            if ($transaction->class == 'CreditPurchaseLog') {
+                $creditPurchasePlan = Models\CreditPurchasePlan::select('id', 'name')->where('id', $transaction->foreign_transaction->credit_purchase_plan_id)->first();
+                if (!empty($creditPurchasePlan)) {
+                    $transaction->creditPurchasePlan = $creditPurchasePlan->toArray();
+                }
+            }
+            $transactionsNew = $transaction;
+            return $transaction;
+        });*/
+        $transactionsNew = $transactionsNew->toArray();
+        $data = $transactionsNew['data'];
+        unset($transactionsNew['data']);
+        $result = array(
+            'data' => $data,
+            '_metadata' => $transactionsNew
+        );
+        return renderWithJson($result);
+        return renderWithJson($result);
+    } catch (Exception $e) {
+        return renderWithJson($result, $message = 'No record found', $fields = '', $isError = 1);
+    }
+})->add(new ACL('canAdmin canUser canContestantUser'));
+$app->PUT('/api/v1/attachments', function ($request, $response, $args) {
+	global $authUser;
+	Models\Attachment::where('user_id', $authUser->id)->update(array(
+					'is_admin_approval' => 1
+				));
+	 return renderWithJson(array(), 'Approval In-progress','', 0);
+})->add(new ACL('canAdmin canContestantUser'));
 $app->POST('/api/v1/mail_test', function ($request, $response, $args) use ($app)
 {
 	$result = array();

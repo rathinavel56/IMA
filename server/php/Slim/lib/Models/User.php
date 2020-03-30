@@ -25,6 +25,7 @@ class User extends AppModel
 		'role_id',
 		'username',
 		'email',
+		'mobile',
 		'password',
 		'user_login_count',
 		'available_wallet_amount',
@@ -37,10 +38,8 @@ class User extends AppModel
 		'last_name',
 		'view_count',
 		'flag_count',
-		'address',
 		'total_votes',
 		'votes',
-		'rank',
 		'instagram_url',
 		'tiktok_url',
 		'youtube_url',
@@ -59,8 +58,7 @@ class User extends AppModel
 		'subscription_end_date',
 		'device_details',
 		'instant_vote_pay_key'
-    );
-	
+    );	
     public $qSearchFields = array(
         'first_name',
         'last_name',
@@ -72,7 +70,9 @@ class User extends AppModel
 		'created_at',
 		'updated_at',
 		'role_id',
+		'username',
 		'email',
+		'mobile',
 		'password',
 		'user_login_count',
 		'available_wallet_amount',
@@ -92,10 +92,12 @@ class User extends AppModel
 		'subscription_id',
 		'paypal_email',
 		'total_votes',
-		'address',
 		'display_name',
 		'instant_vote_pay_key',
-		'instant_vote_to_purchase'
+		'instant_vote_to_purchase',
+		'is_paypal_connect',
+		'is_stripe_connect',
+		//'subscription_end_date'
     );
     public $rules = array(
        'username' => [
@@ -170,13 +172,21 @@ class User extends AppModel
     {
         return $this->belongsTo('Models\Company', 'company_id', 'id');
     }
+	public function address()
+    {
+        return $this->hasOne('Models\UserAddress', 'user_id', 'id')->where('is_default', true)->where('is_active', true);
+    }
     public function foreign()
     {
         return $this->morphTo(null, 'class', 'foreign_id');
     }
 	public function user_category()
     {
-        return $this->hasMany('Models\UserCategory', 'user_id', 'id')->with('category');
+        return $this->hasOne('Models\UserCategory', 'user_id', 'id')->with('category');
+    }
+	public function category()
+    {
+		return $this->hasOne('Models\UserCategory', 'user_id', 'id')->with('category')->where('category_id', $_GET['category_id']);	
     }
 	public function contest()
     {

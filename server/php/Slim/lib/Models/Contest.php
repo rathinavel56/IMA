@@ -17,7 +17,8 @@ class Contest extends AppModel
 	public $hidden = array(
         'created_at',
         'updated_at',
-		'is_active'
+		'is_active',
+		'start_date'
     );
     protected $fillable = array(
         'id',

@@ -411,7 +411,13 @@ function social_login($profile, $provider_id, $provider, $adapter, $role_id)
         }
     }
     if (!empty($current_user_id)) {
+		$enabledIncludes = array(
+			'attachment',
+			'role',
+			'address'
+		);
         $user = Models\User::with($enabledIncludes)->where('id', $current_user_id)->first();
+		$user->cart_count = Models\Cart::where('is_purchase', false)->where('user_id', $current_user_id)->count();
         if (!empty($user) && $profile_picture_url != '' && $user['attachment'] == null) {
             social_profile_image_save($profile_picture_url, $current_user_id);
 			$user = Models\User::with($enabledIncludes)->where('id', $current_user_id)->first();
@@ -785,10 +791,10 @@ function findCountryIdFromIso2($iso2)
  *
  *
 */
-function saveImage($class_name, $file, $foreign_id, $is_multi = false)
+function saveImage($class_name, $file, $foreign_id, $is_multi = false, $user_id = null, $product_detail_id = null)
 {
     if ((!empty($file)) && (file_exists(APP_PATH . '/media/tmp/' . $file))) {
-        //Removing and ree inserting new image
+        //Removing and re-inserting new image
         $userImg = Models\Attachment::where('foreign_id', $foreign_id)->where('class', $class_name)->first();
         if (!empty($userImg) && !($is_multi)) {
             if (file_exists(APP_PATH . '/media/' . $class_name . '/' . $foreign_id . '/' . $userImg['filename'])) {
@@ -796,16 +802,10 @@ function saveImage($class_name, $file, $foreign_id, $is_multi = false)
                 $userImg->delete();
             }
             // Removing Thumb folder images
-            $mediadir = APP_PATH . '/client/app/images/';
-            $whitelist = array(
-                '127.0.0.1',
-                '::1'
-            );
-            if (!in_array($_SERVER['REMOTE_ADDR'], $whitelist)) {
-                $mediadir = APP_PATH . '/client/images/';
-            }
-            foreach (THUMB_SIZES as $key => $value) {
-                $list = glob($mediadir . $key . '/' . $class_name . '/' . $foreign_id . '.*');
+            $mediadir = APP_PATH . '/client/images/';
+			$thumbs = array('big_thumb', 'large_thumb', 'micro_thumb', 'small_thumb', 'medium_thumb', 'normal_thumb', 'original');
+            foreach ($thumbs as $value) {
+				$list = glob($mediadir . $value . '/' . $class_name . '/' . $foreign_id . '.*');
                 if ($list) {
                     @unlink($list[0]);
                 }
@@ -825,6 +825,7 @@ function saveImage($class_name, $file, $foreign_id, $is_multi = false)
         $info = getimagesize($dest);
         $width = $info[0];
         $height = $info[1];
+		$attachment->user_id = $user_id;
         $attachment->filename = $file;
         $attachment->width = $width;
         $attachment->height = $height;
@@ -832,6 +833,7 @@ function saveImage($class_name, $file, $foreign_id, $is_multi = false)
         $attachment->foreign_id = $foreign_id;
         $attachment->class = $class_name;
         $attachment->mimetype = $info['mime'];
+		$attachment->product_detail_id = $product_detail_id;
         $attachment->save();
         $ext = strtolower(substr($file, -4));
         if ($class_name == 'ContestUserDeliveryFile' && $ext == '.zip') {
@@ -1281,12 +1283,11 @@ function insertActivities($user_id, $other_user_id, $class, $foreign_id, $from_s
         $user->save();
     }
 }
-function insertTransaction($user_id, $to_user_id, $foreign_id, $class, $transaction_type, $payment_gateway_id, $amount, $site_revenue_from_freelancer, $gateway_fees, $coupon_id = 0, $site_revenue_from_employer = 0, $model_id = '', $zazpay_gateway_id = '')
+function insertTransaction($user_id, $to_user_id, $class, $transaction_type, $payment_gateway_id, $amount, $site_revenue_from_freelancer, $gateway_fees, $coupon_id = 0, $site_revenue_from_employer = 0, $foreign_id = null, $isSanbox = false)
 {
     $transaction = new Models\Transaction;
     $transaction->user_id = $user_id;
     $transaction->to_user_id = $to_user_id;
-    $transaction->foreign_id = $foreign_id;
     $transaction->class = $class;
     $transaction->transaction_type = $transaction_type;
     $transaction->payment_gateway_id = $payment_gateway_id;
@@ -1294,12 +1295,8 @@ function insertTransaction($user_id, $to_user_id, $foreign_id, $class, $transact
     $transaction->site_revenue_from_freelancer = $site_revenue_from_freelancer;
     $transaction->site_revenue_from_employer = $site_revenue_from_employer;
     $transaction->coupon_id = $coupon_id;
-    $transaction->model_id = $model_id;
-    $transaction->model_class = $class;
-    $transaction->zazpay_gateway_id = $zazpay_gateway_id;
-    if (in_array($class, ['Milestone', 'ProjectBidInvoice'])) {
-        $transaction->model_class = 'Project';
-    }
+    $transaction->foreign_id = $foreign_id;
+	$transaction->is_sanbox = ($isSanbox == 1) ? true : false;
     $transaction->save();
     return $transaction->id;
 }
@@ -1695,30 +1692,14 @@ function getAttachmentSettings($class)
         $result['allowed_file_formats'] = ALLOWED_MIME_TYPES_OF_USER_AVATAR;
         $result['allowed_file_size'] = MAX_UPLOAD_SIZE_OF_USER_AVATAR;
         $result['allowed_file_extensions'] = ALLOWED_EXTENSIONS_OF_USER_AVATAR;
-    } elseif ($class == 'Project' || $class == 'ProjectDocument') {
-        $result['allowed_file_formats'] = ALLOWED_MIME_TYPES_FOR_PROJECT_DOCUMENT_FILE;
-        $result['allowed_file_size'] = MAX_UPLOAD_SIZE_FOR_PROJECT_DOCUMENT_FILE;
-        $result['allowed_file_extensions'] = ALLOWED_EXTENSIONS_FOR_PROJECT_DOCUMENT_FILE;
-    } elseif ($class == 'ContestUser') {
-        $result['allowed_file_formats'] = ALLOWED_MIME_TYPES_OF_IMAGE_CONTEST_ENTRY;
-        $result['allowed_file_size'] = MAX_UPLOAD_SIZE_OF_IMAGE_CONTEST_ENTRY;
-        $result['allowed_file_extensions'] = ALLOWED_EXTENSIONS_OF_IMAGE_CONTEST_ENTRY;
-    } elseif ($class == 'QuoteService' || $class == 'QuoteServicePhoto') {
-        $result['allowed_file_formats'] = ALLOWED_MIME_TYPES_OF_SERVICE_PHOTO;
-        $result['allowed_file_size'] = MAX_UPLOAD_SIZE_OF_SERVICE_PHOTO;
-        $result['allowed_file_extensions'] = ALLOWED_EXTENSIONS_OF_SERVICE_PHOTO;
-    } elseif ($class == 'JobApply') {
-        $result['allowed_file_formats'] = ALLOWED_MIME_TYPES_OF_RESUME_FOR_JOB_APPLY;
-        $result['allowed_file_size'] = MAX_UPLOAD_SIZE_OF_RESUME_FOR_JOB_APPLY;
-        $result['allowed_file_extensions'] = ALLOWED_EXTENSIONS_OF_RESUME_FOR_JOB_APPLY;
-    } elseif ($class == 'Job') {
-        $result['allowed_file_formats'] = ALLOWED_MIME_TYPES_OF_JOB_IMAGE;
-        $result['allowed_file_size'] = MAX_UPLOAD_SIZE_OF_JOB_IMAGE;
-        $result['allowed_file_extensions'] = ALLOWED_EXTENSIONS_OF_JOB_IMAGE;
-    } elseif ($class == 'Portfolio') {
-        $result['allowed_file_formats'] = ALLOWED_MIME_TYPES_OF_PORTFOLIO;
-        $result['allowed_file_size'] = MAX_UPLOAD_SIZE_OF_PORTFOLIO;
-        $result['allowed_file_extensions'] = ALLOWED_EXTENSIONS_OF_PORTFOLIO;
+    } elseif ($class == 'UserProfile') {
+        $result['allowed_file_formats'] = ALLOWED_MIME_TYPES_OF_USER_PROFILE;
+        $result['allowed_file_size'] = MAX_UPLOAD_SIZE_OF_USER_PROFILE;
+        $result['allowed_file_extensions'] = ALLOWED_EXTENSIONS_OF_USER_PROFILE;
+    } elseif ($class == 'Product') {
+        $result['allowed_file_formats'] = ALLOWED_MIME_TYPES_OF_PRODUCT;
+        $result['allowed_file_size'] = MAX_UPLOAD_SIZE_OF_PRODUCT;
+        $result['allowed_file_extensions'] = ALLOWED_EXTENSIONS_OF_PRODUCT;
     }
     return $result;
 }
@@ -1872,4 +1853,31 @@ function paypal_pay($post, $method) {
 		}
 	}
 	return $errors;
+}
+function encrypt_decrypt($action, $string) {
+    $output = false;
+    $encrypt_method = "AES-256-CBC";
+    $secret_key = 'This is my secret key';
+    $secret_iv = 'This is my secret iv';
+    // hash
+    $key = hash('sha256', $secret_key);
+
+    // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
+    if ( $action == 'encrypt' ) {
+        $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+        $output = base64_encode($output);
+    } else if( $action == 'decrypt' ) {
+        $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+    }
+    return $output;
+}
+function videoType($url) {
+    if (strpos($url, 'youtube') > 0) {
+        return 'youtube';
+    } elseif (strpos($url, 'vimeo') > 0) {
+        return 'vimeo';
+    } else {
+        return 'unknown';
+    }
 }

@@ -22,23 +22,12 @@ class Attachment extends AppModel
         'created_at',
         'updated_at',
 		'description',
-		'thumb',
-		'filesize'
+		'filesize',
+		'is_admin_approval',
+		'is_primary'
     );
-    public function foreigns()
+	public function thumb()
     {
-        return $this->morphMany('Models\Activity', 'foreign');
-    }
-    public function foreign_models()
-    {
-        return $this->morphMany('Models\Activity', 'foreign_model');
-    }
-    public function project()
-    {
-        return $this->belongsTo('Models\Project', 'foreign_id', 'id');
-    }
-    public function activity()
-    {
-        return $this->belongsTo('Models\Attachment', 'id', 'id')->with('project');
+        return $this->hasOne('Models\Attachment', 'foreign_id', 'id')->where('class', 'UserProfileVideoImage');
     }
 }

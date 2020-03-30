@@ -1,67 +1,62 @@
 <?php
 /**
- * Product
+ * UserAddress
  */
 namespace Models;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 
-class UserCategory extends AppModel
+class UserAddress extends AppModel
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'user_categories';
+    protected $table = 'user_address';
 	public $hidden = array(
         'created_at',
         'updated_at',
 		'is_active'
     );
-    public function user()
-    {
-        return $this->belongsTo('Models\User', 'user_id', 'id');
-    }
     protected $fillable = array(
         'id',
-		'user_id',
 		'created_at',
 		'updated_at',
-		'category_id',
-		'votes',
+		'name',
+		'addressline1',
+		'addressline2',
+		'city',
+		'state',
+		'country',
+		'zipcode',
+		'is_default',
 		'is_active'
     );
     public $rules = array(
         'id' => 'sometimes|required',
-		'user_id' => 'sometimes|required',
 		'created_at' => 'sometimes|required',
 		'updated_at' => 'sometimes|required',
-		'category_id' => 'sometimes|required',
+		'name' => 'sometimes|required',
+		'addressline1' => 'sometimes|required',
+		'city' => 'sometimes|required',
+		'state' => 'sometimes|required',
+		'country' => 'sometimes|required',
+		'zipcode' => 'sometimes|required',
+		'is_default' => 'sometimes|required',
 		'is_active' => 'sometimes|required'
     );
     public $qSearchFields = array(
         'name'
     );
-	public function attachment()
+	public function product()
     {
-        return $this->hasOne('Models\Attachment', 'foreign_id', 'user_id')->where('class', 'UserAvatar');
-    }
-	public function category()
-    {
-        return $this->belongsTo('Models\Category', 'category_id', 'id')->where('is_active', true);
-    }
-	public function attachments()
-    {
-		return $this->hasMany('Models\Attachment', 'foreign_id', 'id')->with('thumb')->where('class', 'UserProfile')->where('is_admin_approval', 2)->orderBy('id', 'desc');
+        return $this->hasMany('Models\User', 'user_id', 'id');
     }
 	public function scopeFilter($query, $params = array())
     {
         global $authUser;
         parent::scopeFilter($query, $params);
-		if (!empty($params['category_id'])) {
-            $query->where('category_id', $params['category_id']);
-        }
         if (!empty($params['q'])) {
             $query->where(function ($q1) use ($params) {
                 $search = $params['q'];                
