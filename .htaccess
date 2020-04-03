@@ -3,7 +3,7 @@ Options -Indexes
 
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	# If installed in local or under a path say /getlancer-bidding	/: (otherwise, doesn't need RewriteBase)
+	# ubuntu@ec2-18-223-28-89.us-east-2.compute.amazonaws.com
 	RewriteBase	/
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
@@ -15,15 +15,15 @@ Options -Indexes
 	RewriteRule ^ipn/process_ipn/(.*)/(.*)/(.*)$ server/php/Slim/public/process_ipn.php?model=$1&id=$2&hash=$3 [QSA,L]
 	RewriteRule ^download/([a-zA-Z_]*)/([0-9]*)/(.*)$ server/php/download.php?model=$1&id=$2&filename=$3 [QSA,L]
 	
-    RewriteRule ^scripts/(plugins.[a-z0-9]*.js)$ server/php/plugin.php?file=$1 [NC]
-
 	RewriteCond %{HTTP_USER_AGENT} baiduspider|facebookexternalhit/1.1|Facebot|Twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|Pinterest|Google.*snippet|/externalhit_uatext/|Slackbot|Slack-ImgProxy|Slackbot-LinkExpanding|Site\ Analyzer|SiteAnalyzerBot|Viber|Whatsapp|Telegram [NC,OR]
 	RewriteCond %{QUERY_STRING} _escaped_fragment_
 	RewriteRule ^$ server/php/Slim/public/seo.php$1 [QSA,L]
 
+	RewriteCond %{REQUEST_URI} !^/?(css|fonts|img|js)(/.*)?$ [NC]
+	
+	
 	RewriteRule ^$ client/ [QSA,L]
-	RewriteRule ^ag-admin$ client/app/ag-admin/index.html [QSA,L]
-	RewriteRule ^(styles|fonts|images|api_explorer|freichat|ag-admin|scripts)/(.*)$ client/app/$1/$2 [QSA,L]
+	RewriteRule ^(images|static)/(.*)$ client/$1/$2 [QSA,L]
 	RewriteRule ^favicon.ico$ client/app/favicon.ico [L]
 	RewriteRule ^apple-touch-icon(.*)$ client/app/apple-touch-icon$1 [L]
 	# Don't rewrite files or directories
@@ -31,7 +31,7 @@ Options -Indexes
 	 RewriteCond %{REQUEST_FILENAME} -d
 	 RewriteRule ^ - [L]
 	# Rewrite everything else to index.html to allow html5 state links
-	 RewriteRule ^ client/index.html [L] 
+	RewriteRule ^ client/index.html [L] 
 </IfModule>
 
 # gzip
@@ -55,3 +55,10 @@ Options -Indexes
 	# my favicon doesn't change much
 	ExpiresByType image/vnd.microsoft.icon "access plus 3 months"
 </IfModule>
+
+php_value upload_max_filesize 9G
+php_value post_max_size 9G
+php_value max_execution_time 200
+php_value max_input_time 200
+php_value memory_limit 256M
+php_value max_file_uploads 30
